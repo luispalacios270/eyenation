@@ -1,0 +1,27 @@
+<div id="login-container">
+	<div id="err">Nom d'utilisateur/mot de passe invalide</div>
+	<div id="shader"></div>
+	<div id="login-logo">
+		<img src="resources/images/Eye_Nation_Logo_ROUGE.png" alt="LOGO" />
+		<br/><br/>
+		<p>Eyenation vous souhaite la bienvenue !</p>
+	</div>
+	<form id="login">
+		<div id="connexion-head">Authentification Requise</div>
+		<div class="input-group login-input">
+			<span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-user"></span></span>
+				<input tabindex="1" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2" ng-model="user.name" required="true" />
+		</div>
+		<div class="input-group login-input">
+			 <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+			 <input tabindex="2" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" ng-model="user.pwd" required="true" />
+		</div>
+		<button class="btn btn-default" ng-click="validateLoginFor(user)">Envoyer <span class="glyphicon glyphicon-circle-arrow-right"/></button>
+		<div class="hr" />
+		<div id="login-options">
+			<div class="same-line"><a href="#"><span class="glyphicon glyphicon-question-sign" />Mot de passe oublié</a></div>
+			<div class="same-line"><a href="/hosting/#/signup"><span class="glyphicon glyphicon-plus" />Créer un compte</a></div>
+		</div>
+		<div class="clear" />
+	</form>
+</div>

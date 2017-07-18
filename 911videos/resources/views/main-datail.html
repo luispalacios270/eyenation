@@ -1,0 +1,277 @@
+<!--
+
+VIDEO JSON STRUCT
+
+category
+:
+[{translation: "Terrorism", name: "TERRORIMS", id: 6, lang: "en"},…]
+description
+:
+""
+gps_coordinates
+:
+[{timezone: "UTC-5", latitude: 45.7771, longitude: -71.6955},…]
+lastTimeVideoStatusChanged
+:
+1476286686967
+mediaWeight
+:
+null
+name
+:
+"Voiture piÃ©gÃ©e"
+person
+:
+
+		citizen_perormance_status
+		:
+		null
+		email
+		:
+		"motodrag@hotmail.com"
+		firstname
+		:
+		"Anderson"
+		isAnonym
+		:
+		false
+		language_code
+		:
+		"fr"
+		lastname
+		:
+		"Cooper"
+		localization
+		:
+		{city: "St-AdÃ¨le", street: "1699 Ch du Mont-Gabriel", appartment_no: null, country_fips: "CA",…}
+		appartment_no
+		:
+		null
+		city
+		:
+		"St-AdÃ¨le"
+		country_fips
+		:
+		"CA"
+		state_abbreviation
+		:
+		"PQ "
+		street
+		:
+		"1699 Ch du Mont-Gabriel"
+		media_agent
+		:
+		{auction_limit: 500000, media: {name: "CNN"}, bought_video_amount: 22150}
+		auction_limit
+		:
+		500000
+		bought_video_amount
+		:
+		22150
+		media
+		:
+		{name: "CNN"}
+		phone
+		:
+		"15147736686"
+		username
+		:
+		"andersoncooper"
+
+
+sold_amount
+:
+null
+status
+:
+"READY"
+streaming_endedon
+:
+1475687656113
+streaming_startedon
+:
+1475687617977
+tags
+:
+[{translation: [{name: "Intimidation", translation: "Intimidation", id: 40, lang: "fr"},…]},…]
+times_viewed
+:
+334
+unique_name
+:
+
+-->
+
+<style>
+	ng-map {
+		height: 100% !important;
+		width: 100% !important;
+	}
+
+	.video-main {
+		height: 100% !important;
+	}
+
+	.near-videos {
+		margin-right: 25px;
+		position: relative;
+	}
+
+	.index-text {
+		padding-top: 5%;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+		color: white;
+		background: rgb(213, 35, 44);
+		border-radius: 50%;
+		height: 100%;
+		font-weight: bold;
+	}
+
+	.index-video {
+		position: absolute;
+		bottom: -12px;
+		left: -24px;
+		background: white;
+		/* border: 3px solid rgb(53,52,56); */
+		/* padding: 3px 8px; */
+		border-radius: 50%;
+		padding: 6% 7%;
+		height: 60%;
+		width: 45%;
+	}
+
+	.marker-video {
+		cursor: pointer;
+		position: absolute;
+		bottom: -12px;
+		left: -24px;
+		background: white;
+		/* border: 3px solid rgb(53,52,56); */
+		/* padding: 3px 8px; */
+		border-radius: 50%;
+		padding: 6% 7%;
+		height: 40px;
+		width: 40px;
+	}
+
+	.parent {
+		display: relative;
+	}
+
+	.index-text-side {
+		margin: 0;
+		position: absolute;
+		bottom: 31%;
+		left: 41%;
+		color: white;
+		font-weight: bold;
+	}
+
+	.subindex-video {
+		border: 5px solid rgb(53, 52, 56);
+		border-radius: 50%;
+		/* padding: 0% 4%; */
+		padding: 2px 2px 2px 2px;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+<md-content style="height: 100%" layout="column">
+	<div flex="70" layout="row">
+		<div flex-offset="10" flex="80" layout="column">
+			<div flex="60" layout="row">
+				<div flex="60">
+					<video ng-init="onLoad()" class="video-main" width="100%" controls preload="false" id="mainVideo" poster="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video}}/thumbnail">
+					</video>
+				</div>
+				<div flex="40">
+					<ng-map center="{{$root.userLocation}}">
+						<custom-marker ng-repeat="p in  near_videos track by $index" position="{{p.gps_coordinates[0].latitude}}, {{p.gps_coordinates[0].longitude}} ">
+							<div ng-click="">
+								<div class="parent">
+									<img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+									<p class="index-text-side">{{$index+1}}</p>
+								</div>
+							</div>
+						</custom-marker>
+					</ng-map>
+				</div>
+			</div>
+			<div flex="40" layout="column" layout-padding>
+				<md-divider></md-divider>
+				<h4>ÉVÉNEMENTS À PROXIMITÉ</h4>
+				<div layout="row" flex="grow">
+					<div class="video-near" style="background: transparent; height: auto; position: relative;" ng-repeat="video_ in near_videos | limitTo: 20"
+					    ng-if="video_.unique_name != video" ng-click="initVideo(video_.unique_name, video_.gps_coordinates[0].latitude, video_.gps_coordinates[0].longitude)">
+						<!--<div class="near-videos" ng-repeat="video_ in videosTest track by $index" ng-click="initVideo(video_.unique_name, video_.gps_coordinates[0].latitude, video_.gps_coordinates[0].longitude)">-->
+						<img ng-src="{{ getThumb(video_.unique_name) }}" style="height: 100%;">
+						<div class="index-video">
+							<div class="parent">
+								<img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+								<p class="index-text-side">{{$index+1}}</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div flex="30">
+		<div style="height: 100% " app-footer></div>
+	</div>
+</md-content>
+
+<!--<div class="info-app detail">
+	<div class="main_container">
+		<div class="video_preview">
+			<div style="width: 100%;">
+				<video ng-init="onLoad()" width="100%" height="{{ windowHeight*0.5 }}" controls preload="false" id="mainVideo" poster="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video}}/thumbnail">
+				</video>
+			</div>
+		</div>
+		<div class="detail_map">
+			<figure>
+
+				<ng-map id="Map" style="width: 100%; height: {{ windowHeight*0.5 }}px" center="{{current_video.location}}" lazy-init="true">
+
+					<custom-marker position="{{current_video.location}}">
+						<div><img src="resources/assets/marker_2.png" width="20" /></div>
+					</custom-marker>
+
+
+				</ng-map>
+
+			</figure>
+		</div>
+
+	</div>
+
+	<hr style="background: #f2f3f4;height: 1.5%; margin: 3em auto;">
+
+	<div class="near_videos">
+
+		<h4>ÉVÉNEMENTS À PROXIMITÉ</h4>
+
+		<div class="content" style="width: {{ (near_videos.length * 200) + (near_videos.length * 30) }}px">
+
+			<div class="video-near" style="background: transparent; height: auto; position: relative;" ng-repeat="video_ in near_videos | limitTo: 20"
+			    ng-if="video_.unique_name != video" ng-click="initVideo(video_.unique_name, video_.gps_coordinates[0].latitude, video_.gps_coordinates[0].longitude)">
+				<div class="thumbnail">
+					<div class="embed-responsive embed-responsive-16by9">
+						<img ng-src="{{ getThumb(video_.unique_name) }}" style="width: 100%;">
+					</div>
+				</div>
+				<div class="thumbnail_number" style="background: white url(resources/assets/marker_1.png) no-repeat;background-size: 99.9%;">{{ $index + 1 }}</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+</div>
+<div app-footer></div>-->

@@ -1,0 +1,24 @@
+.p0{padding: 0;}
+.p5{padding: 5px;}
+.mb10{margin-bottom: 10px;}
+.mb50{margin-bottom: 50px;}
+.bg-container-header{background:white;	box-shadow: 2px 2px 2px 2px #d6d6d6; padding: 5px;}
+.mt20{margin-top: 20px;}
+.inline-block{display: inline-block;}
+.middle{vertical-align: middle;}
+
+video::-internal-media-controls-download-button {
+	 display:none;
+}
+video::-webkit-media-controls-enclosure {
+		 overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+		 width: calc(100% + 30px); /* Adjust as needed */
+}
+
+.toleft{
+	position:absolute;
+	margin-left: -1000px;
+}
+

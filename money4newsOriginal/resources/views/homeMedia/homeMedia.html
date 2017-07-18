@@ -1,0 +1,352 @@
+<div menu></div>
+
+<div class="container-fluid">
+
+
+  <section>
+    <div class="row">
+      <div class="container">
+        <div class="masection worldInformation">
+
+                  <div class="row vdivide">
+                      <div class="col1 col-sm-4 col-md-4 col-lg-4 text-center">
+                            <div class="group-map"><div id="map"></div>
+                            <p class="mapLegend"><strong>{{homePageVocabulary.mediaBombTitle}}</strong></p></div>
+
+<!--                             <div class="loc-hour clocks active bounce">
+                              <article class="clock ios7 local-hour">
+                                <section class="hours-container">
+                                  <section class="hours"></section>
+                                </section>
+                                <section class="minutes-container">
+                                  <section class="minutes"></section>
+                                </section>
+                                <section class="seconds-container">
+                                  <section class="seconds"></section>
+                                </section>
+                              </article>
+                            </div> -->
+
+<div id="horloge">
+    <div id="heure" class="rond"></div>
+    <div id="minute" class="rond"></div>
+    <div id="seconde" class="rond"></div>
+</div>
+
+
+                        </div>
+                      <div class="col2 col-sm-4 col-md-4 col-lg-4" ng-controller="dateController">
+
+
+<div class="demo-container clocks active bounce">
+  <article class="clock ios7 js-new-york">
+    <section class="label">New York</section>
+    <section class="hours-container">
+      <section class="hours"></section>
+    </section>
+    <section class="minutes-container">
+      <section class="minutes"></section>
+    </section>
+    <section class="seconds-container">
+      <section class="seconds"></section>
+    </section>
+  </article>
+  <article class="clock ios7 js-london">
+    <section class="label">London</section>
+    <section class="hours-container">
+      <section class="hours"></section>
+    </section>
+    <section class="minutes-container">
+      <section class="minutes"></section>
+    </section>
+    <section class="seconds-container">
+      <section class="seconds"></section>
+    </section>
+  </article>
+  <article class="clock ios7 js-tokyo">
+    <section class="label">Tokyo</section>
+    <section class="hours-container">
+      <section class="hours"></section>
+    </section>
+    <section class="minutes-container">
+      <section class="minutes"></section>
+    </section>
+    <section class="seconds-container">
+      <section class="seconds"></section>
+    </section>
+  </article>
+</div>
+
+                          <!-- <div class="date"><center>{{localDate}}</center></div>
+                           <div class="hours">
+                              <span class="city">NEW YORK</span> <span style="font-style: italic;">{{relativeDayNY}}</span>
+                              <span class="currentHour">{{hourNY}}:{{minutes}}</span>
+                          </div>
+                          <div class="hours">
+                              <span class="city">LONDON</span> <span style="font-style: italic;">{{relativeDayLondon}}</span>
+                              <span class="currentHour">{{hourLondon}}:{{minutes}}</span>
+                          </div>
+                           <div class="hours">
+                              <span class="city">FRANKFURT</span> <span style="font-style: italic;">{{relativeDayFrankfurt}}</span>
+                              <span class="currentHour">{{hourFrankfurt}}:{{minutes}}</span>
+                          </div>
+                          <div class="hours">
+                              <span class="city">TOKYO</span> <span style="font-style: italic;">{{relativeDayTokyo}}</span>
+                              <span class="currentHour">{{hourTokyo}}:{{minutes}}</span>
+                          </div>
+                          <div class="hours">
+                              <span class="city">SYDNEY</span> <span style="font-style: italic;">{{relativeDaySydney}}</span>
+                              <span class="currentHour">{{hourSydney}}:{{minutes}}</span>
+                          </div> -->
+                      </div>
+
+                      <div class="col3 col-sm-5 col-md-5 col-lg-5"   ng-controller="searchController">
+                        <div id="search-option-container">
+                          <div class="inline info-header">{{homePageVocabulary.search}} : </div>
+                          <div class="inline info-header radio-group">
+                            <input type="radio" name="category" ng-click="changeSearchOption(1);" checked />{{homePageVocabulary.SearchCriterias[0]}}
+                            <input type="radio" name="category" ng-click="changeSearchOption(2);"  />{{homePageVocabulary.SearchCriterias[1]}}
+                            <div id="search-bar" class="input-group">
+                              <input id="video-search-bar" class="form-control" type="text" placeholder="{{homePageVocabulary.searchPlaceholder}}" />
+                               <span id="s-icon" class="input-group-addon"><span class="glyphicon glyphicon-search" /></span>
+                            </div>
+                          </div>
+                        </div>
+              <div id="search-filters">
+                <div id="category-filter" class="flexbox" size="2" ng-show="searchOption == 1">
+                  <div ng-repeat="category in categories track by $index"  ng-show="categories[$index].lang == lang" ng-click="getCategory(category.name, $event);" name-value="{{category.name}}" tabindex="{{$index + 1}}" class="flex-filter">{{category.translation}}</div>
+                </div>
+                <div id="tag-filter" class="flexbox" size="2" ng-show="searchOption == 2">
+                  <div ng-repeat="tag in tagListing track by $index"  ng-show="tagListing[$index].lang == lang" ng-click="addTagParam(tag.name, $event);" name-value="{{tag.name}}" class="flex-filter">{{tag.translation}}</div>
+                </div>
+              </div>
+                      </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu a gauche + carroussel de mignatures -->
+    <div class="masection sidebar" ng-controller="dateController">
+      <center><strong>{{homePageVocabulary.myCurrentAuctions}}</strong><br>
+      <ul id="myAuctions">
+        <li ng-repeat="video in userBidVideos track by $index" ng-show="{{showAuctionBidVideo($index)}}">
+          <img ng-click="displayAuction($index, 'userBidVideos')" ng-src="../api/videos/{{userBidVideos[$index].video[0].unique_name}}/thumbnail" alt="thumbnail" />
+          <p>{{auctionVocabulary.auctionEndingIn}} <span id="time-{{userBidVideos[$index].video[0].unique_name}}" class="time time-{{userBidVideos[$index].video[0].unique_name}}">{{getTimeLeft($index, 'userBidVideos')}}</span></p>
+          <p>{{auctionVocabulary.videoName}} {{userBidVideos[$index].video[0].name || homePageVocabulary.noName}}</p>
+          <p>{{auctionVocabulary.myBid}} {{userBidVideos[$index].bidCurrentAmount | currency}}</p>
+          <p>{{auctionVocabulary.topCurrentAuction}} : {{userBidVideos[$index].video[0].auction.highestBid | currency}}</p>
+        </li>
+      </ul>
+     </center>
+    </div>
+        <div class="masection videosNews"  ng-controller="dateController">
+            <div ng-show="!auctionVisionning">
+                <button ng-show="recentVideos.length > 0" class="recentOrCitizenVideosButton">{{homePageVocabulary.noveltySection}}</button>
+                <slick ng-show="recentVideos.length > 0" init-onload="true" slick-apply='slickApply' data="recentVideos" slides-to-show="5" slides-to-scroll="5" dots="true">
+                      <div ng-repeat="video in recentVideos track by $index" class="compact">
+                        <span ng-show="dataLoading.recents" >
+                            <a href="" ng-click="displayAuction($index,'recentVideos')">
+                <img  ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}" />
+              </a>
+                        </span>
+                        <p ng-show="dataLoading.recents">{{ video.name ||  homePageVocabulary.noName }}</p>
+                        <p ng-show="dataLoading.recents">{{ convertTimestampToDate(video.lastTimeVideoStatusChanged) }}</p>
+                        <p ng-show="dataLoading.recents" id="video-carousel-tags" class="block centered-aligned"><span class="glyphicon glyphicon-tags"></span>
+                          <span ng-show="video.tags.length == 0">No Tags </span>
+                          <span ng-repeat="tag in video.tags track by $index" class="m4n-carousel-tag"><small>{{getTagTranslation(tag)}} <span ng-show="$index !== video.tags.length - 1"> -&nbsp</span></small></span>
+                        </p>
+                      </div>
+                </slick>
+                <button ng-show="highestBidVideos.length > 0" class="otherClassifiedVideosButton">{{homePageVocabulary.mostExpensiveAuctions}}</button>
+                <slick ng-show="highestBidVideos.length > 0" init-onload="true" slick-apply='slickApply' data="highestBidVideos" slides-to-show="5" slides-to-scroll="5" dots="true">
+                      <div ng-repeat="video in highestBidVideos track by $index" class="compact">
+                        <span ng-show="dataLoading.highestBids" >
+                            <a href="" ng-click="displayAuction($index,'highestBidVideos')">
+                <img  ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}" />
+              </a>
+                        </span>
+                        <p ng-show="dataLoading.highestBids">{{auctionVocabulary.auctionEndingIn}} <span id="time-{{video.unique_name}}" class="time time-{{userBidVideos[$index].video[0].unique_name}}">{{getTimeLeft($index, 'highestBidVideos')}}</span></p>
+                        <p ng-show="dataLoading.highestBids">{{ video.name ||  homePageVocabulary.noName }}</p>
+                        <p ng-show="video.auction.highestBid != 0">{{ video.auction.highestBid | currency }}</p>
+                      </div>
+                </slick>
+                <button ng-show="nearEndAuctionVideos.length > 0" class="otherClassifiedVideosButton">{{homePageVocabulary.minutesLeftDeadlineAuctions}}</button>
+                <slick ng-show="nearEndAuctionVideos.length > 0" init-onload="true" slick-apply='slickApply' data="nearEndAuctionVideos" slides-to-show="5" slides-to-scroll="5" dots="true">
+                      <div ng-repeat="video in nearEndAuctionVideos track by $index" class="compact">
+                        <span ng-show="dataLoading.nearEnd" >
+                            <a href="" ng-click="displayAuction($index,'nearEndAuctionVideos')">
+                <img  ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}" />
+              </a>
+                        </span>
+                        <p ng-show="dataLoading.nearEnd">{{auctionVocabulary.auctionEndingIn}} <span id="video.unique_name" class="time time-{{userBidVideos[$index].video[0].unique_name}}">{{getTimeLeft($index, 'nearEndAuctionVideos')}}</span></p>
+                        <p ng-show="dataLoading.nearEnd">{{ video.name ||  homePageVocabulary.noName }}</p>
+                      </div>
+                </slick>
+                <button ng-show="mostViewedVideos.length > 0" class="otherClassifiedVideosButton">{{homePageVocabulary.mostViewedAuctions}}</button>
+                <slick ng-show="mostViewedVideos.length > 0" init-onload="true" slick-apply='slickApply' data="mostViewedVideos" slides-to-show="5" slides-to-scroll="5" dots="true">
+                      <div ng-repeat="video in mostViewedVideos track by $index" class="compact">
+                        <span ng-show="dataLoading.mostViewed" >
+                            <a href="" ng-click="displayAuction($index,'mostViewedVideos')">
+              <img  ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label }}" />
+                        </a>
+                        </span>
+                        <p ng-show="dataLoading.mostViewed">{{ video.name ||  homePageVocabulary.noName }}</p>
+                        <p ng-show="video.times_viewed != 0 && dataLoading.mostViewed">{{ video.times_viewed }} {{auctionVocabulary.views}}</p>
+                      </div>
+                </slick>
+            </div>
+                <!-- When the user selects one of the videos to see its content and its relative auction information-->
+                <div ng-show="auctionVisionning">
+                <div class="detailAuction">{{auctionVocabulary.auctionVideoDetails}}</div>
+                <div class="returnToListVideosLink">
+                  <a href="" class="returnToListVideosLink" ng-click="returnToVideosList()">{{auctionVocabulary.returnToListVideosLink}}</a>
+                </div>
+
+                <div id="parentVideoTag" ng-show="htmlVideoUsed">
+                    <video id="videoTag" controls="controls" height="425px" width="100%">
+                       <source id="sourceMP4" src="" type="video/mp4" />
+                    </video>
+                </div>
+                <div ng-show="videogularUsed" class="videogular-container">
+                    <videogular id="mediaplayer" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url">
+                        <vg-media vg-src="controller.config.sources"
+                                  vg-tracks="controller.config.tracks">
+                        </vg-media>
+
+                        <vg-controls>
+                            <vg-play-pause-button></vg-play-pause-button>
+                            <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                            <vg-scrub-bar>
+                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                            </vg-scrub-bar>
+                            <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+                            <vg-volume>
+                                <vg-mute-button></vg-mute-button>
+                                <vg-volume-bar></vg-volume-bar>
+                            </vg-volume>
+                            <vg-fullscreen-button></vg-fullscreen-button>
+                        </vg-controls>
+
+                        <vg-overlay-play></vg-overlay-play>
+                        <vg-buffering></vg-buffering>
+                        <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                    </videogular>
+                </div >
+                <div class="videoInformation">
+                    <div class="videoTitle">{{selectedVideoTitle}}</div>
+                    {{videoPlace}}
+                    <div class="h-divider">
+                    </div>
+                    <div class="row vdivide vdivideVideoInfo">
+                        <div class="col-sm-6 col-md-6 col-lg-6 text-center">{{auctionVocabulary.views}}: <span class="videoFigure">{{selectedVideo.times_viewed}}</span></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 text-center">{{auctionVocabulary.consultationPerHour}}: <span class="videoFigure">3</span></div>
+                    </div>
+                    <div class="h-divider">
+                    </div>
+                    {{auctionVocabulary.remainingTime}}:  <span id="time2-{{selectedVideo.unique_name}}" class="videoFigure time">{{remainingTime}}</span>
+                    <div class="h-divider">
+                    </div>
+
+          <div ng-show="alreadyMadeBid()" style="font-weight:bold; font-size:200%;"><center>{{auctionVocabulary.currentPriceAuction}} :  <span class="videoFigure">{{selectedVideo.auction.my_last_value | currency}}</span></center></div>
+                    <div ng-show="!userHasHighestBid()" style="font-weight:bold; font-size:200%;"><center>{{auctionVocabulary.topCurrentAuction}} : <span ng-show="selectedVideo.auction == undefined" class="videoFigure">{{ noOffers }}</span> <span ng-show="selectedVideo.auction != undefined" class="videoFigure">{{currentOffer | currency}}</span></span></center></div>
+                    <form id="auctionForm" class="form-horizontal" role="form" name="form">
+                        <div class="form-group-auction">
+                            <label  class="leftAuctionInput">{{auctionVocabulary.initialBid}}</label>
+                            <div class="inputAuction">
+                                <input id="auction-amount-input" type="number" class="form-control" name="auctionAmount" ng-model="user.auctionAmount" placeholder="{{auctionVocabulary.enterAmount}}" step="50" min="{{initialMinimum}}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group-max-auction">
+                            <label  class="leftAuctionInput">{{auctionVocabulary.maximumBid}}</label>
+                            <div class="inputAuction">
+                                <input id="auction-amount-max-auto-input" type="number" class="form-control" name="auctionMaxAmount" ng-model="user.auctionMaxAmount" placeholder="{{auctionVocabulary.enterAmount}}" step="50" min="{{initialMinimum}}" required>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                      <button id="submitAuctionBtn" class="btn btn-primary">{{auctionVocabulary.validate_auction}}</button>
+                    </div>
+                    <div class="paymentAuctionConditions">{{auctionVocabulary.paymentExplanation1}}<br>{{auctionVocabulary.paymentExplanation2}}</div>
+                    <div id="listTags">
+                    <img src="resources/images/green_tag.svg" style="height:50px;"/>{{selectedVideoTags}}
+                    </div>
+                </div>
+                <div id="mapSelectedVideo"></div><p class="mapLegend"><strong>{{auctionVocabulary.videoJourney}}</strong></p>
+                <div class="reporterInformations">
+
+                    <div class="h-divider">
+                    </div>
+                    <div class="row vdivide">
+                        <div class="col-sm-3 col-md-3 col-lg-3 videoTitle">{{citizenReporterName}}</div>
+                        <div class="col-sm-6 col-md-6 col-lg-6"><star-rating ng-model="controller.rating2" readonly="controller.isReadonly"></star-rating></div>
+                    </div>
+                    <div class="row vdivide">
+                        <div class="col-sm-1 col-md-1 col-lg-1">{{auctionVocabulary.soldVideos}}: <span class="videoFigure">151</span></div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">{{auctionVocabulary.visionningTotal}}: <span class="videoFigure">151 000</span></div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">{{auctionVocabulary.salesTotal}}: <span class="videoFigure">15 000 $</span></div>
+                    </div>
+
+                    <button class="recentOrCitizenVideosButton">{{auctionVocabulary.watchTheOtherVideosRealizedByThisCitizenReporter}}</button>
+                    <div class="video-container">
+                      <div class="flex-container">
+                        <div ng-click="displayAuction($index,'reporterVideos')" class="flexitem" ng-repeat="video in reporterVideos track by $index">
+
+                        <div class="zoomable" id="reporterVideo{{reporterVideos[$index].unique_name}}" >
+                        </div>
+                        <div class="shader">
+                          <p>{{ reporterVideos[$index].name }}</p>
+                          <p>{{ convertTimestampToDate( reporterVideos[$index].streaming_startedon) }}</p>
+                        </div>
+                        </div>
+              <div></div>
+                      </div>
+                    </div>
+            </div>
+            </div>
+
+
+        </div>
+  </section>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="col-xs-3">
+                <ul class="list-unstyled">
+                    <li>{{homePageVocabulary.usage}}<li>
+                    <li><a href="#">{{homePageVocabulary.joinUsLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.conditionsOfUseLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.FAQLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.mobileAppLink}}</a></li>
+
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                <ul class="list-unstyled">
+                    <li>{{homePageVocabulary.purchases}}<li>
+                    <li><a href="#">{{homePageVocabulary.purchaseProtectionPaypalLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.helpForPurchasing}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.salesToolsLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.mobileEyeNationLink}}</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                <ul class="list-unstyled">
+                    <li>{{homePageVocabulary.generalInformation}}<li>
+                    <li><a href="#">{{homePageVocabulary.companyDetailsLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.noveltyLink}}</a></li>
+                    <li><a href="#">{{homePageVocabulary.bankPreApprovalFormLink}}</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                {{homePageVocabulary.GeneralConditionsOfUseExplanation}}
+            </div>
+    </div>
+    <hr>
+    <div class="row">
+            <div class="col-xs-4">
+                <p class="text-muted pull-right">© 2016 Eyenation en direct inc. All rights reserved</p>
+            </div>
+    </div>
+</div>

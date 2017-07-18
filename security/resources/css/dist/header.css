@@ -1,0 +1,44 @@
+#header {
+  background: black;
+}
+#header .logo {
+  position: absolute;
+}
+#header .logo img {
+  width: 86px;
+  height: 51px;
+}
+#header #getting-started {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: white;
+  font-weight: bold;
+}
+#header .hamburger {
+  background: none;
+  border-color: #353535;
+  font-weight: bold;
+}
+#header .hamburger .fa {
+  color: white;
+  font-size: 2em;
+}
+#header .dropdown-menu {
+  background: #555555;
+}
+#header .dropdown-menu a {
+  color: white;
+  font-weight: normal !important;
+}
+#header .dropdown-menu a:hover {
+  background: #797979;
+}
+#header .dropdown-menu a.names {
+  text-transform: capitalize;
+}

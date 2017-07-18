@@ -1,0 +1,503 @@
+<!-- Header Directive -->
+<div menu></div>
+
+<!-- Modals (Pop Ups) -->
+<div id="grand-modal" class="modal modal-fixed-footer">
+  <div class="modal-content parent-block">
+    <div ng-show="modalSelected==1" ng-include="'resources/views/homeMedia/templates/modals/editUser.html'"></div>
+    <div ng-show="modalSelected==2" ng-include="'resources/views/homeMedia/templates/modals/join.html'"></div>
+    <div ng-show="modalSelected==3" ng-include="'resources/views/homeMedia/templates/modals/conditions.html'"></div>
+    <div ng-show="modalSelected==4" ng-include="'resources/views/homeMedia/templates/modals/paymentMethod.html'"></div>
+    <div ng-show="modalSelected==5" ng-include="'resources/views/homeMedia/templates/modals/reportClause.html'"></div>
+    <div ng-show="modalSelected==6" ng-include="'resources/views/homeMedia/templates/modals/companySummary.html'"></div>
+    <div ng-show="modalSelected==7" ng-include="'resources/views/homeMedia/templates/modals/reportForm.html'"></div>
+    <div id="correctEdit" class="valign-wrapper adjust-horizontal adjust-vertically hidden child-parent">
+      <i class="adjust-horizontal center material-icons correct">done</i>
+    </div>
+
+    <!--<div ng-include="'resources/views/homeMedia/templates/modals/confidentiality.html'"></div>-->
+  </div>
+  <div class="modal-footer">
+    <a href="#/accueil" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    <button ng-show="modalSelected==1" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="validate(user)">{{userLanguageAccountFields.validate_change_btn}}</button>
+    <button ng-show="modalSelected==7" type="submit" class="btn btn-lg btn-primary btn-block">
+Envoyer la dénonciation.</button>
+  </div>
+</div>
+
+<div class="col2 col-sm-4 col-md-4 col-lg-4" ng-controller="dateController">
+
+  <div class="demo-container clocks active bounce">
+    <article class="clock ios7 js-new-york">
+      <!--<section class="label">New York</section>-->
+      <section class="hours-container">
+        <section class="hours"></section>
+      </section>
+      <section class="minutes-container">
+        <section class="minutes"></section>
+      </section>
+      <section class="seconds-container">
+        <section class="seconds"></section>
+      </section>
+    </article>
+    <article class="clock ios7 js-london">
+      <!--<section class="label">London</section>-->
+      <section class="hours-container">
+        <section class="hours"></section>
+      </section>
+      <section class="minutes-container">
+        <section class="minutes"></section>
+      </section>
+      <section class="seconds-container">
+        <section class="seconds"></section>
+      </section>
+    </article>
+    <article class="clock ios7 js-tokyo">
+      <!--<section class="label">Tokyo</section>-->
+      <section class="hours-container">
+        <section class="hours"></section>
+      </section>
+      <section class="minutes-container">
+        <section class="minutes"></section>
+      </section>
+      <section class="seconds-container">
+        <section class="seconds"></section>
+      </section>
+    </article>
+  </div>
+
+</div>
+
+<div id="content" class="row">
+  <!--{{userBidVideos}}-->
+  <!--<button ng-click="showModals(7)"> Prueba</button>-->
+  <div id="side-menu" ng-controller="searchController" class="col m4 l3 ">
+    <div id="categories" class="row">
+      <div class="col s12 title">
+        <h6 id="category-title" title="Préciser votre recherche en choisissant une ou plusieurs catégories">
+          CATÉGORIES
+        </h6>
+      </div>
+      <div class="col s12 row">
+        <ul class="col s4" ng-repeat="n in [1,2,3]">
+          <!--<li ng-click="getCategory(category.name, $event);" ng-repeat="category in categories | orderBy: 'id' track by $index" ng-if="$index < (n*categoriesPerColumn) && $index >= (((n-1)*categoriesPerColumn)) && category.lang == lang ">
+            {{category.translation}}
+          </li>-->
+          <li ng-click="addCategoryToList(category.name, $event);" ng-repeat="category in categories | orderBy: 'id' track by $index"
+            ng-if="$index < (n*categoriesPerColumn) && $index >= (((n-1)*categoriesPerColumn)) && category.lang == lang ">
+            {{category.translation}}
+          </li>
+
+        </ul>
+      </div>
+
+      <div id="selected-categories" class="col s12">
+
+        <h6 id="category-title" title="Préciser votre recherche en inscrivant des mots clés">
+          TAGS
+        </h6>
+
+
+        <div class="chip" ng-repeat="tag in selectedTags">
+          {{tag.translation}}
+          <i class="close material-icons">close</i>
+        </div>
+
+        <div class="chip">
+          <a id="add-tag" ng-click="showTags()" title="Add a new tag" href="">+</a>
+        </div>
+
+        <div id="tagsBox" class="invisibleBox hidden">
+
+          <div class="inline valign-wrapper ">
+            <input class="input-money4new" type="text" placeholder="Enter the tag to search" ng-model="tagToFind">
+            <i class="material-icons">search</i>
+          </div>
+          <div class="divider"></div>
+
+          <ul>
+            <li ng-repeat="tag in tagListing  | filter:tagToFind | orderBy: 'translation'" ng-show="tag.lang === lang" ng-click="addTagParam(tag, $event)">
+              {{tag.translation}}
+            </li>            
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <!--<div class="divider"></div>-->
+    <div id="googleMap">
+      <div class="group-map adjust-horizontal adjust-vertically">
+        <div id="map" class="adjust-horizontal adjust-vertically"></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <!--<div id="page-config" class="col s10 offset-s1">
+      <div class="valign-wrapper">
+        <i class="material-icons icons-side-menu">assignment</i>
+        <div class="spec-data">
+          <h6>Date indifférente</h6>
+          <h6>Dernière heure </h6>
+          <strong><h6>Dernières 24 heures</h6></strong>
+          <h6>Dernières 48 heures</h6>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="inline center valign-wrapper">
+        <i class="material-icons icons-side-menu">settings_overscan</i>
+        <div class="spec-data">
+          <h6>Résolution</h6>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="inline center valign-wrapper">
+        <i class="material-icons icons-side-menu">aspect_ratio</i>
+        <div class="spec-data">
+          <h6>Ratio</h6>
+        </div>
+      </div>
+    </div>-->
+  </div>
+  <div id="main-content" class="col m8 l9 row">
+    <div id="top-videos" class="row">
+      <div id="top-auction" class="col s12 m6">
+        <div class="title valign-wrapper">
+          <img style="width: 40px" class="responsive-img" src="resources/images/encheres-haut.png">
+          <strong><h6>ENCHÈRES LES PLUS HAUTES</h6></strong>
+        </div>
+        <div class="col s12" id="top-auction-videos">
+
+          <div class="parent-block videos-top adjust-vertically pointer" ng-click="displayAuction($index,'highestBidVideos')" ng-repeat="video in highestBidVideos track by $index">
+            <div class="center img-container-box">
+              <img class="img-box pointer" ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label }}" on-error-src="resources/images/notFound.jpg"
+              />
+            </div>
+            <div class="caption-videos-main">
+              <h6 class="truncate caption-videos-selectable">{{ video.name || homePageVocabulary.noName }}</h6>
+              <div class="valign-wrapper">
+                <img class="img-responsive pointer" style="height: 25px" src="resources/images/vue.png" alt="">
+                <p class="viewsTop truncate">{{ video.times_viewed }} {{auctionVocabulary.views}}</p>
+                <!--<p ng-show="dataLoading.highestBids">{{auctionVocabulary.auctionEndingIn}} <span id="time-{{video.unique_name}}" class="time time-{{userBidVideos[$index].video[0].unique_name}}">{{getTimeLeft($index, 'highestBidVideos')}}</span></p>
+                <p ng-show="dataLoading.highestBids">{{ video.name || homePageVocabulary.noName }}</p>
+                <p ng-show="video.auction.highestBid != 0">{{ video.auction.highestBid | currency }}</p>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="most-viewed" class="col s12 m6">
+        <div class="title valign-wrapper">
+          <img style="width: 40px" class="responsive-img" src="resources/images/vue.png">
+          <strong>
+            <h6>
+              LES PLUS VUES
+            </h6>
+          </strong>
+        </div>
+        <div id="top-viewed-videos" class="col s12">
+          <div class="parent-block videos-top adjust-vertically pointer" ng-click="displayAuction($index,'mostViewedVideos')" ng-repeat="video in mostViewedVideos track by $index">
+            <div class="center img-container-box">
+              <img class="img-box pointer" ng-src="../api/videos/{{video.unique_name}}/thumbnail" on-error-src="resources/images/notFound.jpg"
+                alt="{{ item.label }}" />
+            </div>
+            <div class="caption-videos-main">
+              <h6 class="truncate caption-videos-selectable"><strong>{{ video.name || homePageVocabulary.noName }}</strong></h6>
+              <div class="valign-wrapper">
+                <img class="img-responsive" style="height: 25px" src="resources/images/vue.png" alt="">
+                <strong><p class="viewsTop truncate">{{ video.times_viewed }} {{auctionVocabulary.views}}</p></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-videos">
+
+      <div class="title valign-wrapper">
+
+        <div id="selected-categories" class="valign-wrapper col s12">
+
+          <!--<div class="chip center">
+            Derniéres 24 h
+            <i class="close material-icons">close</i>
+          </div>
+
+          <div class="chip">
+            1080 x 900
+            <i class="close material-icons">close</i>
+          </div>-->
+
+        </div>
+      </div>
+
+      <div id="normal-videos">
+        <!--{{userBidVideos}} {{recentVideos}}-->
+        <div class="row">
+          <div class="col s3 parent-block" ng-show="$index < maxVideos" ng-repeat="video in recentVideos track by $index">
+            <!--<div class="col s3 parent-block" ng-show="$index < maxVideos" ng-repeat="video in listaPrueba track by $index">-->
+            <div>
+              <div style="width:100%">
+                <img class="img-box-main pointer" ng-class="{' img-near-end':video.showNear}" ng-click="displayAuction($index, 'recentVideos')"
+                  ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}" on-error-src="resources/images/notFound.jpg"
+                />
+                <div class="countdown" ng-show="video.auction != null" ng-init="max$index=getSecundsVideo(video.auction.end)">
+                  <round-progress max="max$index" current="timer" color="red" bgcolor="#ededed" radius="100" stroke="15" semi="false" rounded="true"
+                    clockwise="false" responsive="true" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                  <!--<p>{{counter$index}}</p>-->
+                  <!--<p style="position: absolute;bottom: 29%;right: 16%;width: 50%;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;">{{getTimeLeftCounters(video.auction.end, $index)}}</p>-->
+                  <p class="counter-down-text">{{getTimeLeftCounters(video.auction.end, $index)}}</p>
+                </div>
+                <div class="countdown" ng-hide="video.auction != null">
+                  <img style="float:right" class="caption-videos-selectable" ng-click="displayAuction($index, 'recentVideos')" src="resources/images/encheres-cercle.png"
+                    alt="">
+                </div>
+              </div>
+              <p ng-click="displayAuction($index, 'recentVideos')" class="caption-videos-selectable truncate">{{ video.name || homePageVocabulary.noName }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="center row" ng-controller="searchController">
+          <button ng-click="showMoreVideos()" class="col s4 offset-s4 waves-effect waves-blue" id="btn-more" type="button">VIEW MORE</button>
+          <div class="col s2 offset-s2">
+            <a href="" ng-click="goTop()"><img id="up-arrow" src="resources/images/arrowTop.png" alt=""></a>
+          </div>
+        </div>
+      </div>
+
+
+      <!--<a class="waves-effect waves-light btn" id="pruebaMayor">Modal</a>-->
+
+
+
+      <div ng-include="'resources/views/homeMedia/templates/footer.html'"></div>
+    </div>
+  </div>
+</div>
+
+<div id="video-info" class="hidden" ng-controller="dateController">
+  <div>
+    <a href="" ng-click="returnToVideosList()">{{auctionVocabulary.returnToListVideosLink}}</a>
+  </div>
+  <div id="bid-info" class="row">
+    <div class="col s8 parent-block">
+      <style>
+        .water-mark {
+          position: absolute;
+          z-index: 2;
+          opacity: 0.2;
+        }
+
+        .videos-footer {
+          max-height: 200px !important;
+          overflow-y: auto !important;
+        }
+
+        #extra-info {
+          margin-top: 15px;
+        }
+      </style>
+      <div class="adjust-vertically adjust-horizontal water-mark">
+        <img class="adjust-horizontal" src="resources/images/watermark.png" alt="">
+      </div>
+
+      <div id="parentVideoTag" class="adjust-horizontal" ng-show="htmlVideoUsed">
+        <video id="videoTag" controls="controls">
+          <source id="sourceMP4" src="" type="video/mp4" />
+        </video>
+      </div>
+      <div ng-show="videogularUsed" class="videogular-container">
+        <videogular id="mediaplayer" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()"
+          vg-theme="controller.config.theme.url">
+          <vg-media style="min-height: 400px;" vg-src="controller.config.sources" vg-tracks="controller.config.tracks">
+          </vg-media>
+          <vg-controls style="z-index:1000">
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+            <vg-scrub-bar>
+              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+            <vg-volume>
+              <vg-mute-button></vg-mute-button>
+              <vg-volume-bar></vg-volume-bar>
+            </vg-volume>
+            <vg-fullscreen-button></vg-fullscreen-button>
+            <div title="Signaler une vidéo inappropriée" ng-click="showModals(7)" class="report-button"><i class="material-icons" style="margin-top: 6px;">report</i></div>
+          </vg-controls>
+
+          <vg-overlay-play></vg-overlay-play>
+          <vg-buffering></vg-buffering>
+          <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+        </videogular>
+      </div>
+
+      <div id="extra-info" class="row">
+        <div class="col s4 m4 l4">
+          <div id="mapSelectedVideo" style="width: 100%; height: 200px"></div>
+          <p class="mapLegend"><strong>{{auctionVocabulary.videoJourney}}</strong></p>
+
+        </div>
+        <div class="col s4">
+          <h5><strong>{{selectedVideoTitle}}</strong></h5>
+          <div id="selected-categories">
+
+            <div class="chip" ng-repeat="cat in selectedVideo.category" ng-if="cat.lang === lang" style="font-size: 0.8em">
+              {{cat.translation}}
+              <i class="close material-icons">close</i>
+            </div>
+
+          </div>
+          <div class="row">
+            <div style="margin-top: 10px" class="col s12 inline">
+              <i style="margin-right: 10px" class="small material-icons">assignment</i>
+              <h6 class="small-font">{{ convertTimestampToDate(selectedVideo.streaming_startedon)}}</h6>
+            </div>
+            <div style="margin-top: 10px" class=" col s12 inline">
+              <img class="img-responsive" style="height: 30px" src="resources/images/vue.png" alt="">
+              <!--<h6 class="small-font">30 nov. 16 11:19</h6>-->
+            </div>
+            <div style="margin-top: 10px" class=" col s12">
+              <h6 class="small-font">{{videoPlace}}</h6>
+              <!--<h6 class="small-font">Manifestation, Parlement, Étudiants, Laval, Université, Policier</h6>-->
+            </div>
+          </div>
+        </div>
+        <div class="col s4">
+          <!--<div class="col-sm-1 col-md-1 col-lg-1">{{auctionVocabulary.soldVideos}}: <span class="videoFigure">151</span></div>
+            <div class="col-sm-3 col-md-3 col-lg-3">{{auctionVocabulary.visionningTotal}}: <span class="videoFigure">151 000</span></div>
+            <div class="col-sm-3 col-md-3 col-lg-3">{{auctionVocabulary.salesTotal}}: <span class="videoFigure">15 000 $</span></div>-->
+          <h6 style="margin-bottom: 10px">{{citizenReporterName}}</h6>
+          <!--<div class="col s12 ">
+        <star-rating ng-model="controller.rating2" readonly="controller.isReadonly"></star-rating>
+      </div>-->
+          <h6 class="small-font" style="color:grey">{{auctionVocabulary.soldVideos}} videos:151</h6>
+          <h6 class="small-font" style="color:grey">{{auctionVocabulary.visionningTotal}}:151000</h6>
+          <h6 class="small-font" style="color:grey">{{auctionVocabulary.salesTotal}}: 15000$</h6>
+        </div>
+
+        <!--<div class="col s2 right">
+          <a href="" ng-click="goTop()" class="right-flex"><img id="up-arrow" src="resources/images/arrowTop.png" alt=""></a>
+        </div>-->
+
+      </div>
+
+    </div>
+    <div class="col s4">
+
+      <div class="parent-block" style="height: 300px;width: 200px;" id="spinner">
+        <p id="timeSelectedVideo">{{remainingTime}}</p>
+        <round-progress max="remainingTimeSelected" current="timer" color="red" bgcolor="#ededed" radius="100" stroke="15" semi="false"
+          rounded="true" clockwise="false" responsive="true" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+      </div>
+
+      <div class="s12" style="margin-top: 40px" ng-show="!userHasHighestBid()">
+        <h6 class="small-font">{{auctionVocabulary.topCurrentAuction}}</h6>
+        <h6 class="lower-bid" style="font-size: 2em;" ng-show="selectedVideo.auction == undefined"><strong>No offers made yet</strong></h6>
+        <h6 class="highest-bid center" style="font-size: 3em;" <span ng-show="selectedVideo.auction != undefined"><strong>{{currentOffer | currency}}</strong></h6>
+      </div>
+
+      <div style="margin-top: 25px">
+        <h6 style="font-size: 0.8em">{{auctionVocabulary.initialBid}}</h6>
+        <input id="auction-amount-input" class="input-style" type="number" name="auctionAmount" ng-model="user.auctionAmount" placeholder="{{auctionVocabulary.enterAmount}}"
+          step="50" min="{{initialMinimum}}" required>
+        <h6 style="font-size: 0.8em">{{auctionVocabulary.maximumBid}}</h6>
+        <div class="inline valign-wrapper">
+          <input id="auction-amount-max-auto-input" class="input-style" name="auctionMaxAmount" ng-model="user.auctionMaxAmount" placeholder="{{auctionVocabulary.enterAmount}}"
+            step="50" min="{{initialMinimum}}" type="number" required>
+          <i class="center material-icons icon-extra done ">done</i>
+          <i class="center material-icons icon-extra cancel ">close</i>
+        </div>
+
+      </div>
+
+      <div class="center" style="max-width: 300px;">
+        <button id="submitAuctionBtn" class="btn">{{auctionVocabulary.validate_auction}}</button>
+      </div>
+
+
+
+    </div>
+  </div>
+  <!--  <div id="extra-info" class="row">
+    <div class="col s4 m4 l2">
+      <div id="mapSelectedVideo" style="width: 100%; height: 200px"></div>
+      <p class="mapLegend"><strong>{{auctionVocabulary.videoJourney}}</strong></p>
+
+    </div>
+    <div class="col s4">
+      <h5><strong>{{selectedVideoTitle}}</strong></h5>
+      <div id="selected-categories">
+
+        <div class="chip" ng-repeat="cat in selectedVideo.category" ng-if="cat.lang === lang" style="font-size: 0.8em">
+          {{cat.translation}}
+          <i class="close material-icons">close</i>
+        </div>
+
+      </div>
+      <div class="row">
+        <div style="margin-top: 10px" class="col s12 inline">
+          <i style="margin-right: 10px" class="small material-icons">assignment</i>
+          <h6 class="small-font">{{ convertTimestampToDate(selectedVideo.streaming_startedon)}}</h6>
+        </div>
+        <div style="margin-top: 10px" class=" col s12 inline">
+          <img class="img-responsive" style="height: 30px" src="resources/images/vue.png" alt="">
+
+        </div>
+        <div style="margin-top: 10px" class=" col s12">
+          <h6 class="small-font">{{videoPlace}}</h6>
+
+        </div>
+      </div>
+    </div>
+    <div class="col s4">
+
+      <h6 style="margin-bottom: 10px">{{citizenReporterName}}</h6>
+
+      <h6 class="small-font" style="color:grey">{{auctionVocabulary.soldVideos}} videos:151</h6>
+      <h6 class="small-font" style="color:grey">{{auctionVocabulary.visionningTotal}}:151000</h6>
+      <h6 class="small-font" style="color:grey">{{auctionVocabulary.salesTotal}}: 15000$</h6>
+    </div>
+
+    <div class="col s2 right">
+      <a href="" ng-click="goTop()" class="right-flex"><img id="up-arrow" src="resources/images/arrowTop.png" alt=""></a>
+    </div>
+
+  </div>-->
+
+
+  <div id="related-videos" class="row">
+    <div id="next-videos" class="col s6 videos-footer">
+      <div class="divider">
+      </div>
+      <h6 style="color:grey; margin: 10px 0 10px 0; font-size: 0.8em">{{homePageVocabulary.minutesLeftDeadlineAuctions}}</h6>
+      <div class="row">
+        <div ng-show="video.showNear!=null" class="col s4 parent-block pointer" ng-click="displayAuction(video.indexNear,'nearEndAuctionVideos')"
+          ng-repeat="video in nearEndAuctionVideos track by $index" ng-init="o">
+          <img class="adjust-horizontal" ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}" on-error-src="resources/images/notFound.jpg"
+          />
+          <h6 class="small-font">{{ video.name || homePageVocabulary.noName }}</h6>
+          <h6 class="small-font" style="position: absolute; top: -10px;left:5px;color:white; background-color:#d4292f;border-radius:50%;padding: 2px 5px"><strong>{{$index + 1}}</strong></h6>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col s2 offset-s4 videos-footer">
+      <div class="divider"></div>
+      <h6 style="color:grey; margin: 10px 0 10px 0; font-size: 0.8em">{{auctionVocabulary.watchTheOtherVideosRealizedByThisCitizenReporter}}</h6>
+      <div ng-click="displayAuction($index,'reporterVideos')" ng-repeat="video in reporterVideos" ng-show="video.unique_name != selectedVideo.unique_name">
+        <img style="width: 100%; height: auto" class="img-box-main" ng-src="../api/videos/{{video.unique_name}}/thumbnail" alt="{{ item.label}}"
+          on-error-src="resources/images/notFound.jpg">
+        <h6 class="small-font truncate">{{video.name}}</h6>
+      </div>
+    </div>
+
+  </div>
+  <div ng-include="'resources/views/homeMedia/templates/footer.html'"></div>
+</div>

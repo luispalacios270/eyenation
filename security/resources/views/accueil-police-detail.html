@@ -1,0 +1,159 @@
+<link rel="stylesheet" href="vendors/angular-material/angular-material.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="resources/css/phoneVideos.css">
+
+<md-content id="container" class="adjust-vertical" layout="column">
+  <div layout="row" flex="90">
+    <div flex="80" flex-gt-sm="90" ng-init="mapSelected = true">
+      <ng-map id="main-map" center="{{$root.userLocation}}" ng-show="mapSelected">
+        <custom-marker ng-repeat="p in videos track by $index" position="{{p.gps_coordinates[0].latitude}}, {{p.gps_coordinates[0].longitude}} ">
+          <div class="parent">
+            <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+            <p class="index-text">{{$index+1}}</p>
+          </div>
+        </custom-marker>
+      </ng-map>
+      <!--<img class="img-main-box" ng-if="!mapSelected" ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{currentVideo.unique_name}}/thumbnail">-->
+      <video id="mainVideo" preload="none" ng-show="!mapSelected" style="width: 100%; height: auto"></video>
+
+    </div>
+    <div flex="20" id="side-data" flex-gt-sm="10" layout="column" layout-padding>
+      <ng-map id="side-map" center="{{$root.userLocation}}" ng-hide="mapSelected" ng-click="videos.unshift(currentVideo); mapSelected=true; currentVideo=null"></ng-map>
+      <div ng-repeat="video in videos track by $index" class="parent" ng-click="selectVideo(video,$index)">
+        <!--<div ng-repeat="video in videos track by $index" class="parent" ng-click="selectVideo(video,$index)">-->
+        <img class="img-near" ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail">
+        <div class="index-video">
+          <div class="parent">
+            <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+            <p class="index-text-side">{{$index+1}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div layout="row" flex="10" layout-align="space-between center" layout-padding>
+    <img class="logo-footer" src="resources/assets/logo2.png" alt="">
+    <div class="adjust-vertical" layout="row" layout-align="start center">
+      <img class="logo-footer" src="resources/assets/icon-phone.png" alt="">
+      <p class="phonenumber-footer">581 667-7724</p>
+    </div>
+  </div>
+</md-content>
+
+<!--<div class="container-fluid accueilpolice_container">
+  <div class="row">
+    <div class="col-md-10 col-sm-8 text-center">
+      <div class="video">
+        <div>
+          <div ng-show="!isBigMapVisible">
+            <video ng-init="onLoad(current_video)" width="100%" height="{{ windowHeight*0.7 }}" controls preload="none" id="mainVideo"
+              poster="{{ current_video.poster }}" style="background: black; margin-top: 15px;">
+            </video>
+          </div>
+          <div class="toleft" id="MAPP">
+
+            <ng-map id="bigMap" style="height: {{ windowHeight*0.68 }}px; border-radius: 2%; margin-top: 15px; overflow: hidden;" center="{{ current_video.location }}"
+              lazy-init="true">
+              <custom-marker position="{{current_video.location}}">
+                <div class="custom_marker_1" style="background: url(resources/assets/marker_1.png) no-repeat;background-size: 99.9%
+                        ">{{ current_video.number }}</div>
+              </custom-marker>
+            </ng-map>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <div class="accueilpolice_videolist" style="height: {{ windowHeight*0.7 }}px">
+        <div class="accueilpolice_videolist_content">
+
+          <div class="maps accueilpolice_videolist_item">
+            <figure>
+
+              <ng-map id="Map" style="height:{{ windowHeight*0.18 }}px; margin-bottom: 1.3em; border-radius: 2%; overflow: hidden;" center="{{ current_video.location }}"
+                lazy-init="true" ng-click="toggleMap(event)">
+                <custom-marker position="{{current_video.location}}">
+                  <div class="custom_marker_1" style="background: url(resources/assets/marker_1.png) no-repeat;background-size: 99.9%
+                            ">{{ current_video.number }}</div>
+                </custom-marker>
+
+              </ng-map>
+
+            </figure>
+          </div>
+
+          <div ng-if="videos.length > 0">
+
+
+
+            <div class="thumbnail accueilpolice_videolist_item" style="position:relative;height:{{ windowHeight*0.17 }}px;" ng-show='isBigMapVisible && (current_video.number == 1)'
+              ng-click="toggleMap()">
+              <div class="embed-responsive embed-responsive-16by9" style="padding-bottom: {{ windowHeight*0.15 }}px;">
+                <img ng-src="{{ current_video.poster }}" width="320">
+              </div>
+              <div class="custom_marker_1" style="background: url(resources/assets/marker_1.png) no-repeat;background-size: 99.9%">{{ current_video.number }}</div>
+            </div>
+
+            <div class="accueilpolice_videolist_item" ng-repeat="video in videos | limitTo:20" ng-if='video.gps_coordinates.length > 0'
+              ng-click="initVideo(video.unique_name, video.gps_coordinates[0].latitude, video.gps_coordinates[0].longitude, $index + 2)"
+              style="margin: 1em 0">
+              <div class="thumbnail" style="position:relative; height:{{ windowHeight*0.17 }}px;">
+                <div class="embed-responsive embed-responsive-16by9" ng-if="video.unique_name" style="padding-bottom: {{ windowHeight*0.15 }}px;">
+                  <img ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail" width="320">
+                </div>
+                <div class="custom_marker_1" style="background: url(resources/assets/marker_1.png) no-repeat;background-size: 99.9%">{{ $index + 2 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+  <div>
+    <div class="inline-block middle" style="width: 49%">
+      <br>
+      <img src="resources/assets/911video_Logo_transparant.png" width="200" />
+    </div>
+    <div style="text-align: right;width: 49%" class="inline-block middle">
+      <br>
+      <img src="resources/assets/icon-phone.png" />
+    </div>
+  </div>
+
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    .accueilpolice_videolist_content {
+      width: {
+        {
+          ((videos.length + 2) * 200)+((videos.length + 2) * 30)
+        }
+      }
+      px;
+      /* 2 = hidden item and map
+        30 = margin left + margin right
+       */
+    }
+
+    .accueilpolice_videolist_item {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 15px !important;
+      width: 200px;
+    }
+
+    .accueilpolice_videolist {
+      overflow-x: auto;
+      height: auto !important;
+    }
+  }
+</style>-->

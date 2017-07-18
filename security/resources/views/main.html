@@ -1,0 +1,68 @@
+<div id="info-app">
+    <div class="container-fluid bg-container-header">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-left">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="maps">
+                                <figure>
+
+                                    <ng-map style="width: 100%" center="{{$root.userLocation}}">
+                                            <marker position="{{$root.userLocation}}"></marker>
+                                    </ng-map>
+
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row mt20">
+            <div class="col-md-12 col-lg-1">
+                <div class="sidebar">
+                    <div>
+                        <h4 class="text-center">Mes évènements pris en charge</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-11">
+                <div class="section">
+                    <div class="col-lg-12 title">
+                        <div class="categorys-btns" ng-init="load911Categories()">
+                            <button type="button" ng-click="Category.category[0].translation=this.category" class="btn btn-default" ng-repeat="category in categorys" data-bnt-disable>{{ category }}</button>
+                        </div>
+                    </div>
+                    <div class="row text-center videos-section" ng-init="load911videos()">
+                       <p class="text-center" ng-if="videos.length === 0">No recent videos to show</p>
+                       <br>
+                        <div class="col-md-4 col-sm-6 hero-feature" ng-repeat="video in videos | limitTo:viewMore||3" ng-if="videos.length > 0">
+                            <div class="thumbnail" >
+                                <div class="embed-responsive embed-responsive-16by9" ng-if="video.unique_name">
+                                    <img ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail" width="320">
+                                </div>
+                                <div class="caption">
+                                    <h3>{{video.name}}</h3>
+                                    <p>{{video.category[0].translation}}</p>
+                                    <p>
+                                        <a ng-click="goToVideo()" class="btn btn-danger" style="background-color:#741318; border-color:#741318;">voir détail de la vidéo</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                       <br>
+                        <p class="text-center" style="display: block;" ng-init="viewMore=4" ng-if="video.length > 3">
+                        <button class="btn btn-primary bt-md" ng-click="viewMore=viewMore+3">View More</button>
+                        </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

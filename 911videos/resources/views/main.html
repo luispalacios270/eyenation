@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="vendors/angular-material/angular-material.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="resources/css/911-main.css">
+
+
+<md-content style="height: 100%" layout="column">
+  <div flex="70" flex-xs="100">
+    <div style="height: 100%" layout="row">
+      <div flex="40" hide-xs hide-sm layout="column">
+        <div class="place" layout="row" layout-align="none center">
+          <i flex-offset="10" style="font-size: 1.5em;" class="fa fa-map-marker"></i>
+          <md-input-container flex="grow" class="input-map md-block">
+            <label class="color-white">Input an adrress</label>
+            <input dl-enter-key="$root.userLocation=address" ng-model="address" type="text" class="map-address color-white">
+          </md-input-container>
+        </div>
+
+
+        <ng-map id="Map" flex="grow" center="{{$root.userLocation}}">
+          <custom-marker position="{{$root.userLocation}}">
+            <div>
+              <img src="resources/assets/marker_2.png" style="width: 35px; height: 35px" alt="">
+            </div>
+          </custom-marker>
+
+          <!--<custom-marker ng-repeat="p in videosTest track by $index" position="{{p.gps_coordinates[0].latitude}}, {{p.gps_coordinates[0].longitude}} ">-->
+          <custom-marker ng-repeat="p in videos track by $index" position="{{p.gps_coordinates[0].latitude}}, {{p.gps_coordinates[0].longitude}} ">
+            <div ng-click="goToVideo(p)">
+              <div class="parent">
+                <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+                <p class="index-text-side">{{$index+1}}</p>
+              </div>
+            </div>
+          </custom-marker>
+        </ng-map>
+
+      </div>
+
+
+      <div flex="60" flex-xs="100" flex-sm="100" layout="column" layout-padding>
+        <div flex="85" id="videos-containers">
+          <md-grid-list md-cols="3" md-row-height="4:3" md-gutter="8px">
+            <md-grid-tile ng-repeat="live in lives track by $index" ng-click="showLiveStream($event)">
+              <div class="pointer-mouse" style="position: relative; width:100%; height:100%">
+                <label class="recent_label">Live</label>
+                <img class="center-adjust" onerror="this.src='resources/assets/play-btn.png'" data="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail"
+                  ng-src="resources/assets/play-btn.png">
+                <div class="index-video" ng-click="goToVideo(video)">
+                  <div class="parent">
+                    <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+                    <p class="index-text-side">{{($index+1)}}</p>
+                  </div>
+                </div>
+              </div>
+            </md-grid-tile>
+
+            <!--<md-grid-tile ng-repeat="video in videosTest track by $index" ng-click="playRecordedVideo(video)" ng-if="$index<viewmore">-->
+            <md-grid-tile ng-repeat="video in videos track by $index" ng-click="playRecordedVideo(video)" ng-if="$index<viewmore">
+              <div class="pointer-mouse" style="position: relative; width:100%; height:100%">
+                <label ng-show="video.isRecent" class="recent_label">New</label>
+                <video ng-show="video.show" width="100%" height="100%" controls preload="false" id="mainVideo-{{$index}}" poster="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video}}/thumbnail"
+                  class="">
+                </video>
+                <img class="center-adjust" ng-hide="video.show" onerror="this.src='resources/assets/play-btn.png'" data="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail"
+                  ng-src="resources/assets/play-btn.png">
+                <div class="index-video" ng-click="goToVideo(video)">
+                  <div class="parent">
+                    <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
+                    <p class="index-text-side">{{$index+1}}</p>
+                  </div>
+                </div>
+              </div>
+            </md-grid-tile>
+          </md-grid-list>
+        </div>
+        <div flex="15" layout="row">
+          <md-button flex-offset="25" ng-init="viewmore=5" ng-click="viewmore=viewmore+2" id="more-btn" flex="50" class="md-raised">View more</md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div flex="30" hide-xs>
+    <div style="height: 100% " app-footer></div>
+  </div>
+</md-content>
+<div style="visibility: hidden">
+  <div class="md-dialog-container" id="live-modal">
+    <md-dialog layout-padding>
+      <div class="viewer-container" layout="row" layout-align="center none">
+        <img ng-hide="isLoaded" src="resources/assets/loader-live.svg">
+        <div id="local" ng-show="isLoaded">          
+        </div>
+      </div>
+
+    </md-dialog>
+  </div>
+</div>

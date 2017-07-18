@@ -1,0 +1,9 @@
+[
+  { "name": "Crime" },
+  { "name": "Accident" },
+  { "name": "Témoin" },
+  { "name": "infraction" },
+  { "name": "Meurtre" },
+  { "name": "Vol" },
+  { "name": "Aggression" }
+]

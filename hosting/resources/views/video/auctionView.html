@@ -1,0 +1,36 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Enchères sur cette vidéos</h4>
+  </div>
+  <div class="modal-body">
+    <p ng-show="!hasAuction">Aucunes enchères pour le moment.</p>
+    <div ng-show="hasAuction">
+      <h5>Historique des enchères pour la video : {{vidName}}</h5>
+      <p>Temps restant : <span>{{bidTimeout()}}</span></p>
+      <br />
+      <div>
+        <table id="bid-table" class="table display">
+          <thead>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Média</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="bid in history track by $index">
+              <td>{{bid.bidDateTime | date:"medium"}}</td>
+              <td>{{bid.bidCurrentAmount | currency }}</td>
+              <td>{{bid.media.media.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="close()">Fermer</button>
+  </div>
+</div>

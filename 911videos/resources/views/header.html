@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="resources/css/header.css">
+<nav id='header'>
+  <div layout="row" id="header-container" class="adjust-vertical" layout-align="space-between center">
+    <div layout="row" layout-align="none center">
+      <a href="/911videos/#/"><img class="img-responsive" src="resources/assets/911video_Logo_transparant.png" style="width:200px!important"></a>
+      <div hide-xs layout="column" id="user-info">
+        <h6 class="color-white md-body-1 name-user">{{ user.firstname + " " + user.lastname }}</h6>
+        <h6 class="color-white md-body-1 name-user">{{user.securityType}}</h6>
+      </div>
+      <img hide-xs class="icon-header" title="Inscrire le nom et le poste du secours public pour qui l’usager travail​" ng-click="editPerfil()"
+        src="resources/assets/user.png" alt="">
+      <img hide-xs class="icon-header" src="resources/assets/dossier.png" alt="">
+      <img hide-xs class="icon-header" src="resources/assets/encheres.png" alt="">
+
+    </div>
+    <div layout="row" layout-align="none center">
+      <md-menu hide-xs>
+        <a href="" id="language" title="No pas afficher de drapeaux svp" ng-click="$mdMenu.open()">Language</a>
+
+        <md-menu-content>
+          <md-menu-item ng-click="$mdMenu.close()">
+            <a href="javascript:void(0);">
+              Français
+            </a>
+          </md-menu-item>
+          <md-menu-item ng-click="$mdMenu.close()">
+            <a href="javascript:void(0);">
+              <!--<img src="resources/assets/fr.png" />-->English</a>
+          </md-menu-item>
+          <md-menu-item ng-click="$mdMenu.close()">
+            <a href="javascript:void(0);">
+              <!--<img src="resources/assets/es.png" />-->Spanish</a>
+          </md-menu-item>
+          <md-menu-item ng-click="$mdMenu.close()">
+            <a href="javascript:void(0);">
+              <!--<img src="resources/assets/es.png" />-->Portuguese</a>
+          </md-menu-item>
+          <md-menu-item ng-click="$mdMenu.close()">
+            <a href="javascript:void(0);">
+              <!--<img src="resources/assets/es.png" />-->Germain</a>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+        <i title="Paramètres​-Déconnexion" class="fa fa-bars color-white" ng-click="$mdMenu.open()"></i>
+        <md-menu-content>
+          <md-menu-item ng-click="$mdMenu.close()"><a class="names" ng-click="showPrerenderedDialog($event)">Change Password</a></md-menu-item>
+          <md-menu-item ng-click="$mdMenu.close()"><a ng-click="logout()" class="names">Logout &nbsp;<i style="font-size:16px" class="fa fa-sign-out"></i></a></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+  </div>
+</nav>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" id="passwordModal">
+    <md-dialog flex="50" layout-padding>
+      <div ng-include="'resources/views/modals/chagePassModal.html'"></div>
+
+    </md-dialog>
+  </div>
+</div>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" id="editUser">
+    <md-dialog flex="50" layout-padding>
+
+      <div ng-include="'resources/views/modals/editUserModal.html'"></div>
+
+    </md-dialog>
+  </div>
+</div>

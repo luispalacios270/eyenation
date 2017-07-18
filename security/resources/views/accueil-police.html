@@ -1,0 +1,94 @@
+<div class="container-fluid accueilpolice_container">
+    <div class="row">
+      <div class="col-md-10 col-sm-8 text-center">
+          <div class="maps" style="min-height:450px;">
+              <figure>
+
+                  <ng-map id="Map" style="width: 100%; height: {{ windowHeight*0.7 }}px" center="{{$root.userLocation}}" lazy-init="true">
+                    <custom-marker position="{{$root.userLocation}}">
+                      <div><img src="resources/assets/marker_2.png" width="20" /></div>
+                    </custom-marker>
+                    <custom-marker ng-repeat="point in videos" position="{{point.gps_coordinates[0].latitude}}, {{point.gps_coordinates[0].longitude}}" ng-click="goToVideo()">
+                      <div style="
+                          background: url(resources/assets/marker_1.png) no-repeat;
+                          background-size: 99.9%;
+                          display: block;
+                          padding: 7px;
+                          color: white;
+                          width: 30px;
+                          height: 30px;
+                          text-align: center;
+                          line-height: 15px;
+                      ">{{ $index + 1 }}</div>
+                    </custom-marker>
+
+                  </ng-map>
+
+              </figure>
+          </div>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <div class="accueilpolice_videolist" style="height: {{ windowHeight*0.7 }}px">
+          <div ng-if="videos.length > 0" class="accueilpolice_videolist_content">
+          <div class="accueilpolice_videolist_item" ng-repeat="video in videos" ng-if='video.gps_coordinates.length > 0' ng-click="goToVideo()">
+              <div class="thumbnail" style="position:relative; height:{{ windowHeight*0.17 }}px;" >
+                  <div class="embed-responsive embed-responsive-16by9" ng-if="video.unique_name" style="padding-bottom: {{ windowHeight*0.15 }}px;">
+                      <img ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail" width="320">
+                  </div>
+                  <div style="
+                      background: url(resources/assets/marker_1.png) no-repeat;
+                      background-size: 99.9%;
+                      display: block;
+                      padding: 7px;
+                      color: white;
+                      width: 30px;
+                      height: 30px;
+                      text-align: center;
+                      line-height: 15px;
+                      position: absolute;
+                      bottom: -15px;
+                      left: -15px
+                  ">{{ $index + 1 }}</div>
+              </div>
+          </div>
+        </div>
+
+
+      </div>
+
+  </div>
+
+  <div>
+    <div class="inline-block middle" style="width: 49%">
+      <br>
+        <img src="resources/assets/icon-video-911.png" width="120" />
+    </div>
+    <div style="text-align: right;width: 49%" class="inline-block middle">
+      <br>
+      <img src="resources/assets/icon-phone.png"  />
+    </div>
+  </div>
+
+</div>
+<style>
+
+  @media (max-width: 768px) {
+    .accueilpolice_videolist_content{
+      width: {{ (videos.length  * 200) + (videos.length * 30) }}px;
+    }
+
+    .accueilpolice_videolist_item{
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 15px !important;
+      width: 200px;
+    }
+
+    .accueilpolice_videolist{
+      overflow-x: auto;
+      height: auto !important;
+    }
+
+  }
+
+</style>

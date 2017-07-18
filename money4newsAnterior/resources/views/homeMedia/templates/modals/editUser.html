@@ -1,0 +1,146 @@
+<div>
+    <!--{{paysList}}-->
+    <!--{{listStates}}-->
+    <form id="signupform" role="form" name="formUser">
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.username}}</label>
+            <div class="col-md-9">
+                <input class='no-margin' name="nom" ng-model="user.name" placeholder="{{userLanguageAccountFields.choose_username}}" required>
+            </div>
+        </div>
+        <div class="margin-alert">
+            <div ng-show="nameLenghtNotValid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.name_length_error}}</div>
+            </div>
+            <div ng-show="nameAlreadyUsed">
+                <div class="alert alert-danger" role="alert">
+                    {{userLanguageAccountFields.user_name_already_exists_error}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="firstname">{{userLanguageAccountFields.email}}*</label>
+            <div class="col-md-9">
+                <input type="email" class='no-margin' name="email" ng-model="user.email" placeholder="{{userLanguageAccountFields.email_example}}"
+                    required>
+            </div>
+
+            <div class="margin-alert">
+                <div ng-show="mailAlreadyUsed">
+                    <div class="alert alert-danger" role="alert">
+                        {{userLanguageAccountFields.email_already_in_use_error}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.firstname}}*</label>
+            <div class="col-md-9">
+                <input type="text" class='no-margin' name="firstname" ng-model="user.firstname" placeholder="{{userLanguageAccountFields.firstname}}"
+                    required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.lastname}}*</label>
+            <div class="col-md-9">
+                <input type="text" class='no-margin' name="lastname" ng-model="user.lastname" placeholder="{{userLanguageAccountFields.lastname}}"
+                    required>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.phone_number}}*</label>
+            <div class="col-md-9">
+                <input type="text" class='no-margin' name="telephone" ng-model="user.telephone" placeholder="{{userLanguageAccountFields.phone_number}}"
+                    required>
+            </div>
+        </div>
+
+        <div class="margin-alert">
+            <div ng-show="telFormatInvalid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.invalid_phone_country_error}}<br>{{userLanguageAccountFields.valid_phone_examples}}{{telExamples}}</div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.address}}*</label>
+            <div class="col-md-9">
+                <input type="text" class='no-margin' name="address" ng-model="user.address" placeholder="{{userLanguageAccountFields.define_address}}"
+                    required>
+            </div>
+        </div>
+
+        <div class="margin-alert">
+            <div ng-show="addressLengthNotValid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.address_length_error}}</div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.town}}*</label>
+            <div class="col-md-9">
+                <input type="text" class='no-margin' name="city" ng-model="user.city" placeholder="{{userLanguageAccountFields.town}}" required>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.country}}*</label>
+            <div input-field>
+                <select id="countrySelect" ng-model="user.country" material-select ng-change="getStatesByCurrentCountry()" required>
+              <option ng-repeat="(key, data) in paysList" value="{{data.countryCode}}">{{data.countryName}}</option>
+          </select>
+            </div>
+        </div>
+
+        <div class="margin-alert">
+            <div ng-show="countryNotChosen">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_country_error}}</div>
+            </div>
+        </div>
+
+        <div ng-show="user.country">
+            <div>
+                <label for="icode" class="col-md-3 control-label">{{userLanguageAccountFields.state_province}}*</label>
+                <div input-field>
+                    <select ng-model="user.state" material-select required>
+                <option ng-repeat="(key, data) in listStates" value="{{data.stateCode}}">{{data.stateName}}</option>
+            </select>
+                </div>
+            </div>
+
+
+            <div ng-show="stateNotChosen">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_state_province_error}}</div>
+            </div>
+        </div>
+
+        <div class='no-margin'>
+            <label>{{userLanguageAccountFields.language}}*</label>
+            <div input-field>
+                <select id="languageSelect" ng-model="user.language" material-select required>            
+                    <option ng-repeat="(key, data) in langueList" value="{{key}}">
+                        {{data}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div ng-show="languageNotChosen">
+            <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_language_selected_error}}</div>
+        </div>
+
+        <h6>(*): {{userLanguageAccountFields.required_field_msg}}</h6>
+        <div ng-show="modificationPb">
+            <div class="alertAuth alert-danger" role="alert">
+                <strong>{{userLanguageAccountFields.modification_error}}!</strong>{{userLanguageAccountFields.try_again}}
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+ <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Enlever la vidéo des enchères</h4>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point d'enlever votre vidéo des enchères</p>
+        <div><small id="smaller"><em>Si cette enchère possède déjà une mise, la vidéo ne pourra pas être supprimée</em></small></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="close()">Fermer</button>
+        <button type="button" class="btn btn-primary" ng-click="confirmAuctionning()">Enlever la vidéo</button>
+      </div>
+  </div>

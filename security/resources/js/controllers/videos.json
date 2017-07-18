@@ -1,0 +1,202 @@
+[  
+   {  
+      "times_viewed":1,
+      "streaming_endedon":null,
+      "description":"",
+      "lastTimeVideoStatusChanged":1495856049134,
+      "gps_coordinates":[  
+         {  
+            "timezone":"UTC-5",
+            "latitude":46.2392,
+            "longitude":-71.0354
+         }
+      ],
+      "tags":[  
+
+      ],
+      "sold_amount":null,
+      "unique_name":"5bb90fb7-d507-4e45-9344-24019d8a9d0a",
+      "person":{  
+         "localization":{  
+            "city":"Brossard sud",
+            "street":"9125 rue lenno appt 10",
+            "appartment_no":null,
+            "country_fips":"CA",
+            "state_abbreviation":"PQ "
+         },
+         "language_code":"fr",
+         "firstname":"Carlos",
+         "phone":"514607053",
+         "citizen_perormance_status":null,
+         "media_agent":{  
+            "auction_limit":1000000,
+            "total_temp_bid_value":200,
+            "media":[  
+               {  
+                  "name":"Cnn"
+               }
+            ],
+            "bought_video_amount":4971
+         },
+         "email":"nayarithsolorzano@hotmail.com",
+         "username":"krlosed22",
+         "lastname":"vasquez perez pppp"
+      },
+      "name":"chez Gino",
+      "category":[  
+         {  
+            "translation":"Accident",
+            "name":"ACCIDENT",
+            "id":1,
+            "lang":"en"
+         },
+         {  
+            "translation":"Accident",
+            "name":"ACCIDENT",
+            "id":1,
+            "lang":"fr"
+         }
+      ],
+      "streaming_startedon":1495404830382,
+      "status":"READY",
+      "mediaWeight":null,
+      "location":"Quebec, Canadá"
+   },
+   {  
+      "times_viewed":33,
+      "streaming_endedon":1492537062000,
+      "description":"",
+      "lastTimeVideoStatusChanged":1496083505193,
+      "gps_coordinates":[  
+         {  
+            "timezone":"UTC-5",
+            "latitude":45.536,
+            "longitude":-73.108
+         }
+      ],
+      "tags":[  
+
+      ],
+      "auction":{  
+         "numberBid":3,
+         "highestBid":200,
+         "start":1496083524637,
+         "end":1496097924637,
+         "media":[  
+            {  
+               "name":"Cnn"
+            }
+         ]
+      },
+      "sold_amount":null,
+      "unique_name":"6f0cf353-58be-4df4-8698-8627f5ce9bc2",
+      "person":{  
+         "localization":{  
+            "city":"Brossard sud",
+            "street":"9125 rue lenno appt 10",
+            "appartment_no":null,
+            "country_fips":"CA",
+            "state_abbreviation":"PQ "
+         },
+         "language_code":"fr",
+         "firstname":"Carlos",
+         "phone":"514607053",
+         "citizen_perormance_status":null,
+         "media_agent":{  
+            "auction_limit":1000000,
+            "total_temp_bid_value":200,
+            "media":[  
+               {  
+                  "name":"Cnn"
+               }
+            ],
+            "bought_video_amount":4971
+         },
+         "email":"nayarithsolorzano@hotmail.com",
+         "username":"krlosed22",
+         "lastname":"vasquez perez pppp"
+      },
+      "name":"video test modifi",
+      "category":[  
+         {  
+            "translation":"Autos",
+            "name":"Autos",
+            "id":21,
+            "lang":"fr"
+         },
+         {  
+            "translation":"Autos",
+            "name":"Autos",
+            "id":21,
+            "lang":"en"
+         }
+      ],
+      "streaming_startedon":1492537062000,
+      "status":"AUCTION",
+      "mediaWeight":null,
+      "counter":5794,
+      "location":"Quebec, Canadá"
+   },
+   {  
+      "times_viewed":26,
+      "streaming_endedon":1492537062000,
+      "description":"",
+      "lastTimeVideoStatusChanged":1495066980780,
+      "gps_coordinates":[  
+         {  
+            "timezone":"UTC-5",
+            "latitude":42.536,
+            "longitude":-71.108
+         }
+      ],
+      "tags":[  
+
+      ],
+      "sold_amount":null,
+      "unique_name":"c7f3ea29-7ac2-4b78-8e74-1db8fb84046e",
+      "person":{  
+         "localization":{  
+            "city":"Brossard sud",
+            "street":"9125 rue lenno appt 10",
+            "appartment_no":null,
+            "country_fips":"CA",
+            "state_abbreviation":"PQ "
+         },
+         "language_code":"fr",
+         "firstname":"Carlos",
+         "phone":"514607053",
+         "citizen_perormance_status":null,
+         "media_agent":{  
+            "auction_limit":1000000,
+            "total_temp_bid_value":200,
+            "media":[  
+               {  
+                  "name":"Cnn"
+               }
+            ],
+            "bought_video_amount":4971
+         },
+         "email":"nayarithsolorzano@hotmail.com",
+         "username":"krlosed22",
+         "lastname":"vasquez perez pppp"
+      },
+      "name":"vid",
+      "category":[  
+         {  
+            "translation":"Terrorism",
+            "name":"TERRORIMS",
+            "id":6,
+            "lang":"en"
+         },
+         {  
+            "translation":"Terrorisme",
+            "name":"TERRORIMS",
+            "id":6,
+            "lang":"fr"
+         }
+      ],
+      "streaming_startedon":1492537062000,
+      "status":"READY",
+      "mediaWeight":null
+   }
+]

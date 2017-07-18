@@ -1,0 +1,278 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div id="signupbox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" >
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<span class="panel-title">Profile security person</span>
+				<span class="linksAuthenticationSignup"></span>
+			</div>			
+
+			       <!-- 
+
+					Request Body Vars
+					==================
+
+			        var username = req.body.username; *
+
+			        var pwd = req.body.pwd; *
+
+                    var email = req.body.email; *
+
+                    var securityType = req.body.securityType; * 
+
+                    var streetName = req.body.streetName; *
+
+                    var language = req.body.language; *
+
+                    var firstname = req.body.firstname; *
+
+                    var lastname = req.body.lastname; *
+
+                    var zipcode = req.body.zipcode; *
+
+                    var city = req.body.city; *
+
+                    var country = req.body.country; * 
+
+                    var state = req.body.state; *
+
+                    var telephone = req.body.telephone; *
+
+                    var workPhone = req.body.workPhone; *
+
+                    var workPhoneExt = req.body.workPhoneExt; *
+
+                    var appartment = req.body.appartment; * 
+
+
+					
+					Security Person Types
+					=====================
+					
+					{
+						value : 1, 
+						name : "pour centrale 911"
+					},
+					{
+						value : 2, 
+						name : "pour pompier"
+					},
+					{
+						value : 3, 
+						name : "pour police"
+					},
+					{
+						value : 4, 
+						name : "pour ambulancier"
+					},
+					{
+						value : 5, 
+						name : "pour hôpital"
+					},
+					{
+						value : 6, 
+						name : "pour remorquage"
+					}
+
+                    -->
+
+			<div class="panel-body" >
+				<form name="securityPerson" class="form-horizontal" role="form" name="form">
+					
+					<fieldset>
+						
+						<div class="form-group">
+							<label class="col-md-3 control-label">Username</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="nom" ng-model="user.username" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)" readonly maxlength="100">
+							</div>
+						</div>
+						<div ng-show="nameLenghtNotValid">
+	                        <div class="alert alert-danger" role="alert">Username lenght must be between 8 and 20</div>
+	                    </div>
+						<div ng-show="nameAlreadyUsed">
+							<div class="alert alert-danger" role="alert">Username exist</div>
+						</div>
+
+			
+				
+						
+						<div ng-show="confNotValid">
+	                        <div class="alert alert-danger" role="alert">Les deux mots de passe ne correspondent pas</div>
+	                    </div>
+
+						<div class="form-group">
+							<label for="firstname" class="col-md-3 control-label">Email</label>
+							<div class="col-md-9">
+								<input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com" maxlength="100" readonly>
+							</div>
+							<div ng-show="mailAlreadyUsed">
+								<div class="alert alert-danger" role="alert">Email exist</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="firstname" class="col-md-3 control-label">Security Type</label>
+							<div class="col-md-9">
+								<select 
+								class="form-control"
+								ng-model="user.securityType" 
+								ng-options="item as item.name for item in securityType track by item.value"
+								
+								ng-init="securityType[0]"
+								>
+								</select>
+							</div>
+							<div ng-show="invalidSecurityType">
+								<div class="alert alert-danger" role="alert">Select a valid security type</div>
+							</div>
+						</div>
+
+					</fieldset>
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Firstname</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom" maxlength="100">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Lastname</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille" maxlength="100">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Telephone</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="telephone" ng-model="user.telephone" placeholder="Telephone" maxlength="15">
+							</div>
+						</div>
+						
+	                    <div ng-show="telFormatInvalid">
+	                        <div class="alert alert-danger" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+	                    </div>
+
+	                    <div class="form-group">
+							<label class="col-md-3 control-label">Workphone</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="telephone" ng-model="user.workPhone" placeholder="Workphone" maxlength="15">
+							</div>
+						</div>
+						
+	                    <div ng-show="workPhoneFormatInvalid">
+	                        <div class="alert alert-danger" role="alert">Invalid telephone number</div>
+	                    </div>
+
+	                     <div class="form-group">
+							<label class="col-md-3 control-label">Workphone Ext</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="telephone" ng-model="user.workPhoneExt" placeholder="Workphone Ext" maxlength="5">
+							</div>
+						</div>
+						
+	                    <div ng-show="workPhoneExtFormatInvalid">
+	                        <div class="alert alert-danger" role="alert">Invalid telephone ext</div>
+	                    </div>
+
+	                     <div class="form-group">
+							<label class="col-md-3 control-label">Appartment</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="telephone" ng-model="user.appartment" placeholder="Workphone Ext" maxlength="20">
+							</div>
+						</div>
+						
+	                    <div ng-show="invalidAppartment">
+	                        <div class="alert alert-danger" role="alert">Invalid appartment</div>
+	                    </div>
+
+					
+					</fieldset>
+
+					<fieldset>
+
+						<div class="form-group">
+							<label for="icode" class="col-md-3 control-label">Languge</label>
+							<div class="col-md-9">
+								<select class="form-control" name="country" ng-model="user.language" placeholder="Sélectionnez votre langue" ng-options="item as item.name || 'Select Language' for item in langueList track by item.code" >
+								</select>
+							</div>
+						</div>
+
+						<div ng-show="languageNotChosen">
+	                        <div class="alert alert-danger" role="alert">Veuillez sélectionner une langue SVP</div>
+	                    </div>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">Street Address</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="city" ng-model="user.streetName" placeholder="StreetAddress" maxlength="100">
+							</div>
+						</div>
+						<div ng-show="addressLengthNotValid">
+	                        <div class="alert alert-danger" role="alert">L'adresse doit comprendre au plus 100 caractères</div>
+	                    </div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">City</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence" maxlength="64">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Country</label>
+							<div class="col-md-9">
+								<select class="form-control" name="country" ng-model="user.country" placeholder="Sélectionnez votre pays de résidence" ng-options="item as item.countryName || 'Select Country' for item in countries track by item.countryCode" ng-change="getStates()" >
+								</select>
+							</div>
+						</div>
+						<div ng-show="countryNotChosen">
+	                        <div class="alert alert-danger" role="alert">Select a valid Country</div>
+	                    </div>
+	                    <div ng-show="user.country && states">
+	                        
+	                        <p ng-show="user.country && !states" class="text-center">Loading States...</p>
+
+							<div class="form-group" ng-show='states'>
+								<label for="icode" class="col-md-3 control-label">State</label>
+								<div class="col-md-9">
+									<select class="form-control" name="country" ng-model="user.state" placeholder="Sélectionnez votre état/province/région" ng-options="item as item.stateName for item in states track by item.stateCode" >
+									</select>
+								</div>
+							</div>
+						</div>
+						<div ng-show="stateNotChosen">
+	                        <div class="alert alert-danger" role="alert">Select a valid State</div>
+	                    </div>
+	                    <div class="form-group">
+							<label class="col-md-3 control-label">Zipcode</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="city" ng-model="user.zipcode" placeholder="Zipcode" maxlength="8">
+							</div>
+						</div>
+						<div ng-show="invalidZipcode">
+	                        <div class="alert alert-danger" role="alert">Invalid Zipcode</div>
+	                    </div>
+					</fieldset>
+		
+					
+					<div ng-show="creationPb">
+						<div class="alertAuth alert-danger" role="alert">
+						   <strong>Erreur lors de la data!</strong> Veuillez rééssayer SVP
+						</div>
+					</div>
+					<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="update()" ng-disable="!user">Update</button>
+				</form>			 
+
+
+				<center><a href="#/"></a></center>
+			 </div>
+		</div>
+    </div> 
+</div>

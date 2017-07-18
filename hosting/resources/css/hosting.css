@@ -1,0 +1,85 @@
+div.download button {
+	width: 32%;
+	position: relative;
+	left: -.25%;
+}
+
+div.download button>span {
+	position:absolute;
+	right:1em;
+}
+
+div.download .modal-footer>div{
+	width:91%;
+	margin:auto;
+}
+
+div.download p.center {
+	text-align:center;
+}
+
+#signupbox {
+	margin-top:5em !important;
+}
+
+#video-section {
+	margin-top: 5em;
+}
+
+tags-input {
+	height: 80px;
+}
+
+.tags {
+	margin-right:1em;
+}
+
+/*video{
+	width: 300px;
+	height: 250px;
+	display: block;
+	float: left;
+	border:2px solid white;
+	margin: 7px 8px;
+}*/
+
+.selected{
+	background: #ececec;
+}
+
+
+.localStream {
+	display: inline-block;
+	top: 15px;
+	right: 15px;
+	float: right;
+}
+
+.localStream video {
+		border: 5px solid rgb(119, 119, 119);
+		outline: 0px none;
+		height: 240px;
+		width: 320px;
+}
+
+.remoteStreams{
+	display: inline-block;
+	top: 15px;
+	right: 15px;
+	float: left;
+	text-align: center;
+}
+
+.remoteStreams td:hover {
+	cursor: pointer;
+	background-color: #aaa;
+}
+
+.remoteStreams .selected {
+	background-color: #444 !important;
+	text-shadow:none;
+	border-right-color: #aaa;
+	border-left: none;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow:inset 1px 2px 6px #070707;
+}

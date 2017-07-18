@@ -1,0 +1,70 @@
+<link href="vendors/bootstrap/bootstrap.css" rel="stylesheet" />
+  <link href="vendors/bootstrap/bootstrap-social.css" rel="stylesheet" />
+
+<div logo></div>
+
+<div class="container">
+
+  <div id="loginbox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    <div class="panel panel-info" >
+      <div class="panel-heading">
+        <span class="panel-title">Connectez-vous</span>
+        <span class="linksAuthenticationSignup">Nouvel utilisateur? <a href="#/signup">Créez un compte!</a></span>
+      </div>
+
+      <div class="panel-body">
+
+        <form id="loginform" class="form-horizontal" name="form">
+
+          <!-- Identifiant -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input id="login-username" type="text" class="form-control" ng-model="user.name" name="username" required="true" placeholder="Veuillez saisir votre identifiant">                                        
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-lock"></i>
+            </span>
+            <input id="login-password" type="password" class="form-control" ng-model="user.password" name="password" placeholder="Veuillez composer votre mot de passe" required="true">
+          </div>
+
+          <!-- Mdp manquant -->
+          <div ng-show="missingPw">
+            <div class="alert alert-danger" role="alert">Veuillez entrer votre mot de passe SVP</div>
+          </div>
+          <!-- Pb authentification -->
+          <div ng-show="authPb">
+            <div class="alertAuth alert-danger" role="alert"><strong>Erreur d'authentification!</strong> Identifiant et/ou mot de passe incorrect(s)</div>
+          </div> 
+
+          <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="validate(user)" >Se connecter</button>
+        </form>
+
+        <div class="row">
+          <center>
+           <br>
+            <div class="retrievePassword">
+              <a href="#">Mot de passe oublié ?</a>
+            </div>
+          </center>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12 control">
+            <div class="separationBar">
+                </div>
+            <br>
+            <a class="btn btn-block btn-social btn-facebook"><img src="resources\images\facebook_logo.png"/> Se connecter avec Facebook</a>
+            <br/>
+            <a class="btn btn-block btn-social btn-google"><img src="resources\images\google_logo.png"/> Se connecter avec Google+</a>
+          </div>
+        </div>
+
+      </div>                     
+    </div>  
+  </div>
+</div>

@@ -1,0 +1,22 @@
+ <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Mise en enchère</h4>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point de mettre votre vidéo en enchère. Voici ce que cela représente : </p>
+				<ul>
+					<li>Point A</li>
+					<li>Point B</li>
+					<li>Point C</li>
+				</ul>
+				<p>Accepter vous ces clauses ?</p>
+				<div><small id="smaller"><em>* Mentions légals, autres points de moindre importance, etc</em></small></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="close()">Décliner</button>
+        <button type="button" class="btn btn-primary" ng-click="confirmAuctionning()">Accepter</button>
+      </div>
+  </div>

@@ -1,0 +1,163 @@
+<div>
+    <form name="registerForm" action="">
+        <md-input-container class="md-block">
+            <label>Username</label>
+            <input type="text" name="name" ng-model="user.username" minlength="8" maxlength="100" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)"
+                required readonly>
+            <!--<div ng-messages="registerForm.name.$error">
+                <div ng-message-exp="['minlength','maxlength']">Username lenght must be between 8 and 20</div>
+            </div>-->
+            <!--<div ng-show="nameAlreadyUsed">
+                <div class="md-input-message-animation alert-md" role="alert">Username exist</div>
+            </div>-->
+        </md-input-container>
+        <!--<md-input-container class="md-block">
+            <label>Mot de passe</label>
+            <input type="password" minlength="4" maxlength="16" name="mdp" ng-model="user.pwd" placeholder="Choisissez votre mot de passe (entre 4 et 16 carac.)"
+                required>
+            <div ng-messages="registerForm.mdp.$error">
+                <div ng-message-exp="['minlength','maxlength']">Username lenght must be between 8 and 20</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirmation</label>
+            <input ng-disabled="registerForm.mdp.$invalid" type="password" name="confMdp" ng-model="user.confirmationPw" placeholder="Confirmez votre mot de passe (entre 4 et 10 carac.)"
+                ng-blur="validatePasswords()" required>
+            <div ng-show="confNotValid">
+                <div class="md-input-message-animation alert-md" role="alert">Les deux mots de passe ne correspondent pas</div>
+            </div>
+        </md-input-container>-->
+        <md-input-container class="md-block">
+            <label>Email</label>
+            <input type="email" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com" required readonly maxlength="100">
+            <!--<div ng-messages="registerForm.email.$error">
+                <div ng-message="email">The email isn't valid</div>
+                <div ng-message="maxlength">Email lenght must have less than 100 characters</div>
+            </div>
+            <div ng-show="mailAlreadyUsed">
+                <div class="md-input-message-animation alert-md" role="alert">Email exist</div>
+            </div>-->
+        </md-input-container>
+        <md-input-container class="md-block select-container">
+            <label> Security Type</label>
+            <md-select ng-model="user.securityType" placeholder="Select a security type" required>
+                <md-option ng-value="item.value" ng-repeat="item in securityTypes">
+                    {{item.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Firstname</label>
+            <input type="text" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom" required maxlength="100">
+            <div ng-messages="registerForm.firstname.$error">
+                <div ng-message="maxlength">This field must have less than 100 characters</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Lastname</label>
+            <input type="text" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille" required maxlength="100">
+            <div ng-messages="registerForm.lastname.$error">
+                <div ng-message="maxlength">This field must have less than 100 characters</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Telephone</label>
+            <input type="text" name="telephone" ng-model="user.telephone" placeholder="Telephone" required maxlength="15">
+            <div ng-messages="registerForm.telephone.$error">
+                <div ng-message="maxlength">This field must have less than 16 characters</div>
+            </div>
+            <div ng-show="telFormatInvalid">
+                <div class="md-input-message-animation alert-md" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Workphone</label>
+            <input type="text" name="workphone" ng-model="user.workPhone" placeholder="Workphone">
+            <div ng-show="workPhoneFormatInvalid">
+                <div class="md-input-message-animation alert-md" role="alert">Invalid telephone number</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Workphone Ext</label>
+            <input type="text" name="workphoneext" ng-model="user.workPhoneExt" placeholder="Workphone Ext" maxlength="5">
+            <div ng-messages="registerForm.workphoneext.$error">
+                <div ng-message="maxlength">This field must have less than 6 characters</div>
+            </div>
+            <div ng-show="workPhoneExtFormatInvalid">
+                <div class="md-input-message-animation alert-md" role="alert">Invalid telephone ext</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Appartment</label>
+            <input type="text" name="apartment" ng-model="user.appartment" maxlength="20">
+            <div ng-messages="registerForm.apartment.$error">
+                <div ng-message="maxlength">This field must have less than 20 characters</div>
+            </div>
+            <div ng-show="invalidAppartment">
+                <div class="md-input-message-animation alert-md" role="alert">Invalid appartment</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block select-container">
+            <label>Language</label>
+            <md-select name="language" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+                <md-option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Street Address</label>
+            <input type="text" name="street" ng-model="user.streetName" placeholder="StreetAddress" maxlength="100">
+            <div ng-messages="registerForm.street.$error">
+                <div ng-message="maxlength">L'adresse doit comprendre au plus 100 caractères</div>
+            </div>
+
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>City</label>
+            <input type="text" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence" maxlength="64">
+            <div ng-messages="registerForm.city.$error">
+                <div ng-message="maxlength">This field must have less than 64 characters</div>
+            </div>
+
+        </md-input-container>
+
+
+        <md-input-container class="md-block select-container">
+            <label>Country</label>
+            <md-select required name="country" ng-model="user.country" placeholder="Sélectionnez votre pays de résidence" ng-change="getStates()">
+                <md-option ng-value="item.countryCode" ng-repeat="item in countries track by $index">
+                    {{item.countryName}}
+                </md-option>
+            </md-select>
+
+        </md-input-container>
+
+        <div ng-show="user.country">
+            <p ng-show="user.country && !states">Loading States...</p>
+            <md-input-container class="md-block select-container">
+                <label for="icode">State</label>
+                <md-select name="state" ng-model="user.state" required placeholder="Sélectionnez votre état/province/région">
+                    <md-option ng-value="item.stateCode" ng-repeat="item in states">{{item.stateName}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <!--<md-input-container class="md-block">
+				<label>Language</label>
+				<md-select name="language" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+					<md-option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+				</md-select>
+			</md-input-container>-->
+        <div layout="row" layout-padding>
+            <!--<md-button ng-disabled="registerForm.$invalid" ng-class="{'main-btn':registerForm.$valid}" flex="100" type="submit" class="md-raised"
+                ng-click="validateUser(user)">Créer!</md-button>-->
+            <md-button type="submit" ng-disabled="registerForm.$invalid || !user" flex="70" type="submit" class="md-raised md-primary"
+                ng-click="update()">Update</md-button>
+            <md-button ng-click="closeDialog()" flex="30">Close</md-button>
+        </div>
+
+
+    </form>
+</div>

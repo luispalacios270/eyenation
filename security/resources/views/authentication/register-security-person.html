@@ -1,0 +1,417 @@
+<link rel="stylesheet" href="vendors/angular-material/angular-material.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<style>
+	.img-logo {
+		width: 100%;
+		height: auto;
+		margin-bottom: 20px;
+	}
+
+	.select-container {
+		margin-bottom: 40px !important;
+	}
+
+	.alert-md {
+		opacity: 1 !important;
+		margin-top: 0px !important;
+	}
+
+	.main-btn {
+		background-color: rgb(237, 30, 54) !important;
+		color: white !important;
+		font-weight: bold !important;
+	}
+
+	.main-container {
+		background: #2F302E !important;
+	}
+
+	.sub-container {
+		background: white;
+	}
+</style>
+
+<!--{{securityTypes}}-->
+
+<md-content class="main-container" layout="row" layout-padding>
+	<div class="sub-container" flex-offset-gt-sm="25" flex-offset="15" flex-gt-sm="40" flex="70" layout="column">
+		<img class="img-logo" src="resources/assets/911video_Logo_ROUGE.png" alt="LOGO" />
+		<form name="registerForm" action="">
+			<md-input-container class="md-block">
+				<label>Username</label>
+				<input type="text" name="name" ng-model="user.username" minlength="8" maxlength="100" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)"
+				    required>
+				<div ng-messages="registerForm.name.$error">
+					<div ng-message-exp="['minlength','maxlength']">Username lenght must be between 8 and 20</div>
+				</div>
+				<div ng-show="nameAlreadyUsed">
+					<div class="md-input-message-animation alert-md" role="alert">Username exist</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Mot de passe</label>
+				<input type="password" minlength="4" maxlength="16" name="mdp" ng-model="user.pwd" placeholder="Choisissez votre mot de passe (entre 4 et 16 carac.)"
+				    required>
+				<div ng-messages="registerForm.mdp.$error">
+					<div ng-message-exp="['minlength','maxlength']">Username lenght must be between 8 and 20</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Confirmation</label>
+				<input ng-disabled="registerForm.mdp.$invalid" type="password" name="confMdp" ng-model="user.confirmationPw" placeholder="Confirmez votre mot de passe (entre 4 et 10 carac.)"
+				    ng-blur="validatePasswords()" required>
+				<div ng-show="confNotValid">
+					<div class="md-input-message-animation alert-md" role="alert">Les deux mots de passe ne correspondent pas</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Email</label>
+				<input type="email" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com" required maxlength="100">
+				<div ng-messages="registerForm.email.$error">
+					<div ng-message="email">The email isn't valid</div>
+					<div ng-message="maxlength">Email lenght must have less than 100 characters</div>
+				</div>
+				<div ng-show="mailAlreadyUsed">
+					<div class="md-input-message-animation alert-md" role="alert">Email exist</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block select-container">
+				<label> Security Type</label>
+				<md-select ng-model="securityType" placeholder="Select a security type" required>
+					<md-option ng-value="item.value" ng-repeat="item in securityTypes">
+						{{item.name}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Firstname</label>
+				<input type="text" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom" required maxlength="100">
+				<div ng-messages="registerForm.firstname.$error">
+					<div ng-message="maxlength">This field must have less than 100 characters</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Lastname</label>
+				<input type="text" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille" required maxlength="100">
+				<div ng-messages="registerForm.lastname.$error">
+					<div ng-message="maxlength">This field must have less than 100 characters</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Telephone</label>
+				<input type="text" name="telephone" ng-model="user.telephone" placeholder="Telephone" required maxlength="15">
+				<div ng-messages="registerForm.telephone.$error">
+					<div ng-message="maxlength">This field must have less than 16 characters</div>
+				</div>
+				<div ng-show="telFormatInvalid">
+					<div class="md-input-message-animation alert-md" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Workphone</label>
+				<input type="text" name="workphone" ng-model="user.workPhone" placeholder="Workphone">
+				<div ng-show="workPhoneFormatInvalid">
+					<div class="md-input-message-animation alert-md" role="alert">Invalid telephone number</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Workphone Ext</label>
+				<input type="text" name="workphoneext" ng-model="user.workPhoneExt" placeholder="Workphone Ext" maxlength="5">
+				<div ng-messages="registerForm.workphoneext.$error">
+					<div ng-message="maxlength">This field must have less than 6 characters</div>
+				</div>
+				<div ng-show="workPhoneExtFormatInvalid">
+					<div class="md-input-message-animation alert-md" role="alert">Invalid telephone ext</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Appartment</label>
+				<input type="text" name="apartment" ng-model="user.appartment" maxlength="20">
+				<div ng-messages="registerForm.apartment.$error">
+					<div ng-message="maxlength">This field must have less than 20 characters</div>
+				</div>
+				<div ng-show="invalidAppartment">
+					<div class="md-input-message-animation alert-md" role="alert">Invalid appartment</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container class="md-block select-container">
+				<label>Language</label>
+				<md-select name="language" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+					<md-option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+				</md-select>
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>Street Address</label>
+				<input type="text" name="street" ng-model="user.streetName" placeholder="StreetAddress" maxlength="100">
+				<div ng-messages="registerForm.street.$error">
+					<div ng-message="maxlength">L'adresse doit comprendre au plus 100 caractères</div>
+				</div>
+
+			</md-input-container>
+
+			<md-input-container class="md-block">
+				<label>City</label>
+				<input type="text" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence" maxlength="64">
+				<div ng-messages="registerForm.city.$error">
+					<div ng-message="maxlength">This field must have less than 64 characters</div>
+				</div>
+
+			</md-input-container>
+
+
+			<md-input-container class="md-block select-container">
+				<label>Country</label>
+				<md-select required name="country" ng-model="country" placeholder="Sélectionnez votre pays de résidence" ng-change="getStates()">
+					<md-option ng-value="item.countryCode" ng-repeat="item in countries track by $index">
+						{{item.countryName}}
+					</md-option>
+				</md-select>
+
+			</md-input-container>
+
+			<div ng-show="country">
+				<p ng-show="country && !states">Loading States...</p>
+				<md-input-container class="md-block select-container">
+					<label for="icode">State</label>
+					<md-select name="state" ng-model="state" required placeholder="Sélectionnez votre état/province/région">
+						<md-option ng-value="item.stateCode" ng-repeat="item in states">{{item.stateName}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+
+			<!--<md-input-container class="md-block">
+				<label>Language</label>
+				<md-select name="language" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+					<md-option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+				</md-select>
+			</md-input-container>-->
+			<div layout="row" layout-padding>
+				<md-button ng-disabled="registerForm.$invalid" ng-class="{'main-btn':registerForm.$valid}" flex="100" type="submit" class="md-raised"
+				    ng-click="validateUser(user)">Créer!</md-button>
+			</div>
+
+
+		</form>
+
+	</div>
+</md-content>
+
+<!--<div class="register-security-person-container">
+
+	<div class="register-security-person-content">
+		<img src="resources/assets/911video_Logo_ROUGE.png" alt="LOGO" class="login-logo" width="100%" />
+
+		<div>
+			<form name="securityPerson" class="form-horizontal" role="form" name="form">
+				<fieldset>
+					<div class="rs-input">
+						<label class=" control-label">Username*</label>
+						<div>
+							<input type="text" class="form-control" name="nom" ng-model="user.username" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)"
+							    maxlength="100">
+						</div>
+					</div>
+					<div ng-show="nameLenghtNotValid">
+						<div class="alert alert-danger" role="alert">Username lenght must be between 8 and 20</div>
+					</div>
+					<div ng-show="nameAlreadyUsed">
+						<div class="alert alert-danger" role="alert">Username exist</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Mot de passe*</label>
+						<div>
+							<input type="password" class="form-control" name="mdp" ng-model="user.pwd" placeholder="Choisissez votre mot de passe (entre 4 et 10 carac.)"
+							    required>
+						</div>
+					</div>
+					<div ng-show="pwLengthNotValid">
+						<div class="alert alert-danger" role="alert">Le nombre de caractères du mot de passe doit être compris entre 4 et 16 inclus</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Confirmation*</label>
+						<div>
+							<input type="password" class="form-control" name="confMdp" ng-model="user.confirmationPw" placeholder="Confirmez votre mot de passe (entre 4 et 10 carac.)"
+							    ng-blur="validatePasswords()" required>
+						</div>
+					</div>
+
+					<div ng-show="confNotValid">
+						<div class="alert alert-danger" role="alert">Les deux mots de passe ne correspondent pas</div>
+					</div>
+
+					<div class="rs-input">
+						<label for="firstname" class="control-label">Email*</label>
+						<div>
+							<input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com" required
+							    maxlength="100">
+						</div>
+						<div ng-show="mailAlreadyUsed">
+							<div class="alert alert-danger" role="alert">Email exist</div>
+						</div>
+					</div>
+
+					<div class="rs-input">
+						<label for="firstname" class="control-label">Security Type*</label>
+						<div class="rs-select-container">
+							<select class="form-control" ng-model="securityType" ng-options="item as item.name for item in securityTypes track by item.value"
+							    required ng-init="securityType[0]">
+								</select>
+						</div>
+						<div ng-show="invalidSecurityType">
+							<div class="alert alert-danger" role="alert">Select a valid security type</div>
+						</div>
+					</div>
+
+				</fieldset>
+
+				<fieldset>
+					<div class="rs-input">
+						<label class="control-label">Firstname*</label>
+						<div>
+							<input type="text" class="form-control" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom" required
+							    maxlength="100">
+						</div>
+					</div>
+					<div class="rs-input">
+						<label class="control-label">Lastname*</label>
+						<div>
+							<input type="text" class="form-control" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille"
+							    required maxlength="100">
+						</div>
+					</div>
+					<div class="rs-input">
+						<label class="control-label">Telephone*</label>
+						<div>
+							<input type="text" class="form-control" name="telephone" ng-model="user.telephone" placeholder="Telephone" required maxlength="15">
+						</div>
+					</div>
+
+					<div ng-show="telFormatInvalid">
+						<div class="alert alert-danger" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Workphone</label>
+						<div>
+							<input type="text" class="form-control" name="telephone" ng-model="user.workPhone" placeholder="Workphone" maxlength="15">
+						</div>
+					</div>
+
+					<div ng-show="workPhoneFormatInvalid">
+						<div class="alert alert-danger" role="alert">Invalid telephone number</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Workphone Ext</label>
+						<div>
+							<input type="text" class="form-control" name="telephone" ng-model="user.workPhoneExt" placeholder="Workphone Ext" maxlength="5">
+						</div>
+					</div>
+
+					<div ng-show="workPhoneExtFormatInvalid">
+						<div class="alert alert-danger" role="alert">Invalid telephone ext</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Appartment</label>
+						<div>
+							<input type="text" class="form-control" name="telephone" ng-model="user.appartment" placeholder="Workphone Ext" maxlength="20">
+						</div>
+					</div>
+
+					<div ng-show="invalidAppartment">
+						<div class="alert alert-danger" role="alert">Invalid appartment</div>
+					</div>
+
+
+				</fieldset>
+
+				<fieldset>
+
+					<div class="rs-input">
+						<label for="icode" class="control-label">Languge</label>
+						<div class="rs-select-container">
+							<select class="form-control" name="country" ng-model="user.language" placeholder="Sélectionnez votre langue">
+									<option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+								</select>
+						</div>
+					</div>
+
+					<div ng-show="languageNotChosen">
+						<div class="alert alert-danger" role="alert">Veuillez sélectionner une langue SVP</div>
+					</div>
+
+					<div class="rs-input">
+						<label class="control-label">Street Address</label>
+						<div>
+							<input type="text" class="form-control" name="city" ng-model="user.streetName" placeholder="StreetAddress" maxlength="100">
+						</div>
+					</div>
+					<div ng-show="addressLengthNotValid">
+						<div class="alert alert-danger" role="alert">L'adresse doit comprendre au plus 100 caractères</div>
+					</div>
+					<div class="rs-input">
+						<label class="control-label">City</label>
+						<div>
+							<input type="text" class="form-control" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence"
+							    maxlength="64">
+						</div>
+					</div>
+					<div class="rs-input">
+						<label class="control-label">Country</label>
+						<div class="rs-select-container">
+							<select class="form-control" name="country" ng-model="country" placeholder="Sélectionnez votre pays de résidence" ng-options="item as item.countryName for item in countries track by item.countryCode"
+							    ng-change="getStates()">
+								</select>
+						</div>
+					</div>
+					<div ng-show="countryNotChosen">
+						<div class="alert alert-danger" role="alert">Select a valid Country</div>
+					</div>
+					<div ng-show="country">
+						<p ng-show="country && !states" class="text-center">Loading States...</p>
+
+						<div class="rs-input" ng-show='states'>
+							<label for="icode" class="control-label">State</label>
+							<div class="rs-select-container">
+								<select class="form-control" name="country" ng-model="state" placeholder="Sélectionnez votre état/province/région" ng-options="item as item.stateName for item in states track by item.stateCode">
+									</select>
+							</div>
+						</div>
+					</div>
+					<div ng-show="stateNotChosen">
+						<div class="alert alert-danger" role="alert">Select a valid State</div>
+					</div>
+					<div class="rs-input">
+						<label class="control-label">Zipcode</label>
+						<div>
+							<input type="text" class="form-control" name="city" ng-model="user.zipcode" placeholder="Zipcode" maxlength="8">
+						</div>
+					</div>
+					<div ng-show="invalidZipcode">
+						<div class="alert alert-danger" role="alert">Invalid Zipcode</div>
+					</div>
+				</fieldset>
+
+				<h6>(*): Champs requis</h6>
+
+				<div ng-show="creationPb">
+					<div class="alertAuth alert-danger" role="alert">
+						<strong>Erreur lors de la souscription!</strong> Veuillez rééssayer SVP
+					</div>
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn rs-submit-button" ng-click="validateUser(user)">Créer!</button>
+				</div>
+				<br><br>
+			</form>			
+		</div>
+	</div>
+</div>-->

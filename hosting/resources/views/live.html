@@ -1,0 +1,72 @@
+<link href="vendors/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="vendors/bootstrap/bootstrap-social.css" rel="stylesheet" />
+
+<div menu></div>
+<br>
+<br>
+<br>
+<div class="container">
+
+
+    <div ng-controller="RemoteStreamsController as rtc" class="row" ng-show=true>
+
+
+        <div class="col-md-4">
+
+            <h1><img src="resources/images/logo.png" width="200"></h1>
+
+            <br>
+
+            <h3>People on Live</h3>
+
+
+            <br>
+            <br>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Users</th>
+                        <th>Views</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
+                        <td><a class="user">{{stream.name}}</a></td>
+                        <td><span>{{stream.views || 0}}</span></td>
+                        <td ng-click="rtc.view(stream)"><a>View Stream</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <span ng-click="rtc.loadData()" class="text-center" style="width: 240px">
+        <a class="btn btn-primary" href>Refresh Streams</a>
+    </span>
+            <br>
+            <br>
+            <br>
+
+
+
+        </div>
+
+        <div class="visible-sm visible-xs">
+            <br>
+
+        </div>
+
+        <div class="col-md-8">
+            <br>
+            <br>
+            <div id="remoteVideosContainer" class="center">
+
+            </div>
+
+
+        </div>
+        <div class="remoteStreams">
+
+        </div>
+
+    </div>

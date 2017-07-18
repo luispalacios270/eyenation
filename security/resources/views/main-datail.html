@@ -1,0 +1,264 @@
+<!--
+
+VIDEO JSON STRUCT
+
+category
+:
+[{translation: "Terrorism", name: "TERRORIMS", id: 6, lang: "en"},…]
+description
+:
+""
+gps_coordinates
+:
+[{timezone: "UTC-5", latitude: 45.7771, longitude: -71.6955},…]
+lastTimeVideoStatusChanged
+:
+1476286686967
+mediaWeight
+:
+null
+name
+:
+"Voiture piÃ©gÃ©e"
+person
+:
+
+		citizen_perormance_status
+		:
+		null
+		email
+		:
+		"motodrag@hotmail.com"
+		firstname
+		:
+		"Anderson"
+		isAnonym
+		:
+		false
+		language_code
+		:
+		"fr"
+		lastname
+		:
+		"Cooper"
+		localization
+		:
+		{city: "St-AdÃ¨le", street: "1699 Ch du Mont-Gabriel", appartment_no: null, country_fips: "CA",…}
+		appartment_no
+		:
+		null
+		city
+		:
+		"St-AdÃ¨le"
+		country_fips
+		:
+		"CA"
+		state_abbreviation
+		:
+		"PQ "
+		street
+		:
+		"1699 Ch du Mont-Gabriel"
+		media_agent
+		:
+		{auction_limit: 500000, media: {name: "CNN"}, bought_video_amount: 22150}
+		auction_limit
+		:
+		500000
+		bought_video_amount
+		:
+		22150
+		media
+		:
+		{name: "CNN"}
+		phone
+		:
+		"15147736686"
+		username
+		:
+		"andersoncooper"
+
+
+sold_amount
+:
+null
+status
+:
+"READY"
+streaming_endedon
+:
+1475687656113
+streaming_startedon
+:
+1475687617977
+tags
+:
+[{translation: [{name: "Intimidation", translation: "Intimidation", id: 40, lang: "fr"},…]},…]
+times_viewed
+:
+334
+unique_name
+:
+
+-->
+
+<p ng-show="!video" style="margin-top: 25%" class="text-center">
+	<h2 class="block text-center" style="color:gray">No video to show <a ui-sref="/" style="font-size: .9em">Back to main page</a></h2>
+</p>
+
+<div id="video-detail" ng-show="video">
+	<div class="header">
+		<div class="container-fluid">
+			<div class="row">
+			  <div class="col-md-12">
+			  	<div class="text-center">
+			  		<div class="event-title text-center">
+						<h2>{{video.name}}</h2>
+						<span>{{video.description}}</span>
+					</div>
+			  	</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="body">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4 mb50">
+					<div class="video">
+						<div class="thumbnail">
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <video width="400" height="300" controls preload="false" id="mainVideo" poster="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail">
+                                </video>
+                            </div>
+                        </div>
+					</div>
+				</div>
+
+				<div class="col-md-5 mb50">
+					<div class="map">
+
+					<p ng-hide="video.gps_coordinates[0].latitude + '' != '0'">
+						No Location to show
+					</p>
+
+					   <div ng-show="video.gps_coordinates[0].latitude + '' != '0'">
+						 <ng-map style="width: 100%" center="{{video.gps_coordinates[0].latitude +','+ video.gps_coordinates[0].longitude}}">
+                                            <marker position="{{video.gps_coordinates[0].latitude +','+ video.gps_coordinates[0].longitude}}"></marker>
+                                    </ng-map>
+                        </div>
+
+					</div>
+				</div>
+				<div class="col-md-3 mb50">
+					<div class="chat">
+						<img class="img-responsive chat" src="resources/assets/chat.jpg">
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="about-of-citizen">
+						<h3>Informations sur le Citoyen:</h3>
+						<div>
+			                <p><i class="fa fa-user" aria-hidden="true"></i> {{video.person.firstname + " " + video.person.lastname }} ({{video.person.username}})</p>
+			            </div>
+			            <div>
+			                <p><i class="fa fa-phone"></i> {{video.person.phone }}</p>
+			            </div>
+			            <div>
+			                <p><i class="fa fa-industry" aria-hidden="true"></i> Fournisseur Bell</p>
+			            </div>
+			            <div>
+			                <p><i class="fa fa-map-marker"></i> {{ video.person.address }} </p>
+			            </div>
+			            <div>
+			                <p><i class="fa fa-envelope"></i><a href="mailto:support@company.com"> {{ video.person.email }}</a></p>
+			            </div>
+					</div>
+				</div>
+				<div class="col-md-8 text-center">
+					<div class="others-videos">
+						<h3>Voir les autres vidéos a proximité de cet évènement</h3>
+
+  					</div>
+
+
+  					<slick init-onload="true" infinite="true" slides-to-show="3" slides-to-scroll="3">
+
+  					   <div class="video-near" ng-repeat="video_ in near_videos" ng-if="video_.unique_name != video.unique_name">
+  					   <video style="width: 100%; max-height: 200px;" poster="{{ getThumb(video_.unique_name) }}" controls autobuffer="false" preload="none" allowfullscreen>
+  					   	<source  ng-src="{{ getUrl(video_.unique_name) | trustUrl }}" type="video/mp4">
+  					   </video>
+
+					</slick>
+
+
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="footer-content">
+							<div class="col-md-4">
+								<div class="footer">
+									<img class="img-responsive" src="resources/assets/Eye_Nation_Logo_ROUGE.jpg" width="200" height="200">
+								</div>
+							</div>
+							<div class="col-md-4" style="padding-top:35px;">
+								<ul>
+								  <li>Nous rejoindre</li>
+								  <li>Conditions générales d'utilisation</li>
+								  <li>Foire aux questions</li>
+								  <li>Application mobile</li>
+								</ul>
+							</div>
+							<div class="col-md-4" style="padding-top:35px;">
+								<ul>
+								  <li>Protection des achats Paypal</li>
+								  <li>Aide pour les achats</li>
+								  <li>Outils de vente</li>
+								  <li>Eye nation mobile</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>
+<script type="text/javascript">
+	 $( document ).ready(function() {
+	     $(function(){
+	       $('[data-slick-init]').slick({
+	        centerMode: true,
+	        centerPadding: '60px',
+	        slidesToShow: 3,
+	        responsive: [
+	          {
+	            breakpoint: 768,
+	            settings: {
+	              arrows: false,
+	              centerMode: true,
+	              centerPadding: '40px',
+	              slidesToShow: 3
+	            }
+	          },
+	          {
+	            breakpoint: 480,
+	            settings: {
+	              arrows: false,
+	              centerMode: true,
+	              centerPadding: '40px',
+	              slidesToShow: 1
+	            }
+	          }
+	        ]
+	      });
+	    });
+	});
+</script>

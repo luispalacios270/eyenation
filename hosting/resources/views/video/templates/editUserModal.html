@@ -1,0 +1,126 @@
+<div style="width: 500px">
+    <form id="signupform" role="form" name="formUser">
+        <md-input-container class="md-block">
+            <label>{{userLanguageAccountFields.username}}</label>
+            <input name="nom" ng-model="user.name" required>
+        </md-input-container>
+        <div class="margin-alert">
+            <div ng-show="nameLenghtNotValid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.name_length_error}}</div>
+            </div>
+            <div ng-show="nameAlreadyUsed">
+                <div class="alert alert-danger" role="alert">
+                    {{userLanguageAccountFields.user_name_already_exists_error}}
+                </div>
+            </div>
+        </div>
+
+        <md-input-container class="md-block">
+            <label>{{userLanguageAccountFields.email}}</label>
+            <input type="email" class='no-margin' name="email" ng-model="user.email" placeholder="{{userLanguageAccountFields.email_example}}"
+                required>
+
+
+            <div class="margin-alert">
+                <div ng-show="mailAlreadyUsed">
+                    <div class="alert alert-danger" role="alert">
+                        {{userLanguageAccountFields.email_already_in_use_error}}
+                    </div>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.firstname}}</label>
+            <input type="text" class='no-margin' name="firstname" ng-model="user.firstname" placeholder="{{userLanguageAccountFields.firstname}}"
+                required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.lastname}}</label>
+            <input type="text" class='no-margin' name="lastname" ng-model="user.lastname" placeholder="{{userLanguageAccountFields.lastname}}"
+                required>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.phone_number}}</label>
+            <input type="text" class='no-margin' name="telephone" ng-model="user.telephone" placeholder="{{userLanguageAccountFields.phone_number}}"
+                required>
+        </md-input-container>
+
+        <div class="margin-alert">
+            <div ng-show="telFormatInvalid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.invalid_phone_country_error}}<br>{{userLanguageAccountFields.valid_phone_examples}}{{telExamples}}</div>
+            </div>
+        </div>
+
+
+        <md-input-container class="md-block">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.address}}</label>
+            <input type="text" class='no-margin' name="address" ng-model="user.address" placeholder="{{userLanguageAccountFields.define_address}}"
+                required>
+        </md-input-container>
+
+        <div class="margin-alert">
+            <div ng-show="addressLengthNotValid">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.address_length_error}}</div>
+            </div>
+        </div>
+
+
+        <md-input-container class="md-block">
+            <label class="col-md-3 control-label">{{userLanguageAccountFields.town}}</label>
+            <input type="text" class='no-margin' name="city" ng-model="user.city" placeholder="{{userLanguageAccountFields.town}}" required>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label ng-init="getStatesByCurrentCountry(user.country)" class="col-md-3 control-label">{{userLanguageAccountFields.country}}</label>
+            <md-select id="countrySelect" ng-change="getStatesByCurrentCountry(user.country)" ng-model="user.country" required>
+                <md-option ng-repeat="(key, data) in paysList" value="{{data.countryCode}}">{{data.countryName}}</md-option>
+            </md-select>
+        </md-input-container>
+
+        <div class="margin-alert">
+            <div ng-show="countryNotChosen">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_country_error}}</div>
+            </div>
+        </div>
+
+        <div ng-show="user.country">
+            <md-input-container class="md-block">
+                <label>{{userLanguageAccountFields.state_province}}</label>
+                <md-select ng-model="user.state" required>
+                    <md-option ng-repeat="(key, data) in listStates" value="{{data.stateCode}}">{{data.stateName}}</md-option>
+                </md-select>
+            </md-input-container>
+
+
+            <div ng-show="stateNotChosen">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_state_province_error}}</div>
+            </div>
+        </div>
+
+        <md-input-container class='md-block'>
+            <label>{{userLanguageAccountFields.language}}</label>
+            <div>
+                <md-select id="languageSelect" ng-model="user.language" required>
+                    <md-option ng-repeat="(key, data) in langueList" value="{{key}}">
+                        {{data}}
+                    </md-option>
+                </md-select>
+            </div>
+            </md-input-containerdiv>
+            <div ng-show="languageNotChosen">
+                <div class="alert alert-danger" role="alert">{{userLanguageAccountFields.no_language_selected_error}}</div>
+            </div>
+
+            <!--<h6>(): {{userLanguageAccountFields.required_field_msg}}</h6>-->
+            <div ng-show="modificationPb">
+                <div class="alertAuth alert-danger" role="alert">
+                    <strong>{{userLanguageAccountFields.modification_error}}!</strong>{{userLanguageAccountFields.try_again}}
+                </div>
+            </div>
+    </form>
+</div>

@@ -1,0 +1,129 @@
+.center-text {
+    text-align: center
+}
+
+ng-map {
+    height: 100% !important;
+}
+
+.color-grey {
+    color: rgb(169, 170, 174);
+}
+
+footer {
+    background-color: #d4d8d8;
+    height: 100%;
+}
+
+footer a {
+    margin-bottom: 2px;
+}
+
+.place {
+    background: #2f3132;
+    color: #fff;
+    /*font-size: .8em;*/
+    height: 40px;
+}
+
+.color-white {
+    color: white;
+}
+
+.input-map {
+    margin: 0 !important;
+    margin-left: 10px !important;
+    height: 38px;
+    color: white
+}
+
+.index-text {
+    padding-top: 17%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    color: white;
+    background: rgb(213, 35, 44);
+    border-radius: 50%;
+    height: 100%;
+    font-weight: bold;
+}
+
+.index-video {
+    position: absolute;
+    padding: 2%;
+    top: 0;
+    left: 0;
+    background: white;
+    border-radius: 50%;
+}
+
+.index-text-side {
+    margin: 0;
+    position: absolute;
+    bottom: 31%;
+    left: 41%;
+    color: white;
+    font-weight: bold;
+}
+
+.subindex-video {
+    border: 5px solid rgb(53, 52, 56);
+    border-radius: 50%;
+    /* padding: 0% 4%; */
+    padding: 4px 4px 4px 4px;
+    width: 100%;
+    height: 100%;
+}
+
+.pointer-mouse {
+    cursor: pointer;
+}
+
+#more-btn {
+    background: #272428 !important;
+    color: white;
+}
+
+.marker-video {
+    cursor: pointer;
+    position: absolute;
+    bottom: -12px;
+    left: -24px;
+    background: white;
+    /* border: 3px solid rgb(53,52,56); */
+    /* padding: 3px 8px; */
+    border-radius: 50%;
+    padding: 6% 7%;
+    height: 40px;
+    width: 40px;
+}
+
+.fa-map-marker {
+    color: rgb(0, 130, 201) !important;
+}
+
+#videos-containers {
+    overflow-y: auto;
+}
+
+.recent_label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2%;
+    background: seagreen;
+    color: white;
+    border-radius: 5px;
+}
+
+.center-adjust {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 55%; */
+}

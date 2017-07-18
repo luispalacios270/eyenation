@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Video 911 Eyenation</title>
+	<meta charset="utf-8">
+
+	<!-- Font-awesome -->
+	<link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Vendors-->
+	<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="vendors/angular-material/angular-material.min.css">
+
+	<!-- Styles -->
+	<!--<link rel="stylesheet" type="text/css" href="resources/css/dist/styles.min.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/class.css">-->
+	<!--<link rel="stylesheet" type="text/css" href="resources/css/dist/header.min.css">-->
+	<!--<link rel="stylesheet" href="vendors/slick-carousel/slick/slick.css">-->
+
+
+
+</head>
+
+<style>
+	.adjust-vertical {
+		height: 100%;
+	}
+</style>
+
+<body ng-app="911Video" ng-controller="mainCtrl">
+
+	<div data-loading-overlay style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index:10000; background: white"
+	    ng-show="loading">
+		<p class="text-center" style="position: relative;top: 50%;margin-top: -7.5%;"><img src="resources/assets/loading.gif"></p>
+	</div>
+	<div style="height: 100%" layout="column">
+		<div header flex="15"></div>
+
+		<div id="view" flex="85" ui-view></div>
+	</div>
+
+
+	<!-- Vendors librairy -->
+	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<script src="vendors/angular/angular.min.js"></script>
+	<script src="vendors/angular/angular-route.js"></script>
+	<script src="vendors/angular/angular-cookies.js"></script>
+	<script src="vendors/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="vendors/angular/angular-sanitize.min.js"></script>
+	<script src="vendors/ngmap/build/scripts/ng-map.min.js"></script>
+	<script src="vendors/slick-carousel/slick/slick.js"></script>
+	<script src="vendors/angular-slick/dist/slick.js"></script>
+	<script type="text/javascript" src="vendors/flashphoner/flashphoner.js"></script>
+
+	<!-- Material  -->
+	<script src="vendors/angular/angular-animate.min.js"></script>
+	<script src="vendors/angular/angular-aria.min.js"></script>
+	<script src="vendors/angular/angular-messages.min.js"></script>
+	<script src="vendors/angular/angular-material.min.js"></script>
+
+
+	<!-- cdn slick -->
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+	<!-- Add the slick-theme.css if you want default styling -->
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css" />
+
+	<!-- Angular App configuration -->
+	<script src="app.js"></script>
+
+	<!-- Custom Modules -->
+	<script src="resources/js/Modules/videoMod.js"></script>
+
+	<!-- FactorYs -->
+	<script src="resources/js/factories/securityDelegateFactory.js"></script>
+	<script src="resources/js/factories/video911Factory.js"></script>
+	<script src="resources/js/services/videos911.js"></script>
+	<script src="resources/js/services/User.js"></script>
+	<script src="resources/js/services/Localizations.js"></script>
+
+	<!--service -->
+	<script src="resources/js/services/videos911.js"></script>
+
+	<!-- Controllers -->
+	<script src="resources/js/controllers/mainController.js"></script>
+	<script src="resources/js/controllers/video911Controller.js"></script>
+	<script src="resources/js/controllers/videoViewingController.js"></script>
+	<script src="resources/js/controllers/profileCtrl.js"></script>
+	<script src="resources/js/main.js"></script>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+	<script src="vendors/jquery.countdown/jquery.countdown.js"></script>
+	<script src="vendors/flashphoner/flashphoner-temasys-flash-websocket.js"></script>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyBFWjxVz5xFynuec_jlB4bH5wP0wT7AnHw&sensor=false'></script>
+
+
+
+
+	<script type="text/javascript">
+		$(function () {
+
+			$(window).bind("load", function () {
+
+				$("[data-loading-overlay]").fadeOut();
+
+			});
+
+		})
+	</script>
+	<script src="http://webrtcfast.herokuapp.com/socket.io/socket.io.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+#navbar > ul {
+	max-width:50%;
+}
+
+#search-bar {
+	width:66%;
+	position:relative;
+	top:.7em;
+	left:-1em;
+}
+
+#search-bar span[class*="input-group-addon"] {
+	background-color: #d9edf7;
+}
+
+.navbar-right>li:first-child:hover {
+	background-color: transparent;
+}
+
+#flag {
+	background-size: cover !important;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+#flag>img {
+	height: 100%;
+	width: 100%;
+}
+
+#flag-container {
+	position:relative;
+	width:65px;
+	height:35px;
+	margin-right:.5em;
+	top:.1em;
+}
+
+#language img.flag {
+	height: 20px;
+
+}
+
+.btext {
+	text-decoration: none;
+	color:black;
+}

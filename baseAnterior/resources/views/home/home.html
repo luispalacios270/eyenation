@@ -1,0 +1,663 @@
+<style>
+	#main-container>* {
+		color: white !important;
+	}
+
+	.adjust {
+		height: 100%;
+		width: 100%;
+	}
+
+	.adjust-vertical {
+		height: 100%;
+	}
+
+	.adjust-horizontal {
+		width: 100%;
+	}
+
+	.parent {
+		position: relative;
+	}
+
+	.item-center {
+		width: 60%;
+		text-align: center;
+		margin: 0 auto;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	#main-container {
+		/*background: url("resources/images/world.jpg") no-repeat;*/
+		/*background-size: cover;*/
+		/*background: linear-gradient(to right, rgb(1, 187, 182), rgb(17, 117, 181));*/
+		/*height: 500px;*/
+		/*filter: blur(5px);*/
+	}
+
+	#blur-map {
+		z-index: -1;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: url("resources/images/world.jpg") no-repeat;
+		background-size: cover;
+		filter: blur(4px);
+	}
+
+	#main {
+		width: 100%;
+		height: 540px;
+		border-bottom: 2px solid rgb(130, 128, 128);
+	}
+
+	#header {
+		height: 45px;
+		padding: 5px 0;
+		border-bottom: 1px solid rgb(62, 60, 60);
+		width: 100%;
+		color: white;
+	}
+
+	.inline-flex {
+		display: inline-flex;
+	}
+
+	.make-right {
+		/*display: flex;*/
+		margin-left: auto;
+	}
+
+	#language {
+		background: transparent;
+		padding: 10px 20px;
+		border: none;
+		font-size: 0.9em;
+		/*color: rgb(130, 128, 128);*/
+		/*font-size: 1.35em;*/
+		color: dimgrey;
+	}
+
+	.info-company {
+		font-size: 1.3em;
+		color: darkgrey;
+	}
+
+	.title-company {
+		font-size: 4em;
+	}
+
+	.btn-login {
+		color: rgb(134, 140, 144) !important;
+		font-weight: bold;
+		font-size: 1em !important;
+		border: none;
+		margin-top: 10px !important
+	}
+
+	.input-login-modal {
+		padding: 8px 5px;
+		color: black;
+		margin: 5px 0 0 0;
+		width: 100%;
+		font-size: 0.8em;
+	}
+
+	.input-login {
+		padding: 8px 5px;
+		color: black;
+		margin: 5px 0 0 0;
+		width: 190px;
+		font-size: 0.8em;
+	}
+
+	.title-login {
+		font-size: 1.35em;
+		color: dimgrey;
+	}
+
+	#loginForm {
+		margin: 12px 0 40px 0;
+	}
+
+	.social-links {
+		/*color: rgb(226, 243, 255) !important;*/
+		/* font-weight: bold; */
+		font-size: 1.25em;
+		margin-bottom: 15px;
+	}
+
+	i {
+		margin-right: 5px;
+		font-size: 1.25em !important;
+	}
+
+	#footerLogin {
+		height: 190px;
+	}
+
+	.info-footer {
+		margin: 1px;
+		color: dimgrey;
+		font-size: 1.1em;
+	}
+
+	.img-div {
+		height: 100%;
+		width: auto;
+	}
+
+	#title-nous {
+		font-size: 1.6em;
+		color: rgb(80, 73, 73);
+	}
+
+	#err {
+		font-size: 0.8em;
+		display: none;
+		color: indianred;
+		margin: 10px 0 2px 0;
+	}
+</style>
+
+<div id="main-container" class="parent">
+	<div id="blur-map"></div>
+	<div id="header" class="inline-flex">
+		<div class="adjust-vertical">
+			<img class="img-div" src="resources\images\Eye_Nation_Logo_ROUGE.png" alt="">
+
+		</div>
+
+		<div class="make-right">
+			<div class="dropdown">
+				<button id="language" class="dropdown-toggle" type="button" data-toggle="dropdown">Language
+  			<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href=""> English <!--<img class="flag-img" src="resources/images/langFlags/United-Kingdom.ico" rel="UK FLAGS" />--></a></li>
+					<li><a href=""> Français <!--<img class="flag-img" src="resources/images/langFlags/France.ico" rel="FR FLAGS" />--></a></li>
+					<li><a href=""> Spanish <!--<img class="flag-img" src="resources/images/langFlags/Mexico.ico" rel="ME FLAGS" />--></a></li>
+					<li><a href=""> Portuguese </a></li>
+					<li><a href=""> Germain </a></li>
+					<!--<li><a href="#">HTML</a></li>
+					<li><a href="#">CSS</a></li>
+					<li><a href="#">JavaScript</a></li>-->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div class="row adjust-vertical">
+			<div class="col-sm-6 adjust-vertical parent">
+
+				<div class="item-center">
+					<img style="width: 50%;height: auto;" src="resources\images\Eye_Nation_Logo_ROUGE.png" alt="">
+					<div class="info-slick">
+						<div>
+							<h5 class="title-company">Notre mission</h5>
+							<p class="info-company">Outiller le citoyen dans une perspective de justice sociale en ayant comme objectif de démocratiser la valeur et l’utilisation
+								d’une vidéo.</p>
+						</div>
+						<div>
+							<h5 class="title-company">Vision</h5>
+							<p class="info-company">Devenir une sommité en matière d’enregistrement certifié de vidéo en direct et révolutionner la façon de rendre publique
+								une vidéo à travers le monde.</p>
+						</div>
+						<div>
+							<h5 class="title-company">Valeurs</h5>
+							<p class="info-company">Intégrité / fierté / loyauté / justice sociale redistributrive.</p>
+						</div>
+
+						<div>
+							<h5 class="title-company">Approche</h5>
+							<p class="info-company">Mettre à la disposition du public un ensemble de services qui garanti l’authentification d’un enregistrement vidéo
+								et l’attribution d’une valeur réel à chaque enregistrement.</p>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-sm-6 adjust-vertical parent">
+
+				<div class="item-center">
+					<div class="title-login">Login Or <span><a href="" data-toggle="modal" data-target="#myModal">Signup</a></span></div>
+					<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+					<div class="login" id="loginForm">
+						<form ng-submit="validateLoginFor(user,$event)">
+							<div class="row">
+								<input type="text" placeholder="Username" ng-model="user.name" required="true" class="input-login">
+							</div>
+							<div class="row">
+								<input type="password" placeholder="Password" ng-model="user.pwd" required="true" class="input-login">
+							</div>
+							<div class="row">
+								<div id="err">Nom d'utilisateur/mot de passe invalide</div>
+							</div>
+							<div class="row">
+								<button class="input-login btn-login" type="submit">Envoyer</button>
+							</div>
+						</form>
+					</div>
+					<div>
+						<div class="row social-links">
+							<i class="fa fa-facebook" aria-hidden="true"></i><span><a href=""> Login with facebook</a></span>
+						</div>
+						<div class="row social-links">
+							<i class="fa fa-google" aria-hidden="true"></i> <span> <a href=""> Login with gmail</a></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+	</div>
+</div>
+<div class="row" id="footerLogin">
+	<div class="col-xs-6 col-sm-4 parent adjust-vertical">
+		<div class="item-center">
+			<img class="img-responsive" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="">
+			<a href="">Download the App</a>
+		</div>
+	</div>
+
+	<div class="col-xs-6 col-sm-8 parent adjust-vertical">
+
+		<div class="item-center">
+			<h5 id="title-nous">Nous rejoindre​</h5>
+			<p class="info-footer">1181 rang 10 ouest​ St-Adrien​, Québec​
+			</p>
+			<p class="info-footer">J0A 1CO​
+			</p>
+			<p class="info-footer">(514)773-6686​
+			</p>
+			<p class="info-footer">info@eyenation.org​
+			</p>
+		</div>
+
+
+	</div>
+
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Créez votre compte</h4>
+			</div>
+			<div class="modal-body">
+				<form name="signupform" class="form-horizontal" role="form" name="form">
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Nom d'usager</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="nom" ng-model="user.name" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)">
+							</div>
+						</div>
+						<div ng-show="nameLenghtNotValid">
+							<div class="alert alert-danger" role="alert">Le nom doit comprendre entre 8 et 20 caractères inclus</div>
+						</div>
+						<div ng-show="nameAlreadyUsed">
+							<div class="alert alert-danger" role="alert">Ce nom d'usager existe déjà!</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Mot de passe*</label>
+							<div class="col-md-9">
+								<input type="password" class="input-login-modal" name="mdp" ng-model="user.password" placeholder="Choisissez votre mot de passe (entre 4 et 10 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="pwLengthNotValid">
+							<div class="alert alert-danger" role="alert">Le nombre de caractères du mot de passe doit être compris entre 4 et 16 inclus</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Confirmation*</label>
+							<div class="col-md-9">
+								<input type="password" class="input-login-modal" name="confMdp" ng-model="user.confirmationPw" placeholder="Confirmez votre mot de passe (entre 4 et 10 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="confNotValid">
+							<div class="alert alert-danger" role="alert">Les deux mots de passe ne correspondent pas</div>
+						</div>
+						<div class="form-group">
+							<label for="firstname" class="col-md-3 control-label">Courriel*</label>
+							<div class="col-md-9">
+								<input type="email" class="input-login-modal" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com"
+								    required>
+							</div>
+							<div ng-show="mailAlreadyUsed">
+								<div class="alert alert-danger" role="alert">Ce courriel est déjà utilisé!</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Prénom*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Nom*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Téléphone*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="telephone" ng-model="user.telephone" placeholder="Saisissez votre numéro de téléphone "
+								    required>
+							</div>
+						</div>
+
+						<div ng-show="telFormatInvalid">
+							<div class="alert alert-danger" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+						</div>
+						<div class="form-group">
+							<label for="icode" class="col-md-3 control-label">Langue*</label>
+							<div class="col-md-9">
+								<select class="input-login-modal" name="country" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+									<option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+								</select>
+							</div>
+						</div>
+						<div ng-show="languageNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner une langue SVP</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Adresse*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="address" ng-model="user.address" placeholder="Entrez votre adresse de résidence (max.: 100 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="addressLengthNotValid">
+							<div class="alert alert-danger" role="alert">L'adresse doit comprendre au plus 100 caractères</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Ville*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Pays*</label>
+							<div class="col-md-9">
+								<select class="input-login-modal" ng-change="getStatesByCurrentCountry()" name="country" ng-model="user.country" placeholder="Sélectionnez votre pays de résidence"
+								    required>
+									<option ng-repeat="(key, data) in paysList" value="{{data.countryCode}}">{{data.countryName}}</option>
+								</select>
+							</div>
+						</div>
+						<div ng-show="countryNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner un pays SVP</div>
+						</div>
+						<div ng-show="user.country">
+							<div class="form-group">
+								<label for="icode" class="col-md-3 control-label">Etat/Province*</label>
+								<div class="col-md-9">
+									<select class="input-login-modal" name="country" ng-model="user.state" placeholder="Sélectionnez votre état/province/région"
+									    required>
+										<option ng-repeat="(key, data) in states" value="{{data.stateCode}}">{{data.stateName}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div ng-show="stateNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner un état/province SVP</div>
+						</div>
+					</fieldset>
+
+					<h6>(*): Champs requis</h6>
+
+					<div ng-show="creationPb">
+						<div class="alertAuth alert-danger" role="alert">
+							<strong>Erreur lors de la souscription!</strong> Veuillez rééssayer SVP
+						</div>
+					</div>
+					<button type="submit" style="width:100%;color:rgb(120,192,235) !important" class="input-login btn-login" ng-click="validate(user)">Créer!</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="input-login btn-login" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!--<main class="full-height">
+	<div class="container-fluid full-height">
+		<div class="row full-height">
+			<div class="shader"></div>
+			<div class="over-shade-content">
+				<div id="welcome">
+					<div>
+						<img src="resources/images/Eye_Nation_Logo_ROUGE.png" alt="logo" />
+					</div>
+				</div>
+				<div id="welcome-msg">
+					Vous souhaite la bienvenue sur sa plateforme publique
+				</div>
+				<div id="home-features">
+					<div id="feature-container" class="full-height">
+						<div class="feature">
+							<div class="feature-title">Gardez vos données sécurisées</div>
+							<div class="feature-body">
+								<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+							</div>
+						</div>
+						<div class="feature">
+							<div class="feature-title">Faites des profits avec notre système d'enchère</div>
+							<div class="feature-body">
+								<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+							</div>
+						</div>
+						<div class="feature">
+							<div class="feature-title">Télécharger notre application mobile</div>
+							<div class="feature-body">
+								<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+								<button id="download" type="button" class="btn btn-danger">Télécharger</button>																
+							</div>
+						</div>										
+					</div>				
+				</div>
+			</div>
+
+
+
+			<div class="bottom-menu none">
+				<ul>
+					
+					<a href="/hosting/#/signup"><li data-inscription></li></a>
+					<a href="#/login"><li data-login></li></a>
+					<a ng-controller="vFromNumberController">
+						<form   ng-submit="getVideoFromNumber()" style="padding: 5px">
+						   <label class="form-label">{{$root.local['home_input_tel_label']}} 
+						   <span 
+						   data-toggle="popover"
+ 						   popover-placement="right"
+                           popover="Enter a phone number"
+                           popover-trigger="hover"
+                           data-trigger="hover"
+                           title="Enter a phone number"
+						   ><i class='glyphicon glyphicon-info-sign'></i></span> :</label>
+					
+
+						   <div class="input-group">
+						   <input class="form-control" ng-model="telNumber" placeholder="{{$root.local['home_input_tel_placeholder']}}" aria-describedby="basic-addon2">
+						   <span class="input-group-addon" id="basic-addon2" style="position: relative;">
+						   <button 
+						   type="submit" 
+						   ng-click="getVideoFromNumber()" 
+						   style="
+						       position: absolute;
+							    width: 100% !important;
+							    height: 100%;
+							    top: 0;
+							    left: 0;
+							    background: none;
+							    border: 0;
+						   "
+						   >{{$root.local['home_button_tel_submit']}}</button>
+						   </span>
+						   </div>
+
+						   
+						</form>
+					</a>
+					<a href="#"><li data-documentation></li></a>
+					<a href="#"><li data-contact></li></a>
+					
+				</ul>			
+			</div>
+			<video autoplay loop>
+				<source src="resources/videos/globe.mov" type="video/mp4">
+			</video>
+		</div>
+		<div id="loading" class="over-shade-content"><div>		
+	</div>
+</main>
+
+<div id="layers" class="">
+	<div class="">
+		<div class="separator"></div>
+	</div>	
+	<div id="icon-container" class="half-layer half-height">
+		<div id="icons" class="half-layer odd">
+			<div class="w3-container w3-center w3-padding-8 w3-tangerine quarter-width white">
+				<div class="w3-container">
+				<h1 class="w3-jumbo">Nos Services</h1>					
+				</div>
+			</div>
+			<div class="quarter-width-icons"><span class="glyphicon glyphicon-film" />
+				<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+			</div>
+			<div class="quarter-width-icons"><span class="glyphicon glyphicon-download-alt" />
+				<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+			</div>
+			<div class="quarter-width-icons"><span class="glyphicon glyphicon-piggy-bank" />
+				<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+			</div>
+			<div class="quarter-width-icons"><span class="glyphicon glyphicon-globe" />
+				<p>Nullam viverra vulputate scelerisque. Etiam posuere blandit consequat. Vivamus id odio sit amet justo eleifend lobortis a et tellus. Nulla non sapien porttitor, interdum velit id, eleifend elit. Proin at convallis sapien, eu finibus purus. Phasellus in accumsan ante, id congue tellus. Phasellus lobortis iaculis ipsum a tempor.</p>
+			</div>
+		</div>
+	<div class="clear" />			
+	</div>
+	<div class="clear" />	
+	<div class="separator"/>
+	<div id="coverSlider" class="min-full-height even w3-display-container wow fadeIn">
+		<div class="w3-display-topleft half-width half-layer w3-highway-blue">Money4News</div>
+		<div class="w3-display-topright half-width half-layer w3-highway-green">911Video</div>
+		<div id="cover" class="w3-display-middle full-width w3-teal">
+			<div id="cover-shader" class="full-height">
+				<div id="text-header" class="w3-center w3-tangerine quarter-width">
+					<h1 class="w3-jumbo">Notre Plateforme</h1>
+				</div>
+				<div  id="text" class="w3-section">							
+					<div class="w3-row">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis eget risus sed egestas. Sed in odio pharetra, venenatis tellus sed, tempor velit. Nullam quis cursus dui, in interdum metus. Suspendisse sagittis et sapien id efficitur. Curabitur vehicula tortor a consectetur pharetra. Praesent eu ligula ac leo pretium eleifend posuere non turpis. Nulla mattis nunc eu felis cursus condimentum. Duis nec interdum massa. Aliquam venenatis vestibulum imperdiet. In maximus dolor ac dui pulvinar faucibus. Ut dignissim at nisi sed convallis. Cras vitae est iaculis eros malesuada egestas eget elementum tellus. Vestibulum laoreet ante eros, at posuere risus malesuada non. Sed a faucibus elit.
+
+Donec euismod nisl in quam lacinia, quis tempor nisl venenatis. Suspendisse convallis augue at velit posuere dictum. Morbi in odio dictum orci efficitur rutrum. Duis finibus, dui id dignissim ultricies, metus mauris sodales mauris, ac ornare tortor purus et nibh. Donec pellentesque aliquet faucibus. Phasellus sed elit eleifend, volutpat metus sed, venenatis ante. Nullam sed lobortis orci. Quisque facilisis dolor ut ipsum bibendum, a maximus purus commodo. Cras eleifend enim sit amet odio ultricies, sit amet aliquet lectus consequat.
+
+Praesent quam augue, sollicitudin a ultricies at, vehicula in mi. Curabitur aliquam tempor sem. Aliquam tempor a ex ultrices consequat. In euismod volutpat ipsum, eu aliquet leo consectetur a. Curabitur aliquam dictum purus id fermentum. Cras et lacus molestie est scelerisque congue. Phasellus gravida enim sit amet commodo commodo. Ut a hendrerit neque, ac porta justo. Aenean condimentum tempus lacus, eleifend venenatis justo imperdiet ac. Morbi iaculis, mauris ut hendrerit interdum, diam ante elementum nisi, eu congue mauris urna at neque. Donec condimentum, ipsum sit amet feugiat hendrerit, libero eros accumsan urna, in porta libero ex at eros. Sed et risus a est facilisis molestie. Fusce dictum eleifend lorem, sit amet dictum quam facilisis sit amet. Sed dictum turpis vitae felis fringilla rhoncus. Pellentesque et nunc in ante auctor bibendum. Donec accumsan odio sit amet lorem sollicitudin venenatis.						
+					</div>
+					<div class="w3-row">
+						<button id="anim" class="w3-btn w3-transparent w3-border w3-border-blue w3-round-xlarge w3-quarter">En savoir plus!</button>
+					</div>			
+					<div class="imgs w3-container">
+						<div class="w3-third" >
+							<div class="img-container">
+								<div id="android" class="img"></div>
+							</div>
+							<figcaption>Android</figcaption>
+						</div>	
+						<div class="w3-third">
+							<div class="img-container">
+								<div id="windows" class="img"></div>
+							</div>							
+							<figcaption>Windows</figcaption>							
+						</div>	
+						<div class="w3-third">
+							<div class="img-container">
+								<div id="linux" class="img"></div>
+							</div>						
+							<figcaption>Linux</figcaption>							
+						</div>																				
+					</div>					
+				</div>				
+				<div class="clear" />									
+			</div>
+			<div class="clear" />									
+		</div>
+		<div class="clear" />					
+		<div class="w3-display-bottomleft half-width half-layer w3-yellow">Streaming</div>
+		<div class="w3-display-bottomright half-width half-layer w3-teal">Mobile</div>		
+		<span class="clear" />
+	</div>	 
+	<div class="separator" />
+	<div class="transparent">
+		<div class="shader">
+			<div class="over-shade-content full-height">
+				<div class="w3-row-padding w3-display-container full-height">
+					<div id="top-left-descr" class="w3-display-topleft w3-half">
+						<div class="w3-container w3-highway-blue wow slideInLeft"><h1>Chez Eyenation...</h1></div>
+						<p class="w3-large padded wow slideInRight">
+							Vestibulum efficitur feugiat luctus. Nam vel feugiat metus. Phasellus sit amet pharetra nisl. Pellentesque varius est ut efficitur pellentesque. Ut eget lacus vel libero interdum ullamcorper. Cras lobortis felis ac ligula aliquet cursus. Sed fermentum neque dui. Sed a diam at dolor scelerisque lacinia. Vivamus quis massa scelerisque, sodales diam eget, egestas elit. Nullam magna diam, finibus et aliquam vel, finibus quis justo. Donec convallis purus consectetur sagittis bibendum. Phasellus id purus nulla.
+						</p>					
+					</div>
+					<div class="w3-display-bottomleft full-width half-height">
+						zdddzddd
+					</div>
+				</div>
+			</div>
+						<div class="clear" />
+		</div>
+		<div id="fakeBody"></div>
+	</div>	
+	<div class="half-height even">
+		
+	</div>
+  	<div id="footer" footer></div>	
+</div>-->
+<!--<script type="text/javascript">
+	$(document).ready(function () {
+		var language = navigator.language;
+		switch (language) {
+			case "fr":
+				$("[data-inscription]").html("<li data-inscription>Inscription</li>");
+				$("[data-login]").html("<li data-login>Connexion</li>");
+				$("[data-services]").html("<li data-services>Services</li>");
+				$("[data-documentation]").html("<li data-documentation>Documentation</li>");
+				$("[data-contact]").html("<li data-contact>Contact</li>");
+				$("[data-contact]").html("<li data-contact>Contact</li>");
+				break;
+			case "en-US":
+				$("[data-inscription]").html("<li data-inscription>Registration</li>");
+				$("[data-login]").html("<li data-login>Connection</li>");
+				$("[data-services]").html("<li data-services>Services</li>");
+				$("[data-documentation]").html("<li data-documentation>Documentation</li>");
+				$("[data-contact]").html("<li data-contact>Contact</li>");
+				break;
+		}
+	});
+</script>-->

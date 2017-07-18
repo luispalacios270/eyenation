@@ -1,0 +1,209 @@
+<div menu></div>
+
+<div class="container">
+
+	<section id="video-section">
+		<!-- Menu a gauche + carroussel de mignatures -->
+		<div class="masection sidebar">
+			<div class="dropdown">
+				<button class="dropbtn" type="button">{{userLanguageVocabulary.sortBy}} {{sortCriteria}}
+					<span class="caret"></span>
+				</button>
+				<div class="dropdown-content">
+					<!--<a href="" ng-click="sortByCriteria('title',false)">{{userLanguageVocabulary.order_alpha}}</a>-->
+					<a href="" ng-click="sortByCriteria('creationDate',true)">{{userLanguageVocabulary.order_creation_date}}</a>
+					<a href="" ng-click="sortByCriteria('creationDate',false)">{{userLanguageVocabulary.order_creation_date_inv}}</a>
+					<!--<a href="" ng-click="sortByCriteria('endAuctionDate',true)">{{userLanguageVocabulary.order_end_auction_date}}</a>-->
+					<!--<a href="" ng-click="sortByCriteria('endAuctionDate',false)">{{userLanguageVocabulary.order_creation_date_inv}}</a>-->
+					<!--<a href="" ng-click="sortByCriteria('amount',false)">{{userLanguageVocabulary.order_auction_amount_asc}}</a>-->
+					<!--<a href="" ng-click="sortByCriteria('amount',true)">{{userLanguageVocabulary.order_auction_amount_des}}</a>-->
+				</div>
+			</div>
+
+			<div ng-show="showNav(false)" class="video-list-navigation">
+				<span ng-click="navigateVideoList(false)" class="glyphicon glyphicon-chevron-up" />
+			</div>
+			<div id="video-list-container">
+				<div id="scrolldiv">
+					<ul class="media-list mignat container-fluid override-overflow">
+						<li ng-repeat="video in videos track by $index" class="media mymedia row">
+							<a class="anchorListVideo col-md-10" href="" ng-click="displayVideo($index)">
+								<div class="medialeft">
+									<img width="100%" data-holder-rendered="true" ng-src="../api/videos/{{video.unique_name}}/thumbnail">
+								</div>
+								<div class="medialeft">
+									<h4 class="media-heading">{{video.name}}</h4>
+									<p><span ng-bind="convertTimestampToDate(video.streaming_startedon)"></span></p>
+									<p class="green-text" ng-show="videoIsInState($index, 'AUCTION')"><small><em>{{userLanguageVocabulary.video_in_auction_text}} <span ng-show="video.auction.highestBid !== undefined">(</span> {{video.auction.highestBid | currency}} <span ng-show="video.auction.highestBid !== undefined">)</span></em></small></p>
+									<p ng-show="videoHasBeenViewed($index) && videoIsInState($index, 'AUCTION');"><small>{{video.times_viewed}} {{userLanguageVocabulary.video_times_viewed_text}}</small></p>
+									<p ng-show="videoHasCategory($index)"><small>{{getVideoCategory($index)}}</small></p>
+								</div>
+
+							</a>
+							<div class="videoMenuOptions col-md-2">
+								<div class="dropdown pull-right">
+									<button class="btn dropdown-toggle" data-toggle="dropdown">
+										<span class="glyphicon glyphicon-menu-hamburger"/>
+									</button>
+									<ul class="dropdown-menu pull-right">
+										<li class="dropdown-header">{{userLanguageVocabulary.menu_option_header}}</li>
+										<li class="divider" />
+										<li ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'DOWNLOAD')"
+										    ng-click="putToAuction($index, true)"><a><span id="auction-hammer-icon"class="tabRight"></span>{{userLanguageVocabulary.menu_option_put_auction}}</a></li>
+										<li ng-show="videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" ng-click="putToAuction($index, false)"><a><span class="glyphicon glyphicon-remove tabRight"></span>{{userLanguageVocabulary.menu_option_pull_auction}}</a></li>
+										<li ng-show="videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" ng-click="seeAuctionsOnItem($index)"><a><span class="glyphicon glyphicon-eye-open tabRight"></span>{{userLanguageVocabulary.menu_option_see_auction}}</a></li>
+										<li ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" ng-click="downloadVid($index)"><a><span class="glyphicon glyphicon-download-alt tabRight"></span>{{userLanguageVocabulary.menu_option_download}}</a></li>
+										<li ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" class="divider" />
+										<li ng-show="!videoIsInState($index, 'AUCTION')" ng-click="open($index)"><a><span class="glyphicon glyphicon-trash tabRight"></span>{{userLanguageVocabulary.menu_option_delete_video}}</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-show="showNav(true)" class="video-list-navigation pulled-up-2">
+				<span ng-click="navigateVideoList(true)" class="glyphicon glyphicon-chevron-down" />
+			</div>
+
+		</div>
+
+		<!-- section vidéo -->
+		<div id="no-video-loaded">{{userLanguageVocabulary.empty_video_list}}</div>
+		<div class="masection video">
+			<div class="page-header titlevideo">
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" id="editedname" value="{{currentVideo.name}}" name="s" class="form-control left-rounded">
+						<div class="input-group-btn search-btn">
+							<button type="submit" ng-click="editname()" class="btn btn-inverse">
+									{{userLanguageVocabulary.video_edit_name_btn_text}}
+								</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="viewVideo1">
+				<h5>{{userLanguageVocabulary.recording_video_msg}}</h5>
+			</div>
+			<div ng-show="viewVideo2">
+				<h4>{{userLanguageVocabulary.compilation_video_msg}}</h4>
+			</div>
+			<div id="parentVideoTag" ng-show="viewVideo && htmlVideoUsed">
+				<video id="videoTag" controls="controls" height="425px" width="100%">
+					<source id="sourceMP4" src="{{pathForIEMP4}}" type="video/mp4" />
+				</video>
+			</div>
+
+			<div ng-show="viewVideo && videogularUsed" class="videogular-container">
+				<videogular id="mediaplayer" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()"
+				    vg-theme="controller.config.theme.url">
+					<vg-media vg-src="controller.config.sources" vg-tracks="controller.config.tracks">
+					</vg-media>
+
+					<vg-controls>
+						<vg-play-pause-button></vg-play-pause-button>
+						<vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+						<vg-scrub-bar>
+							<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+						</vg-scrub-bar>
+						<vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+						<vg-volume>
+							<vg-mute-button></vg-mute-button>
+							<vg-volume-bar></vg-volume-bar>
+						</vg-volume>
+						<vg-fullscreen-button></vg-fullscreen-button>
+					</vg-controls>
+
+					<vg-overlay-play></vg-overlay-play>
+					<vg-buffering></vg-buffering>
+					<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+				</videogular>
+
+			</div>
+
+			<ul class="list-group footervideo stats">
+				<li class="list-group-item">
+					<div id="current-video-menu" class="container">
+						<ul class="row">
+							<li id="current-video-auction" class="col-md-4"><span ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING') && !videoIsInState($index, 'DOWNLOAD')"
+								    class="auction-hammer" title="{{userLanguageVocabulary.menu_option_put_auction}}" ng-click="putToAuction(undefined, true)"></span></li>
+							<li id="current-video-download" class="col-md-4"><span ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" class="glyphicon glyphicon-download-alt Top"
+								    title="{{userLanguageVocabulary.menu_option_download}}" ng-click="downloadVid(undefined)"></span></li>
+							<li id="current-video-delete" class="col-md-4"><span ng-show="!videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" class="glyphicon glyphicon-trash Top"
+								    title="{{userLanguageVocabulary.menu_option_delete_video}}" ng-click="open(undefined)"></span></li>
+							<li id="current-video-pull" class="col-md-6"><span ng-show="videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" class="glyphicon glyphicon-remove"
+								    title="{{userLanguageVocabulary.menu_option_pull_auction}}" ng-click="putToAuction(currentVideo.index, false)"></span></li>
+							<li id="current-video-bids" class="col-md-6"><span ng-show="videoIsInState($index, 'AUCTION') && !videoIsInState($index, 'STREAMING')" class="glyphicon glyphicon-eye-open"
+								    title="{{userLanguageVocabulary.menu_option_see_auction}}"></span></li>
+						</ul>
+					</div>
+				</li>
+				<li class="list-group-item list-stat">
+					<b>{{ userLanguageVocabulary.keyword }}</b>
+					<tags-input ng-model="tags" ng-autocomplete display-property="translation" placeholder="Tags" max-tags="10">
+						<auto-complete source="tagListing" selectFirstMatch="true" debounce-delay="0" display-property="translation"></auto-complete>
+						<div class="input-group-btn search-btn">
+							<button type="submit" class="btn btn-inverse">
+									<span class="glyphicon glyphicon-ok" ></span>
+								</button>
+						</div>
+					</tags-input>
+
+					<div ng-show="duplications">
+						<div class="alert alert-warning" role="alert"><strong>{{userLanguageVocabulary.tag_validation_success_duplication_header}}</strong> {{userLanguageVocabulary.tag_validation_success_duplication_body}}</div>
+					</div>
+					<div ng-show="tooManyTags">
+						<div class="alert alert-danger" role="alert"><strong>{{userLanguageVocabulary.tag_validation_too_many_header}}</strong> {{userLanguageVocabulary.tag_validation_too_many_body}}</div>
+					</div>
+					<div ng-show="modifSuccess">
+						<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok"></span> {{userLanguageVocabulary.tag_validation_success}}</div>
+					</div>
+					<div ng-show="modifError">
+						<div class="alert alert-danger" role="alert"><strong>{{userLanguageVocabulary.tag_validation_error_header}}</strong> {{userLanguageVocabulary.tag_validation_error_body}}</div>
+					</div>
+					<div ng-show="noModif">
+						<div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-info-sign"></span> {{userLanguageVocabulary.tag_validation_no_modif}}</div>
+					</div>
+
+				</li>
+				<li class="list-group-item list-stat row"><b id="cat" class="same-line col-md-4">{{userLanguageVocabulary.category_text}}</b>
+					<div class="btn-group pull-right">
+						<button id="current-category-btn" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+						    aria-expanded="false">
+								{{displayCategory}}
+							</button>
+						<ul id="category-menu" class="dropdown-menu">
+							<li class="dropdown-header">{{userLanguageVocabulary.categories_text}}</li>
+							<li class="divider" />
+							<li class="categ" ng-repeat="category in categories track by $index" ng-click="categoryChange(categories[$index].translation)"><a>{{categories[$index].translation}}</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="list-group-item list-stat"><b class="same-line">{{userLanguageVocabulary.video_creation_date}}</b>
+					<p><span ng-bind="convertTimestampToDate(currentVideo.streaming_startedon)"></span></p>
+				</li>
+				<li ng-show="alreadyHasBids()" class="list-group-item list-stat"><b class="same-line">{{userLanguageVocabulary.video_end_auction_date}}</b>
+					<p><span ng-bind="convertTimestampToDate(currentVideo.auction.end)"></span></p>
+				</li>
+				<li ng-show="alreadyHasBids()" class="list-group-item list-stat"><b class="same-line">{{userLanguageVocabulary.auction_time_left}}</b>
+					<p><span id="time">{{currentVideoAuctionRemainingTime || userLanguageVocabulary.calculating_timeleft}}</span></p>
+				</li>
+				<li class="list-group-item list-stat"><b class="same-line">{{userLanguageVocabulary.video_status_text}}</b>
+					<p><span ng-bind="frenchStatus(currentVideo.status)"></span></p>
+				</li>
+				<li ng-show="alreadyHasBids()" class="list-group-item list-stat"><b class="same-line">{{userLanguageVocabulary.video_actual_bid_amount}}</b>
+					<p>{{currentVideo.auction.highestBid}} $</p>
+				</li>
+				<li class="list-group-item list-stat">
+					<b>{{userLanguageVocabulary.video_location_map_text}}</b>
+					<center><br>
+						<div id="map"></div>
+					</center>
+				</li>
+			</ul>
+		</div>
+	</section>
+</div>

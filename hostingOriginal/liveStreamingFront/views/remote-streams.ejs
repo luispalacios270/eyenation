@@ -1,0 +1,66 @@
+<div  ng-controller="RemoteStreamsController as rtc" class="row">
+
+<div class="col-md-4" >
+
+    <h1><img src="/cdn/images/eyelogo.png" width="200"></h1>
+
+    <br>
+
+	<h3>People on Live</h3>
+
+    
+    <br>
+    <br>
+
+	<table class="table">
+    	<thead>
+    		<tr>
+        		<th>Users</th><th>Views</th><th></th>
+   			</tr>
+   		</thead>
+    	<tbody>
+    		<tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
+                <td><a class="user">{{stream.name}}</a></td>
+        		<td><span>{{stream.views || 0}}</span></td>
+                <td ng-click="rtc.view(stream)"><a>View Stream</a></td>
+    		</tr>
+		</tbody>
+	</table>
+<br>
+	<span ng-click="rtc.loadData()" class="text-center" style="width: 240px">
+        <a class="btn btn-primary" href>Refresh Streams</a>
+    </span>
+    <br>
+    <br>
+    <br>
+<div style="border-top:1px dotted white; display: block;"></div>
+
+        <br>
+    <br>
+    <h4 style="font-weight: normal; font-size:1em">Download the APP and go live</h4>
+    <br>
+    <span ng-click="rtc.loadData()" style="width: 240px">
+        <a href="https://s3.amazonaws.com/jafid/app-debug-unaligned.apk" target="_blank" class="" href>
+            <img src="/cdn/images/android-button.png" style="width: 200px">
+        </a>
+    </span>
+
+    
+
+    </div>
+
+    <div class="visible-sm visible-xs">
+     <br>
+
+    </div>
+
+    <div class="col-md-8" >
+     <br>
+     <br>
+    <div id="remoteVideosContainer" class="center">
+      
+    </div>
+
+
+    </div>
+<div class="remoteStreams">

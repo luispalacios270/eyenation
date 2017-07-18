@@ -1,0 +1,178 @@
+<div ng-include="'resources/views/video/templates/popUp.html'"></div>
+<md-content layout-padding ng-init="more = 4">
+    <md-grid-list md-cols-gt-md="2" md-cols="1" md-row-height="1000px" md-row-height-xs="10:21">
+        <md-grid-tile ng-if="$index<more" ng-repeat="video in videos">
+            <!--<md-grid-tile ng-if="$index<more" ng-repeat="video in videosTest">-->
+            <md-card flex="70" flex-xs="100" class="parent" layout-padding>
+                <div class="parent">
+                    <!--<div class="minutes-video">
+                        2:30
+                    </div>-->
+                    <div ng-hide="video.status==='AUCTION' || video.showImage" class="speed-dial animated selected">
+                        <md-button aria-label="try" ng-hide="selectedPencil" class="screw">
+                            <md-icon class="adjust">
+                                <img class="screw" src="resources/views/video/images/screw.png" alt="">
+                            </md-icon>
+                        </md-button>
+                        <md-button ng-show="selectedPencil" class="screw">
+                            <md-icon class="adjust">
+                                <img class="screw" src="resources/views/video/images/pencil.png" alt="">
+                            </md-icon>
+                        </md-button>
+                        <div ng-show="!selectedPencil" class="sub-buttons animated fade">
+                            <img ng-click="selectedPencil=true; prepEdit(videoTmp,video);" md-ink-ripple="#FF0000" class="icons-speed icon-speed-top pencil-icon"
+                                src="resources/views/video/images/pencil.png" alt="" ng-init="videoTmp={}">
+                            <img ng-click="putAuction($event,$index, true)" md-ink-ripple="#FF0000" class="icons-speed icon-speed-top auction-icon" src="resources/views/video/images/auction-red.png"
+                                alt="">
+                            <img ng-click="deleteVideo($event,$index)" md-ink-ripple="#FF0000" class="icons-speed icon-speed-top erase-icon" src="resources/views/video/images/garbage.png"
+                                ng-click="" alt="">
+                            <img title="Generate certificate of the video" md-ink-ripple="#FF0000" class="icons-speed icon-speed-top certificate-icon"
+                                src="resources/views/video/images/certificate.png" ng-click="" alt="">
+                        </div>
+                        <div ng-show="selectedPencil" class="sub-buttons animated fade">
+                            <img md-ink-ripple="#FF0000" ng-click="selectedPencil=false; acceptChangesVideo(video,videoTmp)" class="icons-speed icon-speed-top auction-icon pointer"
+                                src="resources/views/video/images/done.png" alt="">
+                            <img md-ink-ripple="#FF0000" ng-click="selectedPencil=false;" class="icons-speed icon-speed-top erase-icon pointer" src="resources/views/video/images/cancel.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div ng-show="video.status ==='AUCTION'" class="countdown-mini parent">
+                        <div class="child-parent adjust" ng-init="getTimer(video)" layout="row" layout-align="center center">
+                            <div layout="column" ng-show="video.auction" class="counter-main" layout-align="center center">
+                                <h1 class="text-sub" data-fittext data-fittext-min="15" flex="100"> {{bidTimeout(video)}}</h1>
+                                <i ng-click="showPrerenderedDialog($event,video)" class="material-icons pointer elevated">remove_red_eye</i>
+                            </div>
+
+
+                            <!--<h1 data-fittext data-fittext-min="15" ng-show="video.auction" class="counter-main" flex="100"> {{bidTimeout(video)}}</h1>-->
+                            <h1 ng-click="putAuction($event,$index, false)" title="Remove from auction" class="pointer counter-main remove-auction" ng-hide="video.auction || video.status!=='AUCTION'">x</h1>
+                        </div>
+                        <round-progress max="14400" current="video.counter" color="red" bgcolor="#ededed" radius="100" stroke="15" semi="false" rounded="true"
+                            clockwise="false" responsive="true" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                    </div>
+
+                    <div ng-if="video.showImage">
+                        <div id="parentVideoTag-{{$index}}">
+                            <video id="videoTag-{{$index}}" controls height="auto" width="100%" ng-init="getSrcVideo(video)">
+                                <source id="sourceMP4-{{$index}}" src="{{video.pathForIEMP4}}" type="video/mp4" />
+                            </video>
+                            <div>
+                                <videogular style="min-height: 350px" ng-init="reloadVideo(video,$index)" id="mediaplayer-{{$index}}" vg-player-ready="controller.onPlayerReady($API)"
+                                    vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url">
+                                    <vg-media vg-src="controller.config.sources" vg-tracks="controller.config.tracks">
+                                    </vg-media>
+
+                                    <vg-controls>
+                                        <vg-play-pause-button></vg-play-pause-button>
+                                        <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                                        <vg-scrub-bar>
+                                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                        </vg-scrub-bar>
+                                        <vg-time-display>{{ timeLeft | date:'mm:ss':'+0000' }}</vg-time-display>
+                                        <vg-volume>
+                                            <vg-mute-button></vg-mute-button>
+                                            <vg-volume-bar></vg-volume-bar>
+                                        </vg-volume>
+                                        <vg-fullscreen-button></vg-fullscreen-button>
+                                    </vg-controls>
+
+                                    <vg-overlay-play></vg-overlay-play>
+                                    <vg-buffering></vg-buffering>
+                                    <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                                </videogular>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <img class="img-card pointer" ng-hide="video.showImage" ng-click="video.showImage=true" ng-init="video.showImage=false" ng-class="{'main-image':video.status==='AUCTION'}"
+                        ng-src="../api/videos/{{video.unique_name}}/thumbnail" on-error-src="resources/images/notFound.jpg">
+
+
+                </div>
+                <div class="caption" layout="row">
+                    <p class="md-caption color-grey"> {{video.streaming_startedon | date:'medium'}}</p>
+                    <p class="md-caption color-grey" ng-init="geocode(video.gps_coordinates[0].latitude,video.gps_coordinates[0].longitude,video)">
+                        {{video.location}}
+                    </p>
+                </div>
+                <p ng-hide="selectedPencil" ng-class="{'color-red':video.status==='AUCTION'}" class="md-title"><strong>{{video.name}}</strong></p>
+                <md-input-container ng-show="selectedPencil">
+                    <input type="text" name="" ng-model="videoTmp.name">
+                </md-input-container>
+                <div ng-hide="selectedPencil" layout="row" layout-align="none center">
+                    <div class="chip-category" ng-show="cat.lang === lang.toLowerCase()" ng-repeat="cat in video.category">
+                        {{cat.translation}}
+                    </div>
+                </div>
+                <div ng-show="selectedPencil" layout="row" layout-align="none center">
+                    <div class="chip-category" ng-show="cat.lang === lang.toLowerCase()" ng-repeat="cat in videoTmp.category">
+                        {{cat.translation}}
+                        <!--<span class="pointer" ng-click="deleteCategory(videoTmp,cat.id)" ng-show="selectedPencil"><strong>X</strong></span>-->
+                    </div>
+                    <md-menu>
+                        <img class="view-img pointer" ng-click="$mdMenu.open($event)" src="resources/views/video/images/addCategories.png" alt=" ">
+                        <md-menu-content layout-padding width="4">
+                            <md-menu-item class="pointer" ng-click="videoTmp.category=[]; videoTmp.category.push(category); videoTmp.categorySelected=category.translation"
+                                ng-show="videoTmp.category.indexOf(category) === -1" ng-repeat="category in categories track by $index">
+                                {{category.translation}}
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+                <div layout="row" layout-align="space-between none">
+                    <div layout="row" layout-align="none center">
+                        <i ng-show="video.tags.length > 0" class="material-icons tags color-grey">label_outline</i>
+                        <md-menu>
+                            <md-button ng-show="selectedPencil" aria-label="" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-icon> <img title="add a new tag" ng-click="openMenu($mdMenu, $event)" class="plus-tag pointer"
+                                        ng-show="selectedPencil" src="resources/views/video/images/plus.png" alt="">
+                                </md-icon>
+                            </md-button>
+                            <md-menu-content style="overflow: hidden" width="4">
+                                <md-input-container>
+                                    <input type="text" required ng-model="videoTmp.newTag" name="prueba" placeholder="Add new tag" my-enter="addTag(videoTmp, $mdMenu, video)">
+                                </md-input-container>
+                            </md-menu-content>
+                        </md-menu>
+                        <md-menu>
+                            <img class="view-img pointer" ng-show="selectedPencil" ng-click="$mdMenu.open($event)" src="resources/views/video/images/addCategories.png"
+                                alt=" ">
+                            <md-menu-content layout-padding width="4">
+                                <md-menu-item class="pointer" ng-click="videoTmp.tags.push(tag); addTag(video,tag)" ng-show="tag.lang === lang.toLowerCase()"
+                                    ng-repeat="tag in listTag track by $index">
+                                    {{tag.translation}}
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <div ng-hide="selectedPencil" layout="row">
+                            <div flex="100" class="color-grey minitag" layout="row" layout-align="none center" ng-show="tag.lang === lang.toLowerCase()"
+                                ng-repeat="tag in video.tags">
+                                <p>{{tag.translation}}</p>
+                                <p ng-show="!$last">,</p>
+                            </div>
+                        </div>
+                        <div ng-show="selectedPencil" layout="row">
+                            <div flex="100" class="color-grey minitag" ng-show="tag.lang === lang.toLowerCase()" layout="row" layout-align="none center"
+                                ng-repeat="tag in videoTmp.tags">
+                                <p>{{tag.translation}}</p>
+                                <i ng-click="deleteTagUpdated(video,tag);videoTmp.tags.splice(i, 1);" class="material-icons close-tag pointer">close</i>
+                                <p ng-show="!$last">,</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div layout-padding>
+                    <ng-map center="[{{video.gps_coordinates[0].latitude}},{{video.gps_coordinates[0].longitude}}]" zoom="10">
+                        <marker on-click="changePageMarker()" position="[{{video.gps_coordinates[0].latitude}},{{video.gps_coordinates[0].longitude}}]"
+                            animation="Animation.BOUNCE"></marker>
+                    </ng-map>
+                </div>
+            </md-card>
+        </md-grid-tile>
+    </md-grid-list>
+    <div layout="row" layout-align="space-around center">
+        <md-button ng-click="more=more+4" id="view-more-btn" class="md-raised md-primary">View More</md-button>
+    </div>
+</md-content>

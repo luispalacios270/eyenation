@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="vendors/angular-material/angular-material.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="resources/css/login.css">
+
+<md-content id="container">
+	<md-card id="sub-container" flex-offset="25" flex-gt-sm="40" flex="50">
+		<!--<div layout="column">-->
+		<img src="resources/assets/911video_Logo_ROUGE.png" alt="LOGO" />
+		<md-content layout-padding>
+			<div id="userForm">
+				<form action="">
+					<md-input-container class="md-block">
+						<label>Entrer votre courriel ou nom d'usager</label>
+						<input type="text" aria-describedby="sizing-addon2" ng-model="user.name" required id="username">
+					</md-input-container>
+					<md-input-container class="md-block last-input-form">
+						<label>Mot de passe</label>
+						<input type="password" aria-describedby="sizing-addon2" ng-model="user.pwd" required id="password">
+					</md-input-container>
+					<div layout="row">
+						<md-button class="md-raised btn-conect" ng-click="validateLoginFor(user)" flex="60">se connecter</md-button>
+						<md-button class="small" ui-sref="sEnregistrerSecurityPerson" flex="40">S'enregistrer</md-button>
+					</div>
+				</form>
+			</div>
+			<div>
+				<form name="phoneForm">
+					<md-input-container class="md-block last-input-form">
+						<label>Accès XXX XXXX public par téléphone</label>
+						<input type="number" name="number" aria-describedby="sizing-addon2" ng-model="telNumber" id="phone" required>
+						<div ng-messages="phoneForm.number.$error">
+							<div ng-message="number">
+								Please input a valid phone-number.
+							</div>
+						</div>
+					</md-input-container>
+					<!--<div layout="row">-->
+					<md-button ng-click="goToVideoFromNumber()" class="md-raised btn-conect">Allez!</md-button>
+					<!--</div>-->
+				</form>
+
+
+			</div>
+		</md-content>
+
+	</md-card>
+</md-content>

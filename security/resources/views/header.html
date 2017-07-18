@@ -1,0 +1,76 @@
+<nav id='header' class="navbar navbar-default navbar-fixed-top" ng-if='state.current.name != "seConnecterPolice"' style="border: none;">
+  <!-- <div class="logo">
+      <a ui-sref="accueilpolice"><img class="img-responsive" src="resources/assets/logo.jpg" width="86" height="51"></a>
+  </div> -->
+  <div class="container-fluid" style="line-height: 2">
+
+
+
+
+
+    <!-- <div class="dropdown pull-right" style="padding: 5px">
+        <button class="btn btn-primary dropdown-toggle hamburger" type="button" data-toggle="dropdown">Language &nbsp;<img class="img-responsive pull-right" src="resources/assets/fr.png" width="25" height="15"></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Anglais <img class="img-responsive pull-right" src="resources/assets/en.png" width="25" height="15"></a></li>
+          <li><a href="#">Espagnol <img class="img-responsive pull-right" src="resources/assets/es.png" width="25" height="15"></a></li>
+        </ul>
+      </div> -->
+
+
+    <!--user dropdown -->
+
+    <div ng-if="user" class="dropdown pull-right" style="padding: 5px" ng-show='!$root.fromNumber'>
+      <button class="btn btn-primary dropdown-toggle hamburger" type="button" data-toggle="dropdown"> &nbsp;{{ user.firstname + " " + user.lastname }} <i style="font-size:16px" class="fa fa-caret-down"></i></button>
+      <ul class="dropdown-menu">
+        <li><a class="names" ui-sref="user-profile">Edit Profile</a></li>
+        <li><a ng-click="logout()" type="button" data-toggle="dropdown">Logout &nbsp;<i style="font-size:16px" class="fa fa-sign-out"></i></a></li>
+      </ul>
+    </div>
+
+    <div ng-if="!user" class="dropdown pull-right" style="padding: 5px" ng-show='!$root.fromNumber'>
+      <button class="btn btn-primary dropdown-toggle hamburger" type="button" ui-sref="seConnecterPolice"> &nbsp;Login</button>
+
+
+    </div>
+
+    <div class="pull-right" style="padding: 5px" ng-show='$root.fromNumber'>
+
+      <a href="/hosting/#/signup-security" class="btn btn-primary hamburger" type="button">Sing up &nbsp;<i style="font-size:16px" class="fa fa-sign-up"></i></a>
+
+    </div>
+
+
+
+  </div>
+
+</nav>
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Change Password</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="pwd">Old Password*:</label>
+          <input ng-model="resetForm.oldPwd" type="password" class="form-control" placeholder="Enter Old Password">
+        </div>
+        <div class="form-group">
+          <label for="pwd">New Password*:</label>
+          <input ng-model="resetForm.newPwd" type="password" class="form-control" placeholder="Enter New Password">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Confirm New Password*:</label>
+          <input ng-model="confirmPwd" type="password" class="form-control" placeholder="Enter Confirm New">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="submitResetForm()">Save changes</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

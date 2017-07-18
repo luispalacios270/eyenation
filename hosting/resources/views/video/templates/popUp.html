@@ -1,0 +1,47 @@
+<div class="hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog layout-padding>
+            <p ng-show="videoSelected.auction">Aucunes enchères pour le moment.</p>
+            <div ng-show="videoSelected.auction">
+                <h5>Historique des enchères pour la video : {{videoSelected.name}}</h5>
+                <p>Temps restant : <span>{{bidTimeout(videoSelected)}}</span></p>
+                <br />
+                <div>
+                    <md-table-container>
+                        <table md-table>
+                            <thead md-head>
+                                <tr md-row>
+                                    <th md-column>
+                                        DATE
+                                    </th>
+                                    <th md-column>
+                                        Montant
+                                    </th>
+                                    <th md-column>
+                                        Média
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody md-body>
+                                <tr md-row ng-repeat="bid in history track by $index | limitTo: myLimit:(myPage-1)*myLimit">
+                                    <td md-cell>
+                                        {{bid.bidDateTime | date:"medium"}}
+                                    </td>
+                                    <td md-cell>
+                                        {{bid.bidCurrentAmount | currency }}
+                                    </td>
+                                    <td md-cell>
+                                        {{bid.media.media.name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <md-table-pagination ng-init="myPage=1; myLimit=10" md-limit="myLimit" md-limit-options="[5, 10, 15]" md-page="myPage" md-total="{{history.length}}"
+                            md-page-select></md-table-pagination>
+                    </md-table-container>
+                </div>
+            </div>
+            <md-button ng-click="closeDialog()">Close</md-button>
+        </md-dialog>
+    </div>
+</div>

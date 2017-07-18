@@ -1,0 +1,80 @@
+<md-content layout-padding layout="column" ng-init="more = 4">
+    <div layout="row" ng-show="video.status == 'AUCTION'" ng-if="$index<more" ng-repeat="video in videos track by $index">
+        <md-card layout-padding flex-offset-gt-sm="20" flex-gt-sm="60" flex="100">
+            <div layout="row" layout-xs="column" layout-align="none center ">
+                <div flex="70" flex-xs="100" class="parent">
+                    <img class="img-card pointer" ng-hide="video.showImage" ng-click="video.showImage=true" ng-init="video.showImage=false" ng-src="../api/videos/{{video.unique_name}}/thumbnail"
+                        on-error-src="resources/images/notFound.jpg">
+                    <!--<div ng-if="video.showImage">
+                        <video controls height="auto" width="100%" ng-init="getSrcVideo(video)">
+                            <source id="sourceMP4" src="{{video.pathForIEMP4}}" type="video/mp4" />
+                        </video>
+                    </div>-->
+                </div>
+                <div flex="30" class="adjust" flex-xs="100" layout-xs="row" layout-align="center center" layout-padding>
+                    <div flex-xs="100" class="parent">
+                        <div class="child-parent adjust" ng-init="getTimer(video)" layout="row" layout-align="center center">
+                            <h1 ng-click="putAuction($event,$index, false)" title="Remove from auction" class="pointer counter-auction remove-auction"
+                                ng-if="video.auction == null">x</h1>
+                            <h1 data-fittext data-fittext-min="20" class="counter" flex="100" ng-if="video.auction"> {{bidTimeout(video)}}</h1>
+                        </div>
+                        <round-progress max="14400" current="video.counter" color="red" bgcolor="#ededed" radius="100" stroke="15" semi="false" rounded="true"
+                            clockwise="false" responsive="true" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                    </div>
+
+                    <div flex-xs="50" layout="column" class="vid-info " layout-align="none center ">
+                        <p class="md-subhead info-bid">
+                            HIGHEST BID
+                        </p>
+                        <p class="high-bid md-headline">
+                            <strong ng-show="video.auction"> {{video.auction.highestBid | currency:"USD$"}} <!--235 003 $ USD--></strong>
+                            <strong ng-hide="video.auction"> Not Bid Yet</strong>
+                        </p>
+                        <div layout="row ">
+                            <img class="view-img " src="resources/views/video/images/view.png" alt=" ">
+                            <p class="color-grey md-headline">
+                                {{video.times_viewed}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="caption " layout="row">
+                <p class="md-caption color-grey "> {{video.streaming_startedon | date:'medium'}}</p>
+                <p class="md-caption color-grey" ng-init="geocode(video.gps_coordinates[0].latitude,video.gps_coordinates[0].longitude,video)">
+                    {{video.location}}
+                </p>
+            </div>
+            <div layout="row" layout-xs="column">
+                <div flex="100" flex-xs="100">
+                    <p ng-hide="selectedPencil " class="md-title "><strong>{{video.name}}</strong></p>
+                    <div layout="row " layout-align="none center ">
+                        <div ng-hide="selectedPencil" layout-align="none center">
+                            <div class="chip-category" ng-show="cat.lang === lang.toLowerCase()" ng-repeat="cat in video.category">
+                                {{cat.translation}}
+                            </div>
+                        </div>
+                    </div>
+                    <div layout="row" ng-show="video.tags.length>0" layout-align="none center">
+                        <i class="material-icons tags color-grey ">label_outline</i>
+                        <div layout="row">
+                            <div class="color-grey minitag " layout="row " layout-align="none center " ng-repeat="miniTag in miniTags track by $index ">
+                                <p>{{miniTag}}</p>
+                                <p ng-show="!$last">,</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout-padding>
+                <ng-map center="[{{video.gps_coordinates[0].latitude}},{{video.gps_coordinates[0].longitude}}]" zoom="10">
+                    <marker position="[{{video.gps_coordinates[0].latitude}},{{video.gps_coordinates[0].longitude}}]" title="{{video.name}}"
+                        animation="Animation.BOUNCE"></marker>
+                </ng-map>
+            </div>
+        </md-card>
+    </div>
+    <div layout="row" layout-align="space-around center">
+        <md-button ng-click="more=more+4" id="view-more-btn" class="md-raised md-primary">View More</md-button>
+    </div>
+</md-content>

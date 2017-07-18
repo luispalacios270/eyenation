@@ -1,0 +1,27 @@
+<md-sidenav class=" md-whiteframe-4dp" ng-class="{'videos-header-normal':myVideosTab, 'auction-header':!myVideosTab}" md-component-id="rightSideMenu">
+    <md-toolbar ng-class="{'videos-header-normal':myVideosTab, 'auction-header':!myVideosTab}">
+        <h1 class="md-toolbar-tools" style="text-align: center">Navigation Menu</h1>
+    </md-toolbar>
+    <md-content layout-padding ng-class="{'videos-header-normal':myVideosTab, 'auction-header':!myVideosTab}">
+        <md-list>
+            <md-list-item>
+                <md-button><a class="md-body-2 color-white link-header" href="#/">{{userLanguageMenuOptions.header_option_home}}</a></md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button><a class="md-body-2 color-white link-header" ng-click="editUser()" href="">{{userLanguageMenuOptions.header_option_account}}</a></md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button id="m4nLink" ng-show="m4nAccess"><a class="md-body-2 color-white link-header" href="#/moneyfornews">{{userLanguageMenuOptions.header_option_m4n_link}}</a></md-button>
+            </md-list-item>
+            <!--<md-list-item>
+                <md-button><a class="md-body-2 color-white link-header" href="#/live">Live Video</a></md-button>
+            </md-list-item>-->
+            <md-list-item>
+                <md-button>
+                    <a id="logout-link" class="md-body-2 color-white link-header" href="../#/login">Déconnexion</a>
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+    </md-content>
+</md-sidenav>

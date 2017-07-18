@@ -1,0 +1,185 @@
+<div>
+    <div class="valign-wrapper">
+        <img class="modalImg" src="resources/images/topModal2.png" alt="">
+        <h4 class="center adjust-horizontal">Formulaire de signalement</h4>
+    </div>
+    <form>
+        <div>
+            <label>Pour quelle(s) raison(s) signalez-vous la vidéo?</label>
+            <div input-field>
+                <select ng-model="select.value" material-select required>  
+                    <option value="{{$index+1}}" ng-repeat="value in select.choices">{{value}}</option>
+                </select>
+            </div>
+        </div>
+        <div ng-show="select.value==1">
+            <form action="#">
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test1" value="0" />
+                    <label for="test1">Violation d’une loi nationale</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==0">
+                    <br>
+                    <input-field>
+                        <textarea class="materialize-textarea" />
+                        <label>Décrivez la loi et la raison pour laquelle il y aurait selon vous violation des termes de cette loi de quelle loi</label>
+                    </input-field>
+                </div>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test2" value="1" />
+                    <label for="test2">Violence</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==1">
+                    <br>
+                    <input-field>
+                        <select class="" ng-model="select.value1" material-select multiple watch>
+                            <option ng-repeat="value in select.choicesViolence">
+                                {{value}}
+                            </option>
+                        </select>
+
+                    </input-field>
+                </div>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test3" value="2" />
+                    <label for="test3">Terrorisme</label>
+                </input-field>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test4" value="3" />
+                    <label for="test4">Contenu explicite</label>
+                </input-field>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test5" value="4" />
+                    <label for="test5">Discrimination et droit fondamentaux</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==4">
+                    <br>
+                    <input-field>
+                        <select class="" ng-model="select.value2" material-select multiple watch>
+                            <option ng-repeat="value in select.choicesDiscrimination">
+                                {{value}}
+                            </option>
+                        </select>
+                    </input-field>
+                </div>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test6" value="5" />
+                    <label for="test6">Propriété intellectuelle</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==5">
+                    <br>
+                    <input-field>
+                        <select class="" ng-model="select.value3" material-select multiple watch>
+                            <option ng-repeat="value in select.choicesCopyRight">
+                                {{value}}
+                            </option>
+                        </select>
+                    </input-field>
+                </div>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test7" value="6" />
+                    <label for="test7">Pornographie</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==6">
+                    <br>
+                    <input-field>
+                        <select class="" ng-model="select.value3" material-select multiple watch>
+                            <option ng-repeat="value in select.choicesPornography">
+                                {{value}}
+                            </option>
+                        </select>
+                    </input-field>
+                </div>
+                <input-field>
+                    <input class="with-gap" name="group1" type="radio" ng-model="selectedIllegal.name" id="test8" value="7" />
+                    <label for="test8">Autres</label>
+                </input-field>
+                <div ng-show="selectedIllegal.name==7">
+                    <br>
+                    <input-field>
+                        <textarea class="materialize-textarea" id="test1" value="0" />
+                        <label>Décrivez</label>
+                    </input-field>
+                </div>
+
+            </form>
+
+
+        </div>
+
+        <div ng-show="select.value==2">
+            <!--<br>-->
+            <input-field>
+                <textarea class="materialize-textarea" id="test1" value="0" />
+                <label>Décrivez l’abus</label>
+            </input-field>
+        </div>
+
+        <div ng-show="select.value==3">
+            <!--<br>-->
+            <input-field>
+                <textarea class="materialize-textarea" id="test1" value="0" />
+                <label>Décrivez le bris de sécurité ou la tentative de bris de sécurité</label>
+            </input-field>
+        </div>
+
+        <div ng-show="select.value==4">
+            <!--<br>-->
+            <input-field>
+                <textarea class="materialize-textarea" id="test1" value="0" />
+                <label>Décrivez votre problématique </label>
+            </input-field>
+        </div>
+
+
+
+        <div>
+            <br>
+            <label for="">Indiquez, si applicable, le moment pertinent à la seconde près.</label>
+            <form action="#">
+                <input-field>
+                    <input name="group2" type="radio" ng-model="selectedIllegal.name1" id="test111" value="1" />
+                    <label for="test111">Si</label>
+                </input-field>
+                <input-field>
+                    <input name="group2" type="radio" ng-model="selectedIllegal.name1" id="test666" value="0" />
+                    <label for="test666">Non</label>
+                </input-field>
+            </form>
+        </div>
+        <div>
+            <br>
+            <input-field>
+                <input type="text" class='no-margin' name="nom" required>
+                <label>Inscrire le numéro d’identification de la vidéo ici.</label>
+            </input-field>
+
+        </div>
+        <div>
+            <input-field>
+                <label>Si nécessaire, décrivez brièvement la vidéo</label>
+                <textarea class="materialize-textarea" maxlength="100" />
+            </input-field>
+        </div>
+        <div>
+            <label>Identifiez-vous ou la personne que vous représentez et qui signale la vidéo.</label>
+            <!--<h6>Identifiez-vous ou la personne que vous représentez et qui signale la vidéo.</h6>-->
+            <input-field>
+                <input type="text">
+                <label>Nom, prénom</label>
+            </input-field>
+            <input-field>
+                <input type="text">
+                <label>Adresse correspondante au compte</label>
+            </input-field>
+            <input-field>
+                <input type="text">
+                <label>Nom d’utilisateur</label>
+            </input-field>
+            <input-field>
+                <input type="tel">
+                <label>Numéro de téléphone pour vous rejoindre</label>
+            </input-field>
+        </div>
+    </form>
+</div>

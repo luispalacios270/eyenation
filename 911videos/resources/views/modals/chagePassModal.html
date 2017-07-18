@@ -1,0 +1,44 @@
+<div>
+    <h2>Change Password</h2>
+    <form name="passForm">
+        <!--<div class="form-group">
+          <label for="pwd">Old Password*:</label>
+          <input ng-model="resetForm.oldPwd" type="password" class="form-control" placeholder="Enter Old Password">
+        </div>
+        <div class="form-group">
+          <label for="pwd">New Password*:</label>
+          <input ng-model="resetForm.newPwd" type="password" class="form-control" placeholder="Enter New Password">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Confirm New Password*:</label>
+          <input ng-model="confirmPwd" type="password" class="form-control" placeholder="Enter Confirm New">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="submitResetForm()">Save changes</button>
+      </div>-->
+        <md-input-container>
+            <label>Old Password</label>
+            <input ng-model="resetForm.oldPwd" name="old" type="password" placeholder="Enter Old Password" required>
+        </md-input-container>
+        <md-input-container>
+            <label>New Password</label>
+            <input ng-model="resetForm.newPwd" name="new" type="password" placeholder="Enter New Password" required>
+
+        </md-input-container>
+        <md-input-container>
+            <label>Confirm New Password</label>
+            <input ng-model="confirmPwd" ng-blur="dirtyPass=true" ng-focus="dirtyPass=false" name="confirm" type="password" placeholder="Enter Confirm New"
+                required>
+            <div ng-show="resetForm.newPwd!=confirmPwd && dirtyPass ">
+                <div class="md-input-message-animation alert-md" role="alert">The password is not the same</div>
+            </div>
+
+        </md-input-container>
+        <div layout="row">
+            <md-button class="md-raised md-primary" ng-disabled="resetForm.newPwd!=confirmPwd || passForm.$invalid" ng-click="submitResetForm()">Save Changes</md-button>
+            <md-button ng-click="closeDialog()">Close</md-button>
+        </div>
+    </form>
+</div>

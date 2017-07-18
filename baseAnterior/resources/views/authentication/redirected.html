@@ -1,0 +1,16 @@
+<center>
+  <div data-ng-controller="sessionActiveCtrl" ng-show="showAuth" ng-transclude>
+  	<div class="jumbotron">
+  		<center>
+    		<h1>Bonjour, vous n'êtes actuellement pas authentifié</h1>
+    		<p>Veuillez choisir parmi les quatre types d'authentification possibles en cliquant sur l'un des boutons ci-dessous</p>
+    		<div class="btn-group btn-group-lg" role="group">
+    			<button onclick="window.location.href='/authByName'" type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-font"></span> Connexion avec nom d'usager</button>
+    			<button type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-envelope"></span> Connexion avec un courriel d'usager</button>
+    			<button type="button" class="btn btn-primary btn-lg"><img src="resources\images\logofb.png"/> Connexion via Facebook</button>
+    			<button type="button" class="btn btn-secondary btn-lg"><img src="resources\images\logogoogle.png"/> Connexion via votre compte Google</button>
+    		</div>
+  		</center>
+  	</div>
+  </div>
+</center>

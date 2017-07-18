@@ -1,0 +1,80 @@
+<link href="resources/views/video/css/header.css" rel="stylesheet">
+<div id="header" ng-class="{'auction-header':!myVideosTab}" layout-padding layout="column">
+    <div layout="row" layout-align="space-between center">
+        <div layout="row" layout-align="none center">
+            <i hide-gt-sm class="material-icons burger-menu pointer" ng-click="openSideMenu('rightSideMenu')">menu</i>
+            <p style="margin-right: 3px" class="md-body-2 color-white ">{{user.firstname}} </p>
+            <p class="md-body-2 color-white">{{user.lastname}}</p>
+        </div>
+        <div layout="row" hide show-gt-sm layout-align="none center">
+            <md-button><a class="md-body-2 color-white link-header" href="#/">{{userLanguageMenuOptions.header_option_home}}</a></md-button>
+            <md-button><a class="md-body-2 color-white link-header" ng-click="editUser()">{{userLanguageMenuOptions.header_option_account}}</a></md-button>
+            <!--<md-button><a class="md-body-2 color-white link-header" href="#/videoViewer">{{userLanguageMenuOptions.header_option_videos}}</a></md-button>-->
+            <md-button id="m4nLink" ng-show="m4nAccess"><a class="md-body-2 color-white link-header" href="#/moneyfornews">{{userLanguageMenuOptions.header_option_m4n_link}}</a></md-button>
+            <!--<md-button><a class="md-body-2 color-white link-header" href="#/live">Live Video</a></md-button>-->
+            <md-button>
+                <a id="logout-link" class="md-body-2 color-white link-header" href="../#/login">
+                  Déconnexion
+                </a>
+            </md-button>           
+        </div>
+    </div>
+    <div layout="row " layout-align="center  ">
+        <div layout="row">
+            <md-nav-bar md-selected-nav-item="currentNavItem1">
+                <md-nav-item ng-show="myVideosTab" md-nav-click="goto('page1')" name="page1 ">
+                    <md-icon class="icon-nav">
+                        <img class="img-nav " src="resources/views/video/images/videsLogo.png " alt=" ">
+                    </md-icon>
+                    <span ng-class="{'selected-tab':myVideosTab}"> MES VIDEOS</span>
+                </md-nav-item>
+
+                <md-nav-item ng-hide="myVideosTab" md-nav-click="goto( 'page1') " name="page1 ">
+                    <md-icon class="icon-nav">
+                        <img class="img-nav " src="resources/views/video/images/encheres.png " alt=" ">
+                    </md-icon>
+                    <span ng-class="{'selected-tab':!myVideosTab}"> MES ENCHÈRES EN COURS</span>
+                </md-nav-item>
+            </md-nav-bar>
+            <!--<img class="charge" src="resources/views/video/images/charging-icon.png" alt="">-->
+        </div>
+        <md-nav-bar id="right-tabs" hide-xs md-selected-nav-item="currentNavItem " nav-bar-aria-label="navigation
+                links ">
+            <md-nav-item ng-show="myVideosTab" md-nav-click="goto('MyVideos');changePage('#/videoViewerAuctions')" name="page1 ">
+                <!--<img class="img-nav" href="#/videoViewerAuctions" src="resources/views/video/images/encheres.png " alt=" ">-->
+                <md-icon class="icon-nav">
+                    <img class="img-nav " src="resources/views/video/images/encheres.png " alt=" ">
+                </md-icon>
+                <span> MES ENCHÈRES EN COURS</span>
+            </md-nav-item>
+
+            <md-nav-item ng-hide="myVideosTab" class="tabLogo " md-nav-click="goto('auctions'); changePage('#/videoViewer')" name="page1 ">
+                <!--<a href="#/videoViewer"><img class="img-nav " src="resources/views/video/images/videsLogo.png " alt=" "></a>-->
+                <md-icon class="icon-nav">
+                    <img class="img-nav " src="resources/views/video/images/videsLogo.png " alt=" ">
+                </md-icon>
+                <span> MES VIDEOS</span>
+            </md-nav-item>
+            <md-nav-item class="saerch-button " md-nav-click="goto('page1') " name="page1 ">
+                <i class="material-icons color-white">search</i>
+            </md-nav-item>
+        </md-nav-bar>
+    </div>
+</div>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="editUser">
+        <md-dialog>
+            <md-dialog-content layout-padding>
+                <div id="formEditUser" class="fade" ng-hide="correctEdited" ng-include="'resources/views/video/templates/editUserModal.html'"></div>
+                <div id="correctEdit" class="gone" layout="row" layout-align="center center">
+                    <i flex="100" class="adjust-horizontal material-icons correct">done</i>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions id="footerModal">
+                <md-button class="md-raised md-primary" ng-click="validate(user)">{{userLanguageAccountFields.validate_change_btn}}</md-button>
+                <md-button class="md-primary" ng-click="closeDialog()">Cancel</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+    </div>
+</div>

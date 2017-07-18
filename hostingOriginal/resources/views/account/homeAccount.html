@@ -1,0 +1,196 @@
+<div menu></div>
+
+<div class="container">
+    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">Modifiez vos informations</div>
+                                <div style="float:right; font-size: 85%; position: relative; top:-10px"></div>
+                            </div>  
+                            <div class="panel-body" >
+                                <form id="signupform" class="form-horizontal" role="form" name="form">
+                                    
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+                                    
+                                    <div ng-show="creationPb">
+                                    <div class="alert alert-danger" role="alert">
+                                           <strong>Erreur lors de la modification!</strong>Veuillez rééssayer SVP
+                                    </div>
+                                  </div> 
+                                    
+                                      
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3 control-label">Nom d'usager</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="nom" ng-model="user.name" placeholder="Nom d'usager">
+                                        </div>
+                                    </div>
+                                    <div ng-show="form.nom.$touched">
+                                        <div ng-show="nameToShort">
+                                        <div class="alert alert-danger" role="alert">
+                                           Le nom doit avoir au moins huit caractères
+                                        </div>
+                                      </div>
+                                      <div ng-show="nameAlreadyUsed">
+                                        <div class="alert alert-danger" role="alert">
+                                           Ce nom est déjà utilisé!
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3 control-label">Mot de passe*</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="mdp" ng-model="user.password" placeholder="Mot de passe" required>
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="form-group">
+                                        <label for="firstname" class="col-md-3 control-label">Courriel*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
+                                        </div>
+                                    </div>
+                                    <div ng-show="mailWithoutarobase">
+                                        <div class="alert alert-danger" role="alert">
+                                           Le courriel doit contenir le caractère '@'
+                                        </div>
+                                      </div>
+                                    <div ng-show="mailAlreadyUsed">
+                                        <div class="alert alert-danger" role="alert">
+                                           Ce courriel est déjà utilisé!
+                                        </div>
+                                      </div>
+                                    <div class="form-group">
+                                        <label for="lastname" class="col-md-3 control-label">Prénom*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="firstname" ng-model="user.firstname" placeholder="Prénom" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-3 control-label">Nom*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="lastname" ng-model="user.lastname" placeholder="Nom" required>
+                                        </div>
+                                    </div>
+                                    
+                                        
+                                    <div class="form-group">
+                                        <label for="icode" class="col-md-3 control-label">Téléphone*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="telephone" ng-model="user.telephone" placeholder="telephone" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label for="address" class="col-md-3 control-label">Adresse*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="address" ng-model="user.address" placeholder="adresse" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label for="icode" class="col-md-3 control-label">Ville*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="city" ng-model="user.city" placeholder="ville" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label for="icode" class="col-md-3 control-label">Pays*</label>
+                                        <div class="col-md-9">
+                                            <!--<input type="text" class="form-control" name="country" ng-model="user.name" placeholder=""-->
+                                            <select class="form-control" name="country" ng-model="user.country" required>
+                                                <option ng-repeat="(key, data) in paysList" value="{{key}}">{{key}}</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div ng-show="countryNotChosen">
+                                        <div class="alert alert-danger" role="alert">
+                                           Veuillez sélectionner un pays SVP
+                                        </div>
+                                      </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label for="icode" class="col-md-3 control-label">Etat/Province*</label>
+                                        <div class="col-md-9">
+                                            <!--<input type="text" class="form-control" name="state" ng-model="user.name" placeholder="">-->
+                                            <select class="form-control" name="country" ng-model="user.state" required>
+                                                
+                                                <option ng-repeat="(key, data) in etatList" value="{{key}}">{{key}}</option>
+
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div ng-show="stateNotChosen">
+                                        <div class="alert alert-danger" role="alert">
+                                           Veuillez sélectionner un état/province SVP
+                                        </div>
+                                      </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label for="icode" class="col-md-3 control-label">Langue*</label>
+                                        <div class="col-md-9">
+                                            <!--<input type="text" class="form-control" name="language" ng-model="user.name" placeholder="">-->
+                                            <select class="form-control" name="country" ng-model="user.language" required>
+                                                <option ng-repeat="(key, data) in langueList" value="{{key}}">{{key}}</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div ng-show="languageNotChosen">
+                                        <div class="alert alert-danger" role="alert">
+                                           Veuillez sélectionner une langue SVP
+                                        </div>
+                                      </div>
+
+                                    <!--<div class="form-group">-->
+                                        <!-- Button -->                                        
+                                        <!--<div class="col-md-offset-3 col-md-9">-->
+                                            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="validate(user)" >Se connecter</button>
+                                             
+                                        <!--</div>-->
+                                        <h6>(*): Champs requis</h6>
+                                   <!-- </div>-->
+                                    
+                                   <!-- <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                                        
+                                        <div class="col-md-offset-3 col-md-9">-->
+                                            <div class="form-group">
+                                                <div class="col-md-12 control">
+                                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                       
+                                                     </div>
+                                                    <a class="btn btn-block btn-social btn-facebook">
+                                                    <img src="resources\images\facebook.png"/> Souscrire avec Facebook
+                                                    </a>
+                                                    <a class="btn btn-block btn-social btn-google">
+                                                        <img src="resources\images\google.png"/> Souscrire avec Google+
+                                                     </a>
+                                                </div>
+                                            </div>
+                                        
+
+                                        </div>                                           
+                                            
+                                    </div>
+                                    
+                                    
+                                    
+                                </form>
+                             </div>
+                        </div>
+
+                   
+                   
+                    
+    </div> 
+</div>

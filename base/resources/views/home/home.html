@@ -1,0 +1,262 @@
+<!-- CSS Import -->
+<link rel="stylesheet" href="resources/css/home.css">
+
+<!-- HTML content -->
+<div id="main-container" class="parent">
+	<div id="blur-map"></div>
+	<div id="header" class="inline-flex">
+		<div class="make-right">
+			<div class="dropdown">
+				<button id="language" class="dropdown-toggle" type="button" data-toggle="dropdown">Language
+  			<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href=""> English </a></li>
+					<li><a href=""> Français </a></li>
+					<li><a href=""> Spanish </a></li>
+					<li><a href=""> Portuguese </a></li>
+					<li><a href=""> Germain </a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<div class="row adjust-vertical">
+			<div class="col-sm-6 adjust-vertical parent hidden-xs">
+				<div class="item-center">
+					<img src="resources\images\Eye_Nation_Logo_ROUGE.png" alt="" class="logo">
+					<div class="info-slick">
+						<div>
+							<h5 class="title-company">Notre mission</h5>
+							<p class="info-company">Outiller le citoyen dans une perspective de justice sociale en ayant comme objectif de démocratiser la valeur et l’utilisation
+								d’une vidéo.</p>
+						</div>
+						<div>
+							<h5 class="title-company">Vision</h5>
+							<p class="info-company">Devenir une sommité en matière d’enregistrement certifié de vidéo en direct et révolutionner la façon de rendre publique
+								une vidéo à travers le monde.</p>
+						</div>
+						<div>
+							<h5 class="title-company">Valeurs</h5>
+							<p class="info-company">Intégrité / fierté / loyauté / justice sociale redistributrive.</p>
+						</div>
+
+						<div>
+							<h5 class="title-company">Approche</h5>
+							<p class="info-company">Mettre à la disposition du public un ensemble de services qui garanti l’authentification d’un enregistrement vidéo
+								et l’attribution d’une valeur réel à chaque enregistrement.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 adjust-vertical parent">
+				<div class="item-center">
+					<div class="title-login">Login Or <span><a href="" data-toggle="modal" data-target="#myModal">Signup</a></span></div>
+					<div class="login" id="loginForm">
+						<form ng-submit="validateLoginFor(user,$event)">
+							<div class="row">
+								<input type="text" placeholder="Username" ng-model="user.name" required="true" class="input-login">
+							</div>
+							<div class="row">
+								<input type="password" placeholder="Password" ng-model="user.pwd" required="true" class="input-login">
+							</div>
+							<div class="row">
+								<div id="err">Nom d'utilisateur/mot de passe invalide</div>
+							</div>
+							<div class="row">
+								<button class="input-login btn-login" type="submit">Envoyer</button>
+							</div>
+						</form>
+					</div>
+					<div>
+						<div class="row social-links">
+							<i class="fa fa-facebook" aria-hidden="true"></i><span><a href=""> Login with facebook</a></span>
+						</div>
+						<div class="row social-links">
+							<i class="fa fa-google" aria-hidden="true"></i> <span> <a href=""> Login with gmail</a></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" id="footerLogin">
+	<div class="col-xs-6 col-sm-6 parent adjust-vertical">
+		<div class="item-center">
+			<img class="img-responsive logo-app" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+			    alt="">
+			<a href="">Download the App</a>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 parent adjust-vertical">
+		<div class="item-center">
+			<h5 id="title-nous">Nous rejoindre​</h5>
+			<p class="info-footer">1181 rang 10 ouest​ St-Adrien​, Québec​
+			</p>
+			<p class="info-footer">J0A 1CO​
+			</p>
+			<p class="info-footer">info@eyenation.org​
+			</p>
+		</div>
+	</div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Créez votre compte</h4>
+			</div>
+			<div class="modal-body">
+				<form name="signupform" class="form-horizontal" role="form" name="form">
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Nom d'usager</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="nom" ng-model="user.name" placeholder="Définissez un nom d'utilisateur (entre 8 et 20 carac.)">
+							</div>
+						</div>
+						<div ng-show="nameLenghtNotValid">
+							<div class="alert alert-danger" role="alert">Le nom doit comprendre entre 8 et 20 caractères inclus</div>
+						</div>
+						<div ng-show="nameAlreadyUsed">
+							<div class="alert alert-danger" role="alert">Ce nom d'usager existe déjà!</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Mot de passe*</label>
+							<div class="col-md-9">
+								<input type="password" class="input-login-modal" name="mdp" ng-model="user.password" placeholder="Choisissez votre mot de passe (entre 4 et 10 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="pwLengthNotValid">
+							<div class="alert alert-danger" role="alert">Le nombre de caractères du mot de passe doit être compris entre 4 et 16 inclus</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Confirmation*</label>
+							<div class="col-md-9">
+								<input type="password" class="input-login-modal" name="confMdp" ng-model="user.confirmationPw" placeholder="Confirmez votre mot de passe (entre 4 et 10 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="confNotValid">
+							<div class="alert alert-danger" role="alert">Les deux mots de passe ne correspondent pas</div>
+						</div>
+						<div class="form-group">
+							<label for="firstname" class="col-md-3 control-label">Courriel*</label>
+							<div class="col-md-9">
+								<input type="email" class="input-login-modal" name="email" ng-model="user.email" placeholder="Exemple: courriel@domaine.com"
+								    required>
+							</div>
+							<div ng-show="mailAlreadyUsed">
+								<div class="alert alert-danger" role="alert">Ce courriel est déjà utilisé!</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Prénom*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="firstname" ng-model="user.firstname" placeholder="Saisissez votre prénom"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Nom*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="lastname" ng-model="user.lastname" placeholder="Saisissez votre nom de famille"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Téléphone*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="telephone" ng-model="user.telephone" placeholder="Saisissez votre numéro de téléphone "
+								    required>
+							</div>
+						</div>
+
+						<div ng-show="telFormatInvalid">
+							<div class="alert alert-danger" role="alert">Format de téléphone invalide pour le pays sélectionné<br>Exemple de numéros valides: {{telExamples}}</div>
+						</div>
+						<div class="form-group">
+							<label for="icode" class="col-md-3 control-label">Langue*</label>
+							<div class="col-md-9">
+								<select class="input-login-modal" name="country" ng-model="user.language" placeholder="Sélectionnez votre langue" required>
+									<option ng-repeat="(key, data) in langueList" value="{{key}}">{{data}}</option>
+								</select>
+							</div>
+						</div>
+						<div ng-show="languageNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner une langue SVP</div>
+						</div>
+					</fieldset>
+
+					<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Adresse*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="address" ng-model="user.address" placeholder="Entrez votre adresse de résidence (max.: 100 carac.)"
+								    required>
+							</div>
+						</div>
+						<div ng-show="addressLengthNotValid">
+							<div class="alert alert-danger" role="alert">L'adresse doit comprendre au plus 100 caractères</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Ville*</label>
+							<div class="col-md-9">
+								<input type="text" class="input-login-modal" name="city" ng-model="user.city" placeholder="Indiquez votre ville de résidence"
+								    required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Pays*</label>
+							<div class="col-md-9">
+								<select class="input-login-modal" ng-change="getStatesByCurrentCountry()" name="country" ng-model="user.country" placeholder="Sélectionnez votre pays de résidence"
+								    required>
+									<option ng-repeat="(key, data) in paysList" value="{{data.countryCode}}">{{data.countryName}}</option>
+								</select>
+							</div>
+						</div>
+						<div ng-show="countryNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner un pays SVP</div>
+						</div>
+						<div ng-show="user.country">
+							<div class="form-group">
+								<label for="icode" class="col-md-3 control-label">Etat/Province*</label>
+								<div class="col-md-9">
+									<select class="input-login-modal" name="country" ng-model="user.state" placeholder="Sélectionnez votre état/province/région"
+									    required>
+										<option ng-repeat="(key, data) in states" value="{{data.stateCode}}">{{data.stateName}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div ng-show="stateNotChosen">
+							<div class="alert alert-danger" role="alert">Veuillez sélectionner un état/province SVP</div>
+						</div>
+					</fieldset>
+
+					<h6>(*): Champs requis</h6>
+
+					<div ng-show="creationPb">
+						<div class="alertAuth alert-danger" role="alert">
+							<strong>Erreur lors de la souscription!</strong> Veuillez rééssayer SVP
+						</div>
+					</div>
+					<button type="submit" style="width:100%;color:rgb(120,192,235) !important" class="input-login btn-login" ng-click="validate(user)">Créer!</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="input-login btn-login" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

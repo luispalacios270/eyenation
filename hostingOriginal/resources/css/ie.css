@@ -1,0 +1,8 @@
+_:-ms-fullscreen, :root #scrolldiv>ul{
+	position:relative;
+	top:1.2em;
+}
+
+_:-ms-fullscreen, :root #video-list-container > #scrolldiv > ul > li{
+	margin-bottom:4em;
+}

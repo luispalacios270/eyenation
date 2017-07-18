@@ -1,0 +1,14 @@
+<!--<div ng-app="hosting">-->
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Suppression d'une vidéo</h4>
+	</div>
+	<div class="modal-body">
+		<p ng-show="!bought"> {{text.video_delete}} {{videoName}}? </p>
+		<p ng-show="bought"><em><small>{{text.video_has_been_bought}}</small></em></p>
+	</div>
+	<div class="modal-footer">
+		<button ng-show="!bought" type="button" class="btn btn-default" data-dismiss="modal" ng-click="confirmVideoRemoval()">{{text.confirmation}}</button>
+		<button ng-show="!bought" type="button" class="btn btn-default" ng-click="close()" data-dismiss="modal">{{text.refusal}}</button>
+		<button ng-show="bought"  type="button" class="btn btn-danger"  ng-click="close()" data-dismiss="modal">{{text.close}}</button>
+	 </div>
