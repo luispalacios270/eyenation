@@ -176,6 +176,8 @@ function policeController($scope, API911video, $state, $rootScope, NgMap, VIDEOS
 
 
 
+
+
   $scope.getNearVideos = function (latitude, longitude, meters) {
 
     return API911video
@@ -258,6 +260,34 @@ function policeController($scope, API911video, $state, $rootScope, NgMap, VIDEOS
 angular.module("911Video")
   .controller("videoDetail", function ($scope, API911video, $state, $rootScope, NgMap, VIDEOS_BASE, $window, $http, GEOLOCATE_PATH, GEOLOCATE_KEY) {
 
+
+
+
+    $scope.getSrcVideo = function (video) {
+      API911video.recupTokenVideo(video.unique_name)
+        .then(function (data) {
+          data = data.data;
+          var tok = data.viewing_token;
+          video.pathForIEMP4 = '/api/videos/' + video.unique_name + '/play/' + tok + '/mp4';
+
+          //Get src; 
+
+          var Video = document.querySelector("#mainVideo");
+          Video.innerHTML = '';
+          var extensions = ["webm", "mp4"];
+          for (var x in extensions) {
+            var source = document.createElement("source");
+            // source.src = base_video + "/extensions/" + extensions[x];
+            source.src = video.pathForIEMP4;
+            // source.src = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+            source.type = "video/" + extensions[x];
+            $(Video).append(source);
+          }
+          Video.load();
+          // var player = document.getElementById('mainVideo');
+        });
+
+    }
 
     $scope.logout = function () {
       /* console.log("SAlio");
@@ -462,7 +492,8 @@ angular.module("911Video")
       $scope.currentVideo.poster = base_video + "/thumbnail";
       $scope.videos.splice($index, 1);
       $scope.mapSelected = false;
-      var Video = document.querySelector("#mainVideo");
+      $scope.getSrcVideo(video);
+      /*  var Video = document.querySelector("#mainVideo");
       Video.innerHTML = '';
       var extensions = ["webm", "mp4"];
       for (var x in extensions) {
@@ -473,18 +504,18 @@ angular.module("911Video")
         $(Video).append(source);
       }
       Video.load();
-      var player = document.getElementById('mainVideo');
+      var player = document.getElementById('mainVideo'); */
 
       // console.log(video)
 
-      if (player != null) {
+      /* if (player != null) {
         player.onplay = function () {
           API911video.Viewed(video.unique_name).then(function (response) {
             console.log("viewed")
           });
         };
 
-      }
+      } */
     };
 
 
@@ -593,7 +624,7 @@ angular.module("911Video")
 
 
 
-        /*var Video = document.querySelector("#mainVideo");
+        /* var Video = document.querySelector("#mainVideo");
 
         Video.innerHTML = '';
         var extensions = ["webm", "mp4"];
@@ -607,7 +638,7 @@ angular.module("911Video")
         }
 
 
-        Video.load();*/
+        Video.load(); */
       }
 
 
@@ -642,7 +673,7 @@ angular.module("911Video")
 
     }
 
-    $scope.ahoraSI=function(){
+    $scope.ahoraSI = function () {
       console.log("Unidos");
     }
 

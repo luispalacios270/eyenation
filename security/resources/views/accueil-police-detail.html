@@ -15,9 +15,9 @@
         </custom-marker>
       </ng-map>
       <img class="img-main-box" ng-if="!mapSelected && errorVideo" src="resources/assets/notFound.jpg">
-      <video id="mainVideo" poster="{{currentVideo.poster }}" on-error-src="{{errorVideo=true}}" preload="none" onerror="" ng-show="!mapSelected && !errorVideo"
+      <video id="mainVideo" poster="{{currentVideo.poster }}" preload="none" onerror="" ng-show="!mapSelected && !errorVideo"
         controls>
-        <!-- <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4"> -->
+         <!-- <source ng-src="{{video.pathForIEMP4}}" type="video/mp4">  -->
 
       </video>
 

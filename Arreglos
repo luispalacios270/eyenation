@@ -22,6 +22,7 @@ EN desconexiones siempre se limpia la cookie.
 
 arreglos 911-telefono:
 Botón de desconexión con icóno de puerta ya sea en el footer central o en la parte superior izq.(DONE)
+Los videos necesitan token como hosting. (TEST)
 
 Arreglos login:
 Se deja sólo en la dirección St-Adrien,Quebec (DONE)
@@ -30,7 +31,7 @@ y Se quita el número telefónico.(DONE)
 
 videoViewer:
 El cambio de perfil.
-quitar boton de ACCUEL de header(DONE)
+quitar boton de ACCUEL de header. (DONE)
 
 
 login-911: Por telefono no ingresa(DONE)

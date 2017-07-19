@@ -1893,6 +1893,7 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
             $scope.prepareMarks();
             getNearEndVideosRecent();
             materializeInit();
+            materializeInit();
             /*$scope.recentVideos = listaPrueba*/
         });
 
@@ -1927,6 +1928,7 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
             console.log("initialization");
             $('.modal').modal();
             $('select').material_select();
+            $scope.initDropdown();
             $scope.initDropdown();
             /*$('.dropdown-button').dropdown('open');*/
             /* $('.dropdown-button').dropdown({
@@ -2185,7 +2187,7 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
                             $("#my-auctions").show(500);
                             $("#my-bids").hide();
                             $interval(function () {
-                                $("#my-auctions").hide(500);
+                                $("#my-auctions").hfide(500);
                                 $("#my-bids").show();
                             }, 10000, 1);
 

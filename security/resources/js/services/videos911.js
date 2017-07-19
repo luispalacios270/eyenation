@@ -22,6 +22,19 @@ function video911($q, $http, API_BASE) {
 
     }
 
+    this.recupTokenVideo = function (nomvideo) {
+        return $http({
+            withCredentials: true,
+            method: 'GET',
+            url: '/api/videos/' + nomvideo + '/play',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+            /*,
+                      cache:true*/
+        })
+    };
+
 
     this.getNearVideos = function (meters, lat, lng) {
 
@@ -46,6 +59,8 @@ function video911($q, $http, API_BASE) {
 
 
 }
+
+
 
 
 function vFromNumber($q, $http, API_BASE) {
