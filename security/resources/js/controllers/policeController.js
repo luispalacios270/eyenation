@@ -8,6 +8,8 @@ angular.module("911Video")
 
 function policeController($scope, API911video, $state, $rootScope, NgMap, VIDEOS_BASE, $window, $http, GEOLOCATE_PATH, GEOLOCATE_KEY) {
 
+
+  $scope.numberUser = $state.params.number;
   /*  $scope.videosTest = [{
       times_viewed: 8,
       streaming_endedon: 1496455795621,
@@ -148,9 +150,9 @@ function policeController($scope, API911video, $state, $rootScope, NgMap, VIDEOS
     }, function () {
 
       $http({
-          method: 'POST',
-          url: GEOLOCATE_PATH + GEOLOCATE_KEY
-        })
+        method: 'POST',
+        url: GEOLOCATE_PATH + GEOLOCATE_KEY
+      })
         .then(function (res) {
 
           $rootScope.userLocation = res.data.location.lat + "," + res.data.location.lng;
@@ -255,6 +257,22 @@ function policeController($scope, API911video, $state, $rootScope, NgMap, VIDEOS
 
 angular.module("911Video")
   .controller("videoDetail", function ($scope, API911video, $state, $rootScope, NgMap, VIDEOS_BASE, $window, $http, GEOLOCATE_PATH, GEOLOCATE_KEY) {
+
+
+    $scope.logout = function () {
+      /* console.log("SAlio");
+
+      $cookies.remove("e-session", {
+        path: "/"
+      });
+      window.localStorage.removeItem("user");*/
+      console.log(window.location);
+      // window.location.pathname = "/security/";
+      window.location.hash = "#!";
+
+    }
+
+    $scope.numberUser = $state.params.number;
     /*  $scope.videosTest = [   {      
       times_viewed: 1,
             streaming_endedon: null,
@@ -441,6 +459,7 @@ angular.module("911Video")
         $index = $index + 1;
       };
       $scope.currentVideo = video;
+      $scope.currentVideo.poster = base_video + "/thumbnail";
       $scope.videos.splice($index, 1);
       $scope.mapSelected = false;
       var Video = document.querySelector("#mainVideo");
@@ -507,9 +526,9 @@ angular.module("911Video")
         $rootScope.userLocation = baseCoors;
 
         $http({
-            method: 'POST',
-            url: GEOLOCATE_PATH + GEOLOCATE_KEY
-          })
+          method: 'POST',
+          url: GEOLOCATE_PATH + GEOLOCATE_KEY
+        })
           .then(function (res) {
 
             $rootScope.userLocation = res.data.location.lat + "," + res.data.location.lng;
@@ -621,6 +640,10 @@ angular.module("911Video")
       //google.maps.event.trigger($scope.map, 'resize');
 
 
+    }
+
+    $scope.ahoraSI=function(){
+      console.log("Unidos");
     }
 
 

@@ -1,18 +1,18 @@
 var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.services', 'slick', "ngSanitize", "com.2fdevs.videogular",
-        "com.2fdevs.videogular.plugins.controls",
-        "com.2fdevs.videogular.plugins.overlayplay",
-        "com.2fdevs.videogular.plugins.poster",
-        "com.2fdevs.videogular.plugins.buffering", 'ui.bootstrap' /*'star-rating'*/
-    ])
+    "com.2fdevs.videogular.plugins.controls",
+    "com.2fdevs.videogular.plugins.overlayplay",
+    "com.2fdevs.videogular.plugins.poster",
+    "com.2fdevs.videogular.plugins.buffering", 'ui.bootstrap' /*'star-rating'*/
+])
     /*
      * Define routing and views.
      */
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-        when("/accueil", {
-            templateUrl: "resources/views/homeMedia/homeMedia.html",
-            controller: "homeController"
-        });
+            when("/accueil", {
+                templateUrl: "resources/views/homeMedia/homeMedia.html",
+                controller: "homeController"
+            });
     }])
     .controller("notificationController", function ($scope, $modalInstance, message) {
         var opposingBid = message.msg[0];
@@ -1486,8 +1486,8 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
                         lat: videoPlanCoordinates[0].lat,
                         lng: videoPlanCoordinates[0].lng
                     }, "#mapSelectedVideo", 15, {
-                        geodesic: true
-                    }, []);
+                            geodesic: true
+                        }, []);
                 }, 50);
 
             });
@@ -1672,16 +1672,16 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
             // Case of a subscription without username
             if (user.name == undefined || user.name.length == 0) {
                 servicesAPI.editAccount( //For the moment, we have to put the email for the username in that case
-                        user.email,
-                        user.email,
-                        user.firstname,
-                        user.lastname,
-                        user.telephone,
-                        user.address,
-                        user.city,
-                        user.country,
-                        user.state,
-                        user.language)
+                    user.email,
+                    user.email,
+                    user.firstname,
+                    user.lastname,
+                    user.telephone,
+                    user.address,
+                    user.city,
+                    user.country,
+                    user.state,
+                    user.language)
                     .success(function () {
                         /*console.log("aprobado");*/
                         $cookies.put("modifOk", "1");
@@ -1704,16 +1704,16 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
             } else {
 
                 servicesAPI.editAccount(
-                        user.name,
-                        user.email,
-                        user.firstname,
-                        user.lastname,
-                        user.telephone,
-                        user.address,
-                        user.city,
-                        user.country,
-                        user.state,
-                        user.language)
+                    user.name,
+                    user.email,
+                    user.firstname,
+                    user.lastname,
+                    user.telephone,
+                    user.address,
+                    user.city,
+                    user.country,
+                    user.state,
+                    user.language)
                     .success(function () {
                         $cookies.put("modifOk", "1");
                         $scope.modalSelected = 0;
@@ -1927,6 +1927,7 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
             console.log("initialization");
             $('.modal').modal();
             $('select').material_select();
+            $scope.initDropdown();
             /*$('.dropdown-button').dropdown('open');*/
             /* $('.dropdown-button').dropdown({
                 inDuration: 300,
@@ -2574,8 +2575,8 @@ var m4nModule = angular.module('money4news.homeMedia', ['ngRoute', 'money4news.s
                     lat: 0,
                     lng: 0
                 }, "#map", 0, {
-                    geodesic: true
-                }, "failureLocalization"); //neither the instantaneous nor the home localization worked
+                        geodesic: true
+                    }, "failureLocalization"); //neither the instantaneous nor the home localization worked
                 location.href = "../";
             });
 

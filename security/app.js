@@ -41,7 +41,7 @@ var video911App = (function (angular) {
                 }
             })
             .state('accueilpolicedetail', {
-                url: "/911DetailPolice/:id/:lat/:lng",
+                url: "/911DetailPolice/:id/:lat/:lng/:number",
                 controller: "videoDetail",
                 templateUrl: "resources/views/accueil-police-detail.html",
                 data: {
@@ -95,6 +95,18 @@ var video911App = (function (angular) {
 
             }
         };
+    })
+
+    app.directive('onErrorSrc', function () {
+        return {
+            link: function (scope, element, attrs) {
+                element.bind('error', function () {
+                    if (attrs.src != attrs.onErrorSrc) {
+                        attrs.$set('src', attrs.onErrorSrc);
+                    }
+                });
+            }
+        }
     })
 
     app.filter("trustUrl", ['$sce', function ($sce) {

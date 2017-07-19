@@ -21,24 +21,24 @@ Quitar martillo y dossier de header.
 EN desconexiones siempre se limpia la cookie.
 
 arreglos 911-telefono:
-Botón de desconexión con icóno de puerta ya sea en el footer central o en la parte superior izq.
+Botón de desconexión con icóno de puerta ya sea en el footer central o en la parte superior izq.(DONE)
 
 Arreglos login:
-Se deja sólo en la dirección St-Adrien,Quebec
-y Se quita el número telefónico.
+Se deja sólo en la dirección St-Adrien,Quebec (DONE)
+y Se quita el número telefónico.(DONE)
 
 
 videoViewer:
 El cambio de perfil.
-quitar boton de ACCUEL de header
+quitar boton de ACCUEL de header(DONE)
 
 
-login-911: Por telefono no ingresa
+login-911: Por telefono no ingresa(DONE)
 
 arreglos eyenation:
-scope de header presenta problema.
-filtrar por categoria.
-filtar por tag.
+scope de header presenta problema. (DONE)
+filtrar por categoria. (ERROR)
+filtar por tag. (ERROR)
 actualizar en tiempo real recentVideos y hacer subasta.
 
 recebir credenciales por header

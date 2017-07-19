@@ -159,12 +159,12 @@
 		}
 
 		function getChangesUserBid(localArray, newArray) {
-			/*newArray.forEach((grandItem, grandIndex) => {
+			newArray.forEach((grandItem, grandIndex) => {
 				var flag = false;
 				localArray.forEach((item, index) => {
 					if (grandItem.unique_name === item.unique_name) {
 						flag = true;
-						for (var elementValue in grandItem) {							
+						for (var elementValue in grandItem) {
 							item[elementValue] = grandItem[elementValue];
 						}
 						return;
@@ -172,24 +172,27 @@
 					if (((index + 1) === localArray.length) && !flag) {
 						localArray.push(grandItem);
 
-					}					
+					}
 				});
 
-			});*/
+			});
 		}
 
-		function getVideosWithParams(order, filter, email, list, videoName) {
+		function getVideosWithParams(order, filter, email, list, videoName,isAFilter) {
 			// var cats = [];
 			var cats = $scope.categoriesSelected;
 			var tagz = $scope.tags.length != 0 ? $scope.tags : [];
 			/*$scope.$parent[list] = [];*/
-			if ($scope.category != undefined)
-				cats.push($scope.category);
+			if (isAFilter && $scope.category != undefined && $scope.category != '') {
+				let cat = $scope.category;
+				$scope.category = undefined;
+				cats.push(cat);
+			}
 			/*console.log("Categories: ");
 			console.log(cats);*/
 
 			servicesAPI.getVideos($scope.indexes[list], JSON.stringify(cats), JSON.stringify(tagz), order, filter, email, videoName).then(function (resp) {
-				console.log("videos",resp.data);
+				console.log("videos", resp.data);
 				if ($scope.$parent[list] == null || $scope.$parent[list].length == 0)
 					$scope.$parent[list] = resp.data;
 				else

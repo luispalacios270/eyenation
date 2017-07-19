@@ -14,15 +14,19 @@
           </div>
         </custom-marker>
       </ng-map>
-      <!--<img class="img-main-box" ng-if="!mapSelected" ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{currentVideo.unique_name}}/thumbnail">-->
-      <video id="mainVideo" preload="none" ng-show="!mapSelected" style="width: 100%; height: auto"></video>
+      <img class="img-main-box" ng-if="!mapSelected && errorVideo" src="resources/assets/notFound.jpg">
+      <video id="mainVideo" poster="{{currentVideo.poster }}" on-error-src="{{errorVideo=true}}" preload="none" onerror="" ng-show="!mapSelected && !errorVideo"
+        controls>
+        <!-- <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4"> -->
+
+      </video>
 
     </div>
     <div flex="20" id="side-data" flex-gt-sm="10" layout="column" layout-padding>
       <ng-map id="side-map" center="{{$root.userLocation}}" ng-hide="mapSelected" ng-click="videos.unshift(currentVideo); mapSelected=true; currentVideo=null"></ng-map>
-      <div ng-repeat="video in videos track by $index" class="parent" ng-click="selectVideo(video,$index)">
+      <div ng-repeat="video in videos track by $index" class="parent" ng-click="selectVideo(video,$index); errorVideo=false">
         <!--<div ng-repeat="video in videos track by $index" class="parent" ng-click="selectVideo(video,$index)">-->
-        <img class="img-near" ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail">
+        <img class="img-near" on-error-src="resources/assets/notFound.jpg" ng-src="http://ec2-34-208-118-56.us-west-2.compute.amazonaws.com:3000/api/videos/{{video.unique_name}}/thumbnail">
         <div class="index-video">
           <div class="parent">
             <img src="resources/assets/marker_1.png" style="width: 35px; height: 35px" alt="">
@@ -34,9 +38,11 @@
   </div>
   <div layout="row" flex="10" layout-align="space-between center" layout-padding>
     <img class="logo-footer" src="resources/assets/logo2.png" alt="">
+    <i title="Click to go out" ng-click="logout()" class="fa fa-sign-out logout-sign"></i>
     <div class="adjust-vertical" layout="row" layout-align="start center">
       <img class="logo-footer" src="resources/assets/icon-phone.png" alt="">
-      <p class="phonenumber-footer">581 667-7724</p>
+      <p class="phonenumber-footer">
+        <!-- 581 667-7724 -->{{numberUser}}</p>
     </div>
   </div>
 </md-content>

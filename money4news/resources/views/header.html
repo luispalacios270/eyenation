@@ -6,7 +6,7 @@
                     alt="">
             </div>
             <div id="profile" class="inline adjust-vertically">
-                <!--<img class="adjust-vertically" src="resources/images/photo-user.png" alt="">-->
+
                 <div id="info" class="valign-wrapper nav-child hide-on-small-only">
                     <div>
                         <h6 class="small-font">{{mediaAgentFirstname}} {{mediaAgentLastname}}</h6>
@@ -22,7 +22,7 @@
                 <h6 ng-show="NoSeenAuction>0" class="small-font" style="position: absolute; top: -10px;right:-12px;color:white; font-size: 0.65em; background-color:#d4292f;border-radius:50%;padding: 2px 5px"><strong>{{NoSeenAuction}}</strong></h6>
                 <img title="Suivi des enchères en cours" id="auction-icon" class="icon-header" ng-click="minizeAuction(4)" class="adjust-vertically"
                     src="resources/images/encheres.png" alt="">
-                <!--<img id="info-icon" class="adjust-vertically icon-header" src="resources/images/info.png" alt="">-->
+
             </div>
             <div id="money" class="valign-wrapper hide-on-small-only" style="height: 100%">
                 <div>
@@ -45,23 +45,11 @@
             <div class="valign-wrapper right-flex hide-on-small-only">
                 <div id="language-selector">
                     <div class="dropdown parent-block">
-                        <a id="language" ng-click="openDropDown('.dropdown-button')" class="dropdown-button" href='#/accueil' data-activates='dropdown1' ng-init="initDropdown()">Language</a>
-                        <!--<a id="language" ng-click="openDropDown('.dropdown-button')" class="dropdown-button" href='#/accueil' data-activates='dropdown1'>Language</a>-->
-                        <!--<a id="language" class="dropdown-button" href='#/accueil' data-activates='dropdown1' ng-click="showLangugeBox()">Language</a>
-                        <div id="languageBox" class="invisibleBox hidden">
-                            <a href="" class="flag valign-wrapper" ng-click="selectLanguage('en')"> English <img class="flag-img" src="resources/images/langFlags/United-Kingdom.ico" rel="UK FLAGS" /></a>
-                            <a href="" class="flag valign-wrapper" ng-click="selectLanguage('fr')"> Français <img class="flag-img" src="resources/images/langFlags/France.ico" rel="FR FLAGS" /></a>
-                            <a href="" class="flag valign-wrapper"> Español <img class="flag-img" src="resources/images/langFlags/Mexico.ico" rel="ME FLAGS" /></a>
-                        </div>-->
-                        <!-- Dropdown Trigger -->
-                        <!--<a class='dropdown-button btn' href='#/accueil' data-activates='dropdown1'>Drop Me!</a>-->
-
-                        <!-- Dropdown Structure -->
-                       
+                        <a id="language" class="dropdown-button" href='#/accueil' data-activates='dropdown1'>Language</a>
                         <ul id='dropdown1' class='dropdown-content'>
-                            <li><a href="" ng-click="selectLanguage('en')"> English <!--<img class="flag-img" src="resources/images/langFlags/United-Kingdom.ico" rel="UK FLAGS" />--></a></li>
-                            <li><a href="" ng-click="selectLanguage('fr')"> Français <!--<img class="flag-img" src="resources/images/langFlags/France.ico" rel="FR FLAGS" />--></a></li>
-                            <li><a href=""> Spanish <!--<img class="flag-img" src="resources/images/langFlags/Mexico.ico" rel="ME FLAGS" />--></a></li>
+                            <li><a href="" ng-click="selectLanguage('en')"> English</a></li>
+                            <li><a href="" ng-click="selectLanguage('fr')"> Français </a></li>
+                            <li><a href=""> Spanish </a></li>
                             <li><a href=""> Portuguese </a></li>
                             <li><a href=""> Germain </a></li>
                         </ul>
@@ -70,15 +58,15 @@
                 <div id="menu" class="valign-wrapper parent-block">
                     <img title="-Paramètres​-Déconnexion" class="icon-header dropdown-button" href='#/accueil' data-activates='dropdown2' src="resources/images/hamburger.png"
                         alt="">
-                    <!--<img class="icon-header dropdown-button" href='#/accueil' data-activates='dropdown1' src="resources/images/hamburger.png" ng-click="showLogOutOption()" alt="">-->
+
                     <div id="logoutOption" class="invisibleBox hidden">
                         <a id="logout-link" href="../#/login">
-                            <!--{{homePageVocabulary.myVideos}}-->Déconnexion
+                    Déconnexion
                         </a>
                         <ul id='dropdown2' class='dropdown-content'>
                             <li>
                                 <a id="logout-link" href="../#/login">
-                                    <!--{{homePageVocabulary.myVideos}}-->Déconnexion
+                    Déconnexion
                                 </a>
                             </li>
 
@@ -91,7 +79,7 @@
     <nav id="my-bids" class="pointer valign-wrapper" ng-click="minizeAuction(3)" ng-controller="homeController">
         <div id="my-bids-div" ng-class="{'shadow':shadow}" ng-mouseleave="shadow=false" ng-mouseenter="shadow=true" ng-click="minizeAuction(3)"
             class="nav-wrapper adjust-vertically valign-wrapper">
-            <!--<div class="adjust-vertically valign-wrapper" ng-repeat="video in userBidVideos">
+            <div class="adjust-vertically valign-wrapper" ng-repeat="video in userBidVideos">
                 <div class="valign-wrapper adjust-vertically max-width-header">
                     <img src="resources/images/bon.png" ng-show="video.bidCurrentAmount=== video.video[0].auction.highestBid" alt="">
                     <img src="resources/images/main-red.png" ng-hide="video.bidCurrentAmount=== video.video[0].auction.highestBid" alt="">
@@ -99,7 +87,7 @@
                     <p style="margin-left: 5px" class="small-font">{{video.video[0].name || homePageVocabulary.noName}}</p>
                 </div>
                 <div class="vertical-divider"></div>
-            </div>-->
+            </div>
 
 
         </div>
@@ -113,7 +101,7 @@
     <nav id="my-auctions" class="parent-block hidden">
         <div id="options" class="inline">
             <i id="minimize-top" ng-click="minizeAuction(1)" class="center material-icons color-grey-top">-</i>
-            <!--<i id="close-auction-button" ng-click="minizeAuction(2)" class="center material-icons cancel">close</i>-->
+
         </div>
         <div class="nav-wrapper valign-wrapper parent-block" id="my-auctions-div" style="background-color:#353438">
             <div class="inline child-auctions adjust-vertically pointer" ng-repeat="video in userBidVideos" ng-init="NoSeenAuction = userBidVideos.length">
@@ -192,77 +180,7 @@
                 </div>
                 <div class="vertical-divider"></div>
             </div>
-            <!--<div class="vertical-divider"></div>
-            <div class="inline child-auctions adjust-vertically">
-                <div class="thumbnail parent-block">
-                    <div class="parent-block">
-                        <video class="videos-header">
-                            <source src="media/small.mp4" type="video/mp4">
-                        </video>
-                        <h6 class="small-font caption-videos truncate caption-videos-selectable">Mort au Boxing Day</h6>
-                        <img class="top-icon-heder" src="resources/images/main-red.png" alt="">
-                        <div id="countdown_2" class="countdown-bottom">
-                        </div>
-                    </div>
-                </div>
-                <div class="thumbnail-info">
-                    <div class="inline adjust-horizontal">
-                        <div>
-                            <h6 class="small-font">HIGHEST BID</h6>
-                            <h5>1350$</h5>
-                        </div>
-                        <div class="right-flex">
-                            <h6 class="small-font">YOUR BID</h6>
-                            <h6 class="lower-bid">500$</h6>
-                        </div>
-                    </div>
-                    <div class="bid-info">
-                        <h6 class="small-font label-input-header">BID NOW($)</h6>
-                        <input type="number" placeholder="Enter an amount">
-                    </div>
-                    <div>
-                        <h6 class="small-font grey-text">OPTIONAL MAXIMUM AUTOMATIC BID</h6>
-                        <div class="inline valign-wrapper ">
-                            <input type="number" placeholder="Enter an amount">
-                            <i class="center material-icons icon-bid done right-flex">done</i>
-                            <i class="center material-icons icon-bid cancel">close</i>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-            <div class="vertical-divider"></div>
-            <div class="inline child-auctions adjust-vertically">
-                <div class="thumbnail">
-                    <div class="parent-block">
-                        <video class="videos-header">
-                            <source src="media/small.mp4" type="video/mp4">
-                        </video>
-                        <h6 class="small-font caption-videos truncate caption-videos-selectable">Manifestation étudiante vire mal au Parlement</h6>
-
-                        <img class="top-icon-heder" src="resources/images/bon.png" alt="">
-                        <div id="countdown_3" class="countdown-bottom">
-                        </div>
-                    </div>
-                </div>
-                <div class="thumbnail-info">
-                    <h6>YOU HAVE</h6>
-                    <h6>THE HIGHEST BID</h6>
-                    <h5 class="highest-bid bid-info">400$</h5>
-                    <h6 class="small-font grey-text">OPTIONAL MAXIMUM AUTOMATIC BID</h6>
-
-                    <div class="inline valign-wrapper adjust-horizontal">
-                        <input type="number" placeholder="Enter an amount">
-                        <i class="center material-icons icon-bid done">done</i>
-                        <i class="center material-icons icon-bid cancel">close</i>
-                    </div>
-
-                </div>
-            </div>-->
-            <!--<div id="options" class="inline">
-                <i id="minimize-top" class="center material-icons color-grey-top">-</i>
-                <i id="close-auction-button" class="center material-icons cancel">close</i>
-            </div>-->
         </div>
     </nav>
 </div>

@@ -1,9 +1,9 @@
 angular.module('911Video'
-    /*, ['ngMaterial',
-        'ngMessages',
-        'ngAnimate',
-      ]*/
-  )
+  /*, ['ngMaterial',
+      'ngMessages',
+      'ngAnimate',
+    ]*/
+)
   .controller('authenticationController', AuthCtrl);
 
 function AuthCtrl($scope, AuthAPI, $cookies, $state, APIvideoFromNumber, $validations) {
@@ -42,11 +42,20 @@ function AuthCtrl($scope, AuthAPI, $cookies, $state, APIvideoFromNumber, $valida
         console.log(rs);
         rs = rs.data[0];
         console.log(rs, "result");
-        var url = $state.href('accueilpolicedetail', {
+        let paramObject = {
+          number: $scope.telNumber
+        }
+        if (rs != undefined) {
+          paramObject.id = rs.unique_name;
+          paramObject.lat = rs.gps_coordinates[0].latitude;
+          paramObject.lng = rs.gps_coordinates[0].longitude;
+        }
+        /* var url = $state.href('accueilpolicedetail', {
           id: rs.unique_name,
           lat: rs.gps_coordinates[0].latitude,
           lng: rs.gps_coordinates[0].longitude
-        });
+        }); */
+        var url = $state.href('accueilpolicedetail', paramObject);
         window.open(url, '_self');
       }, function (err, code) {
 
